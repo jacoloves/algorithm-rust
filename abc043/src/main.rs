@@ -1,9 +1,31 @@
 use proconio::input;
 
 fn main() {
-    b();
+    c();
 }
 
+fn c() {
+    input! {
+        n: i32,
+        v: [i32;n],
+    }
+
+    let min_el = *v.iter().min().unwrap();
+    let max_el = *v.iter().max().unwrap();
+
+    let mut ans = 10000000;
+    for i in min_el..=max_el {
+        let mut sum = 0;
+        for j in &v {
+            sum = sum + ((j - i) * (j - i));
+        }
+        ans = std::cmp::min(sum, ans);
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
 fn b() {
     input! {
         s: String,
