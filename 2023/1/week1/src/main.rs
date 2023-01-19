@@ -11,9 +11,117 @@ where
 }
 
 fn main() {
-    itp1_6_a();
+    itp1_6_c();
 }
 
+fn itp1_6_d() {
+    let fl: Vec<i32> = read_line();
+    let first: i32 = fl[0];
+    let second: i32 = fl[1];
+
+    let mut vector1: Vec<Vec<usize>> = vec![vec![0; first as usize]; second as usize];
+
+    let mut vector2: Vec<usize>;
+
+    for i in 0..first {
+        let l: Vec<usize> = read_line();
+        for j in 0..second {
+            vector1[i as usize][j as usize] = l[j as usize];
+        }
+    }
+}
+
+fn itp1_6_c() {
+    let mut univ: Vec<Vec<Vec<usize>>> = vec![vec![vec![0; 10]; 3]; 4];
+
+    let fl: Vec<i32> = read_line();
+    let en: i32 = fl[0];
+
+    let mut ic = 1;
+    while ic <= en {
+        let l: Vec<i32> = read_line();
+        let first: i32 = l[0] - 1;
+        let second: i32 = l[1] - 1;
+        let third: i32 = l[2] - 1;
+        let ele: i32 = l[3];
+
+        univ[first as usize][second as usize][third as usize] =
+            univ[first as usize][second as usize][third as usize] + ele as usize;
+        if univ[first as usize][second as usize][third as usize] >= 10 {
+            univ[first as usize][second as usize][third as usize] = 9
+        }
+        ic = ic + 1;
+    }
+
+    for i in 0..4 {
+        for j in 0..3 {
+            for k in 0..10 {
+                print!(" {}", univ[i][j][k]);
+            }
+            println!();
+        }
+        if i != 3 {
+            println!("####################");
+        }
+    }
+}
+
+fn itp1_6_b() {
+    let mut trumps: Vec<Vec<usize>> = vec![vec![0; 13]; 4];
+
+    let fl: Vec<i32> = read_line();
+    let en: i32 = fl[0];
+
+    let mut ic = 1;
+    while ic <= en {
+        let l: Vec<String> = read_line();
+        let mut first: usize;
+        let mut second: usize;
+
+        match l[0].as_str() {
+            "S" => {
+                first = 0;
+            }
+            "H" => {
+                first = 1;
+            }
+            "C" => {
+                first = 2;
+            }
+            _ => {
+                first = 3;
+            }
+        }
+
+        second = l[1].parse().unwrap();
+
+        trumps[first][second - 1] = 1;
+        ic = ic + 1
+    }
+
+    for i in 0..4 {
+        for j in 0..13 {
+            if trumps[i][j] == 0 {
+                match i {
+                    0 => {
+                        print!("S ",)
+                    }
+                    1 => {
+                        print!("H ",)
+                    }
+                    2 => {
+                        print!("C ",)
+                    }
+                    _ => {
+                        print!("D ",)
+                    }
+                }
+
+                println!("{}", j + 1);
+            }
+        }
+    }
+}
 fn itp1_6_a() {
     let _: Vec<i32> = read_line();
     let mut line: Vec<i64> = read_line();
