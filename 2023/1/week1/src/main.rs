@@ -11,7 +11,7 @@ where
 }
 
 fn main() {
-    itp1_8_a();
+    itp1_8_b();
 }
 
 fn itp1_7_a() {
@@ -188,5 +188,28 @@ fn itp1_8_a() {
             print!(" ");
         }
         i = i + 1;
+    }
+}
+
+fn itp1_8_b() {
+    let mut v: Vec<u16> = Vec::new();
+    loop {
+        let l: Vec<String> = read_line();
+        let x: String = l[0].clone();
+        let mut ans: u16 = 0;
+
+        if x == "0" {
+            break;
+        }
+
+        for c in x.chars() {
+            ans += c as u16 - '0' as u16;
+        }
+
+        v.push(ans);
+    }
+
+    for e in v.iter() {
+        println!("{}", e);
     }
 }
