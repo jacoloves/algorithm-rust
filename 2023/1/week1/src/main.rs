@@ -11,7 +11,7 @@ where
 }
 
 fn main() {
-    itp1_8_b();
+    itp1_9_b();
 }
 
 fn itp1_7_a() {
@@ -210,6 +210,124 @@ fn itp1_8_b() {
     }
 
     for e in v.iter() {
+        println!("{}", e);
+    }
+}
+
+fn itp1_8_d() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let l2: Vec<String> = read_line();
+    let p = l2[0].clone();
+
+    let mut string_cnt = 0;
+    loop {
+        if s.len() == string_cnt {
+            println!("No");
+            break;
+        }
+        let mut comp_str = String::new();
+        let mut cnt = 1;
+        for c in s.chars() {
+            if comp_str.len() == p.len() {
+                break;
+            }
+            if cnt > s.len() - string_cnt {
+                comp_str.push_str(&c.to_string());
+            }
+            cnt += 1;
+        }
+
+        cnt = 1;
+        for c in s.chars() {
+            if comp_str.len() == p.len() {
+                break;
+            }
+            if cnt <= s.len() - string_cnt {
+                comp_str.push_str(&c.to_string());
+            }
+            cnt += 1;
+        }
+
+        // judge
+        if p == comp_str {
+            println!("Yes");
+            break;
+        }
+
+        string_cnt += 1;
+    }
+}
+
+fn itp1_9_a() {
+    let l: Vec<String> = read_line();
+    let w = l[0].clone();
+
+    let mut cnt = 0;
+    loop {
+        let l: Vec<String> = read_line();
+
+        if l[0] == "END_OF_TEXT" {
+            break;
+        }
+
+        for e in l {
+            if w.to_lowercase() == e.to_lowercase() {
+                cnt += 1;
+            }
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+fn itp1_9_b() {
+    let mut ans: Vec<String> = Vec::new();
+    loop {
+        let l: Vec<String> = read_line();
+        // string
+        let mut m = l[0].clone();
+
+        if m == "-" {
+            break;
+        }
+
+        // input num
+        let l: Vec<i32> = read_line();
+        let input_num = l[0];
+
+        // input
+        for i in 0..input_num {
+            let mut comp_str: String = String::new();
+            let l: Vec<i32> = read_line();
+            let position = l[0];
+            let mut cnt = 0;
+            for c in m.chars() {
+                cnt += 1;
+                if cnt <= position {
+                    continue;
+                }
+
+                comp_str.push_str(&c.to_string());
+            }
+            cnt = 0;
+            for c in m.chars() {
+                if cnt < position {
+                    comp_str.push_str(&c.to_string());
+                } else {
+                    break;
+                }
+                cnt += 1;
+            }
+
+            m = comp_str.clone();
+        }
+
+        ans.push(m);
+    }
+
+    for e in ans {
         println!("{}", e);
     }
 }
