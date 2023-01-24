@@ -11,7 +11,7 @@ where
 }
 
 fn main() {
-    itp1_9_b();
+    itp1_9_d();
 }
 
 fn itp1_7_a() {
@@ -329,5 +329,144 @@ fn itp1_9_b() {
 
     for e in ans {
         println!("{}", e);
+    }
+}
+
+fn itp1_9_c() {
+    let l: Vec<usize> = read_line();
+    let n: usize = l[0];
+
+    let mut tp = 0;
+    let mut hp = 0;
+    for _ in 0..n {
+        let l: Vec<String> = read_line();
+
+        let t: String = l[0].clone();
+        let h: String = l[1].clone();
+
+        if t > h {
+            tp += 3;
+        } else if t < h {
+            hp += 3;
+        } else {
+            tp += 1;
+            hp += 1;
+        }
+    }
+
+    println!("{} {}", tp, hp);
+}
+
+fn itp1_9_d() {
+    // string
+    let l: Vec<String> = read_line();
+    let mut s: String = l[0].clone();
+
+    // input_num
+    let l: Vec<usize> = read_line();
+    let input_num: usize = l[0];
+
+    let mut ans: Vec<String> = Vec::new();
+    for _ in 0..input_num {
+        let l: Vec<String> = read_line();
+        let op: String = l[0].clone();
+        match op.as_str() {
+            // print
+            "print" => {
+                let first_num: usize = l[1].parse().unwrap();
+                let second_num: usize = l[2].parse().unwrap();
+                let mut cnt: usize = 0;
+                let mut tmp_str: String = String::new();
+                for c in s.chars() {
+                    if first_num > cnt {
+                        cnt += 1;
+                        continue;
+                    } else if second_num < cnt {
+                        break;
+                    }
+
+                    tmp_str.push_str(&c.to_string());
+                    cnt += 1
+                }
+                ans.push(tmp_str);
+            }
+
+            // replace
+            "replace" => {
+                let first_num: i32 = l[1].parse().unwrap();
+                let second_num: i32 = l[2].parse().unwrap();
+                let change_str: String = l[3].clone();
+                let mut comp_str: String = String::new();
+                let mut cnt: i32 = 0;
+                let mut replace_cnt = 0;
+                for c in s.chars() {
+                    if first_num > cnt {
+                        comp_str.push_str(&c.to_string());
+                        cnt += 1;
+                    } else if second_num < cnt {
+                        comp_str.push_str(&c.to_string());
+                        cnt += 1;
+                    } else if replace_cnt != (second_num - first_num + 1) {
+                        for rc in change_str.chars() {
+                            comp_str.push_str(&rc.to_string());
+                            replace_cnt += 1;
+                        }
+                        cnt += 1;
+                    } else {
+                        cnt += 1;
+                    }
+                }
+
+                s = comp_str.clone();
+            }
+
+            // reverse
+            _ => {
+                let first_num: u32 = l[1].parse().unwrap();
+                let second_num: u32 = l[2].parse().unwrap();
+                let mut tmp_str: String = String::new();
+                let mut tmp_str2: String = String::new();
+
+                let mut cnt: u32 = 0;
+                for c in s.chars() {
+                    if first_num > cnt {
+                        cnt += 1;
+                    } else if second_num < cnt {
+                        cnt += 1;
+                    } else {
+                        tmp_str.push_str(&c.to_string());
+                        cnt += 1;
+                    }
+                }
+
+                let reverse: String = tmp_str.chars().rev().collect::<String>();
+
+                cnt = 0;
+                let mut flg: bool = false;
+                for c in s.chars() {
+                    if first_num > cnt {
+                        tmp_str2.push_str(&c.to_string());
+                        cnt += 1;
+                    } else if second_num < cnt {
+                        tmp_str2.push_str(&c.to_string());
+                        cnt += 1;
+                    } else if !flg {
+                        for rc in reverse.chars() {
+                            tmp_str2.push_str(&rc.to_string());
+                        }
+                        flg = true;
+                        cnt += 1;
+                    } else {
+                        cnt += 1;
+                    }
+                }
+
+                s = tmp_str2.clone();
+            }
+        }
+    }
+
+    for s in ans.iter() {
+        println!("{}", s);
     }
 }
