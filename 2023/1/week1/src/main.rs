@@ -10,8 +10,76 @@ where
     s.split_whitespace().map(|c| c.parse().unwrap()).collect()
 }
 
+#[derive(Debug)]
+struct Dice {
+    one_surface: u32,
+    two_surface: u32,
+    three_surface: u32,
+    four_surface: u32,
+    five_surface: u32,
+    six_surface: u32,
+    top_surface: u32,
+}
+
+impl Dice {
+    fn new(a: u32, b: u32, c: u32, d: u32, e: u32, f: u32) -> Self {
+        Dice {
+            one_surface: a,
+            two_surface: b,
+            three_surface: c,
+            four_surface: d,
+            five_surface: e,
+            six_surface: f,
+            top_surface: a,
+        }
+    }
+
+    fn dice_change(&mut self, azimuth: String) {
+        for c in azimuth.chars() {
+            let tmp_one: u32 = self.one_surface;
+            let tmp_two: u32 = self.two_surface;
+            let tmp_three: u32 = self.three_surface;
+            let tmp_four: u32 = self.four_surface;
+            let tmp_five: u32 = self.five_surface;
+            let tmp_six: u32 = self.six_surface;
+
+            match c {
+                'E' => {
+                    self.one_surface = tmp_four;
+                    self.three_surface = tmp_one;
+                    self.six_surface = tmp_three;
+                    self.four_surface = tmp_six;
+                    self.top_surface = self.one_surface;
+                }
+                'W' => {
+                    self.one_surface = tmp_three;
+                    self.three_surface = tmp_six;
+                    self.six_surface = tmp_four;
+                    self.four_surface = tmp_one;
+                    self.top_surface = self.one_surface;
+                }
+                'N' => {
+                    self.one_surface = tmp_two;
+                    self.five_surface = tmp_one;
+                    self.six_surface = tmp_five;
+                    self.two_surface = tmp_six;
+                    self.top_surface = self.one_surface;
+                }
+                'S' => {
+                    self.one_surface = tmp_five;
+                    self.five_surface = tmp_six;
+                    self.six_surface = tmp_two;
+                    self.two_surface = tmp_one;
+                    self.top_surface = self.one_surface;
+                }
+                _ => {}
+            }
+        }
+    }
+}
+
 fn main() {
-    itp1_10_d();
+    itp1_11_a();
 }
 
 fn itp1_10_c() {
@@ -103,4 +171,16 @@ fn itp1_10_d() {
     println!("{}", euc_dis_ans1);
     println!("{}", euc_dis_ans2);
     println!("{}", che_dis);
+}
+
+fn itp1_11_a() {
+    let l: Vec<u32> = read_line();
+
+    let mut d: Dice = Dice::new(l[0], l[1], l[2], l[3], l[4], l[5]);
+
+    let l: Vec<String> = read_line();
+
+    d.dice_change(l[0].clone());
+
+    println!("{}", d.top_surface);
 }
