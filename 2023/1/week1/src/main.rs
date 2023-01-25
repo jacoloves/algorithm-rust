@@ -1,6 +1,8 @@
 use std::fmt::Debug;
 use std::str::FromStr;
 
+use week1::itp1_10_b;
+
 fn read_line<T: std::str::FromStr>() -> Vec<T>
 where
     <T as FromStr>::Err: Debug,
@@ -10,4 +12,6 @@ where
     s.split_whitespace().map(|c| c.parse().unwrap()).collect()
 }
 
-fn main() {}
+fn main() {
+    itp1_10_b();
+}
