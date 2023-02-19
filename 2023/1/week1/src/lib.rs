@@ -1002,12 +1002,14 @@ fn itp1_10_a() {
     println!("{}", ans.sqrt());
 }
 
-fn itp1_10_b() {
+pub fn itp1_10_b() {
     let l: Vec<f64> = read_line();
 
     let a: f64 = l[0];
     let b: f64 = l[1];
     let c: f64 = l[2];
+
+    println!("{} {} {}", a, b, c);
 
     let tmp_c: f64 = a.powf(2.0_f64) + b.powf(2.0_f64) - (2.0_f64 * a * b * c.cos());
     let line_c: f64 = tmp_c.sqrt();
@@ -1016,7 +1018,7 @@ fn itp1_10_b() {
     let ll: f64 = a + b + line_c;
     let h: f64 = b * c.sin();
 
-    println!("{}", s.ceil());
-    println!("{}", ll.floor());
-    println!("{}", h.ceil());
+    println!("{}", s);
+    println!("{}", ll);
+    println!("{}", h);
 }
