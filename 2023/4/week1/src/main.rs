@@ -1,5 +1,6 @@
 use std::fmt::Debug;
 use std::str::FromStr;
+use std::cmp::min;
 
 fn read_line<T: std::str::FromStr>() -> Vec<T>
 where
@@ -11,7 +12,25 @@ where
 }
 
 fn main() {
-    abc193_ans();
+    abc156c();
+}
+
+fn abc156c() {
+    let l: Vec<usize> = read_line();
+    let N: usize = l[0];
+
+    let x: Vec<isize> = read_line();
+
+    let mut ans: isize = 1<<30;
+    for p in 1..=100 {
+        let mut cnt: isize = 0;
+        for i in 0..N {
+            cnt +=  (x[i] - p).pow(2);
+        }
+        ans = min(ans, cnt);
+    }
+
+    println!("{}", ans);
 }
 
 fn abc193_ans() {
