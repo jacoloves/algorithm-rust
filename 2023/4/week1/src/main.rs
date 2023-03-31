@@ -12,7 +12,17 @@ where
 }
 
 fn main() {
-    abc156c();
+    doublePoints();
+}
+
+fn doublePoints() {
+    let S: Vec<String> = read_line();
+
+    let str1: &str = &S[0];
+
+    let changStr1 = str1.chars().map(|c| format!("{}{}", c, "``")).collect::<String>();
+
+    println!("{}", changStr1);
 }
 
 fn abc156c() {
