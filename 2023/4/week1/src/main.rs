@@ -12,7 +12,47 @@ where
 }
 
 fn main() {
-    submitb_2019_b();
+    panasonic_2020_b();
+}
+
+fn panasonic_2020_b() {
+    let l: Vec<i128> = read_line();
+    let h = l[0];
+    let w = l[1];
+
+    if h == 1 || w == 1 {
+        println!("1");
+    } else {
+        let mut ans = h * w / 2;
+        if (h * w) % 2 == 1 {
+            ans += 1;
+        }
+
+        println!("{}", ans);
+    }
+}
+
+fn abc121_b() {
+    let l: Vec<i32> = read_line();
+    let n = l[0];
+    let c = l[2];
+
+    let bl: Vec<i32> = read_line();
+
+    let mut cnt = 0;
+    for _ in 1..=n {
+        let al: Vec<i32> = read_line();
+        let mut sum = 0;
+        for (a, b) in al.iter().zip(bl.iter()) {
+            sum += a * b;
+        }
+
+        if sum + c > 0 {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 fn submitb_2019_b() {
