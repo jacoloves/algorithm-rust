@@ -1,6 +1,6 @@
+use std::cmp::min;
 use std::fmt::Debug;
 use std::str::FromStr;
-use std::cmp::min;
 
 fn read_line<T: std::str::FromStr>() -> Vec<T>
 where
@@ -12,17 +12,78 @@ where
 }
 
 fn main() {
-    doublePoints();
+    submitb_2019_b();
 }
 
-fn doublePoints() {
-    let S: Vec<String> = read_line();
+fn submitb_2019_b() {
+    let l: Vec<f32> = read_line();
 
-    let str1: &str = &S[0];
+    let n: f32 = l[0];
 
-    let changStr1 = str1.chars().map(|c| format!("{}{}", c, "``")).collect::<String>();
+    let m = n / 1.08;
+    let c1 = m.floor();
+    let c2 = c1 - 1.0;
+    let c3 = c1 + 1.0;
+    if (c1 * 1.08).floor() == n {
+        println!("{}", c1 as i32);
+    } else if (c2 * 1.08).floor() == n {
+        println!("{}", c2 as i32);
+    } else if (c3 * 1.08).floor() == n {
+        println!("{}", c3 as i32);
+    } else {
+        println!(":(");
+    }
+}
 
-    println!("{}", changStr1);
+fn code_fes_qual_b() {
+    let l: Vec<usize> = read_line();
+
+    let _n: usize = l[0];
+    let a: usize = l[1];
+    let b: usize = l[2];
+
+    let s_vec: Vec<String> = read_line();
+
+    let s: String = s_vec[0].clone();
+
+    let pass_limit: usize = a + b;
+
+    let mut foreign_cnt: usize = 1;
+
+    let mut pass_cnt: usize = 1;
+    for c in s.chars() {
+        if c == 'a' {
+            if pass_limit >= pass_cnt {
+                println!("Yes");
+                pass_cnt += 1;
+            } else {
+                println!("No");
+            }
+        } else if c == 'b' {
+            if pass_limit >= pass_cnt && b >= foreign_cnt {
+                println!("Yes");
+                pass_cnt += 1;
+                foreign_cnt += 1;
+            } else {
+                println!("No");
+            }
+        } else {
+            println!("No");
+        }
+    }
+}
+
+fn double_points() {
+    let s: Vec<String> = read_line();
+
+    let str1: &str = &s[0];
+
+    let chang_str1 = str1
+        .chars()
+        .map(|c| format!("{}{}", c, "``"))
+        .collect::<String>();
+
+    println!("{}", chang_str1);
 }
 
 fn abc156c() {
@@ -31,11 +92,11 @@ fn abc156c() {
 
     let x: Vec<isize> = read_line();
 
-    let mut ans: isize = 1<<30;
+    let mut ans: isize = 1 << 30;
     for p in 1..=100 {
         let mut cnt: isize = 0;
         for i in 0..N {
-            cnt +=  (x[i] - p).pow(2);
+            cnt += (x[i] - p).pow(2);
         }
         ans = min(ans, cnt);
     }
@@ -49,7 +110,7 @@ fn abc193_ans() {
     let a: u32 = l[0];
     let b: u32 = l[1];
 
-    let ans: u32 = (b-1+a-2)/(a-1);
+    let ans: u32 = (b - 1 + a - 2) / (a - 1);
 
     println!("{}", ans);
 }
@@ -67,7 +128,7 @@ fn abc193() {
     let max_num: u32 = 1000000007;
     for i in 1..=max_num {
         cnt += 1;
-        ans = a*i-plug;
+        ans = a * i - plug;
         if ans >= b {
             break;
         }
