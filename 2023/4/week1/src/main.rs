@@ -1,5 +1,6 @@
 use std::cmp::min;
 use std::fmt::Debug;
+use std::ptr::read;
 use std::str::FromStr;
 
 fn read_line<T: std::str::FromStr>() -> Vec<T>
@@ -12,7 +13,53 @@ where
 }
 
 fn main() {
-    panasonic_2020_b();
+    abc175_b();
+}
+
+fn abc175_b() {
+    let b_1: Vec<usize> = read_line();
+    let b_2: Vec<usize> = read_line();
+    let b_3: Vec<usize> = read_line();
+
+    let mut bc_1 = [0, 0, 0];
+    let mut bc_2 = [0, 0, 0];
+    let mut bc_3 = [0, 0, 0];
+
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    for _ in 1..=n {
+        let b: Vec<usize> = read_line();
+        for (j, e) in (0..).zip(b_1.iter()) {
+            if *e == b[0] {
+                bc_1[j] = 1;
+            }
+        }
+        for (j, e) in (0..).zip(b_2.iter()) {
+            if *e == b[0] {
+                bc_2[j] = 1;
+            }
+        }
+        for (j, e) in (0..).zip(b_3.iter()) {
+            if *e == b[0] {
+                bc_3[j] = 1;
+            }
+        }
+    }
+
+    if (bc_1[0] == 1 && bc_1[1] == 1 && bc_1[2] == 1)
+        || (bc_2[0] == 1 && bc_2[1] == 1 && bc_2[2] == 1)
+        || (bc_3[0] == 1 && bc_3[1] == 1 && bc_3[2] == 1)
+        || (bc_1[0] == 1 && bc_2[0] == 1 && bc_3[0] == 1)
+        || (bc_1[1] == 1 && bc_2[1] == 1 && bc_3[1] == 1)
+        || (bc_1[2] == 1 && bc_2[2] == 1 && bc_3[2] == 1)
+        || (bc_1[0] == 1 && bc_2[1] == 1 && bc_3[2] == 1)
+        || (bc_1[2] == 1 && bc_2[1] == 1 && bc_3[0] == 1)
+    {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 fn panasonic_2020_b() {
