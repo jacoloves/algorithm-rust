@@ -13,7 +13,42 @@ where
 }
 
 fn main() {
-    abc086_b();
+    abc088_b();
+}
+
+fn abc088_b() {
+    let l: Vec<i32> = read_line();
+    let n = l[0];
+    let mut a: Vec<i32> = read_line();
+
+    a.sort();
+    a.reverse();
+
+    let mut ans = 0;
+    for (a_e, i) in a.iter().zip(1..=n) {
+        if i % 2 != 0 {
+            ans += a_e;
+        } else {
+            ans -= a_e;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+fn abc074_b() {
+    let l: Vec<i32> = read_line();
+    let _n = l[0];
+    let l: Vec<i32> = read_line();
+    let k = l[0];
+    let x: Vec<i32> = read_line();
+
+    let mut ans = 0;
+    for x_e in x.iter() {
+        ans += min(x_e * 2, (k - x_e) * 2);
+    }
+
+    println!("{}", ans);
 }
 
 fn abc086_b() {
