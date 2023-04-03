@@ -13,7 +13,25 @@ where
 }
 
 fn main() {
-    abc175_b();
+    abc086_b();
+}
+
+fn abc086_b() {
+    let l: Vec<String> = read_line();
+
+    let syn_str = l[0].clone() + &l[1].clone();
+
+    let num: i32 = syn_str.parse().unwrap();
+
+    let mut ans = "No";
+    for i in 1..=2000 {
+        if num == i * i {
+            ans = "Yes";
+            break;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 fn abc175_b() {
