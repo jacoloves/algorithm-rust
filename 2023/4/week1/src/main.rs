@@ -1,3 +1,4 @@
+use std::cmp;
 use std::cmp::min;
 use std::fmt::Debug;
 use std::ptr::read;
@@ -13,7 +14,53 @@ where
 }
 
 fn main() {
-    abc088_b();
+    abc160_c();
+}
+
+fn abc160_c() {
+    let kl: Vec<usize> = read_line();
+    let k = kl[0];
+    let nl: Vec<usize> = read_line();
+    let _n = nl[0];
+    let a: Vec<usize> = read_line();
+
+    let mut max = 0;
+    for i in 0..a.len() {
+        if i + 1 < a.len() {
+            max = cmp::max(max, a[i + 1] - a[i]);
+        } else {
+            max = cmp::max(max, k + a[0] - a[i]);
+        }
+    }
+
+    println!("{}", k - max);
+}
+
+fn abc068_b() {
+    let l: Vec<i32> = read_line();
+    let n = l[0];
+
+    if n == 1 {
+        println!("1");
+    } else {
+        let mut max_cnt = -1;
+
+        let mut ans = 0;
+        for i in 2..=n {
+            let mut div_i = i.clone();
+            let mut cnt = 0;
+            while div_i / 2 != 0 {
+                div_i = div_i / 2;
+                cnt += 1;
+                if max_cnt < cnt {
+                    max_cnt = cnt;
+                    ans = i;
+                }
+            }
+        }
+
+        println!("{}", ans);
+    }
 }
 
 fn abc088_b() {
