@@ -14,7 +14,34 @@ where
 }
 
 fn main() {
-    abc160_c();
+    agc014_a();
+}
+
+fn agc014_a() {
+    let l: Vec<usize> = read_line();
+    let mut a = l[0];
+    let mut b = l[1];
+    let mut c = l[2];
+
+    let mut cnt = 0;
+
+    if a % 2 == 1 || b % 2 == 1 || c % 2 == 1 {
+        println!("0");
+    } else if a == b || a == c {
+        println!("-1");
+    } else {
+        while a % 2 == 0 && b % 2 == 0 && c % 2 == 0 {
+            let a_c = a.clone();
+            let b_c = b.clone();
+            let c_c = c.clone();
+            a = (b_c + c_c) / 2;
+            b = (a_c + c_c) / 2;
+            c = (a_c + b_c) / 2;
+            cnt += 1;
+        }
+
+        println!("{}", cnt);
+    }
 }
 
 fn abc160_c() {
