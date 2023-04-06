@@ -18,22 +18,19 @@ fn main() {
 }
 
 fn abc160_c() {
-    let kl: Vec<usize> = read_line();
-    let k = kl[0];
-    let nl: Vec<usize> = read_line();
-    let _n = nl[0];
-    let a: Vec<usize> = read_line();
+    let l: Vec<usize> = read_line();
+    let k = l[0];
+    let n = l[1];
+    let mut a: Vec<usize> = read_line();
 
-    let mut max = 0;
-    for i in 0..a.len() {
-        if i + 1 < a.len() {
-            max = cmp::max(max, a[i + 1] - a[i]);
-        } else {
-            max = cmp::max(max, k + a[0] - a[i]);
-        }
+    a.push(k + a[0]);
+
+    let mut max_range: usize = 0;
+    for i in 0..n {
+        max_range = cmp::max(max_range, a[i + 1] - a[i]);
     }
 
-    println!("{}", k - max);
+    println!("{}", k - max_range);
 }
 
 fn abc068_b() {
