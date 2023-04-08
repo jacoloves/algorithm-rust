@@ -14,7 +14,16 @@ where
 }
 
 fn main() {
-    agc014_a();
+    abc161_c();
+}
+
+fn abc161_c() {
+    let l: Vec<i128> = read_line();
+    let n = l[0];
+    let k = l[1];
+
+    let a = n % k;
+    println!("{}", min(a, k - a));
 }
 
 fn agc014_a() {
