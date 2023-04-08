@@ -14,7 +14,18 @@ where
 }
 
 fn main() {
-    abc161_c();
+    abc132_c();
+}
+
+fn abc132_c() {
+    let _l: Vec<usize> = read_line();
+    let mut v: Vec<usize> = read_line();
+
+    v.sort();
+
+    let ans = v[v.len() / 2] - v[v.len() / 2 - 1];
+
+    println!("{}", ans);
 }
 
 fn abc161_c() {
