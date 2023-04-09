@@ -14,7 +14,26 @@ where
 }
 
 fn main() {
-    abc132_c();
+    abc142_c();
+}
+
+fn abc142_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let a: Vec<usize> = read_line();
+
+    let mut ans: Vec<usize> = vec![0; n];
+
+    for (e, i) in a.iter().zip(0..n) {
+        let j = e - 1;
+        ans[j] = i + 1;
+    }
+
+    for e in ans.iter() {
+        print!("{} ", e);
+    }
+
+    println!();
 }
 
 fn abc132_c() {
