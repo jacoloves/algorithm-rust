@@ -14,7 +14,77 @@ where
 }
 
 fn main() {
-    abc142_c();
+    abc094_b();
+}
+
+fn abc094_b() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let x = l[2];
+    let a: Vec<usize> = read_line();
+
+    let mut up_cnt = 0;
+    let mut down_cnt = 0;
+
+    for i in 0..=x {
+        for e in a.iter() {
+            if x < *e {
+                break;
+            } else if i == *e {
+                down_cnt += 1;
+            }
+        }
+    }
+
+    for i in x..=n {
+        for e in a.iter() {
+            if i == *e {
+                up_cnt += 1;
+            }
+        }
+    }
+
+    let min_cnt = cmp::min(down_cnt, up_cnt);
+
+    println!("{}", min_cnt);
+}
+
+fn abc122_b() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+    let mut ans = 0;
+    let mut cnt = 0;
+    for e in s.chars() {
+        if e == 'A' || e == 'C' || e == 'G' || e == 'T' {
+            cnt += 1;
+        } else {
+            ans = cmp::max(ans, cnt);
+            cnt = 0;
+        }
+    }
+    ans = cmp::max(ans, cnt);
+    println!("{}", ans);
+}
+
+fn abc138_c() {
+    let _l: Vec<usize> = read_line();
+    let mut v: Vec<f64> = read_line();
+
+    v.sort_by(|a, b| a.partial_cmp(b).unwrap());
+
+    let mut ans: f64 = 0.0;
+    let mut cnt = 0;
+    for e in v.iter() {
+        cnt += 1;
+        if cnt >= 2 {
+            ans += e;
+            ans /= 2.0;
+        } else {
+            ans += e;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 fn abc142_c() {
