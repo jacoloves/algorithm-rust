@@ -14,7 +14,31 @@ where
 }
 
 fn main() {
-    abc094_b();
+    abc116_b();
+}
+
+fn abc116_b() {
+    let l: Vec<usize> = read_line();
+    let mut s = l[0];
+
+    let mut v: Vec<usize> = vec![s];
+
+    let mut ans = 1;
+    loop {
+        ans += 1;
+        if s % 2 == 0 {
+            s /= 2;
+        } else {
+            s = 3 * s + 1;
+        }
+        let index = v.iter().position(|&item| item == s);
+        if index != None {
+            break;
+        }
+        v.push(s);
+    }
+
+    println!("{}", ans);
 }
 
 fn abc094_b() {
