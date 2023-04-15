@@ -14,7 +14,35 @@ where
 }
 
 fn main() {
-    abc149_c();
+    agc027_a();
+}
+
+fn agc027_a() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let mut x = l[1];
+    let mut va: Vec<usize> = read_line();
+
+    va.sort();
+
+    let mut cnt = 0;
+    for e in va.iter() {
+        if *e > x {
+            break;
+        }
+        x -= *e;
+        if x == 0 {
+            cnt += 1;
+            break;
+        }
+        cnt += 1;
+    }
+
+    if x > 0 && cnt == n {
+        cnt -= 1;
+    }
+
+    println!("{}", cnt);
 }
 
 fn abc149_c() {
