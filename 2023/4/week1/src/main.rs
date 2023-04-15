@@ -14,7 +14,38 @@ where
 }
 
 fn main() {
-    abc116_b();
+    abc149_c();
+}
+
+fn abc149_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let max = 100000007;
+
+    for i in n..=max {
+        if is_prime(i) {
+            println!("{}", i);
+            break;
+        }
+    }
+}
+
+fn is_prime(n: usize) -> bool {
+    if n == 2 {
+        true
+    } else if n % 2 == 0 {
+        false
+    } else {
+        let mut i = 3;
+        while i * i <= n {
+            if n % i == 0 {
+                return false;
+            }
+            i += 2;
+        }
+        true
+    }
 }
 
 fn abc116_b() {
