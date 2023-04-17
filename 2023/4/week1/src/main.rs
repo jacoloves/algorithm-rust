@@ -14,7 +14,58 @@ where
 }
 
 fn main() {
-    agc027_a();
+    abc092_b();
+}
+
+fn abc092_b() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let l: Vec<usize> = read_line();
+    let d = l[0];
+    let x = l[1];
+
+    let mut sum = 0;
+    for _ in 1..=n {
+        let mut cnt = 0;
+        let l: Vec<usize> = read_line();
+        let a = l[0];
+        let mut c_cnt = 1;
+        let mut i = 1;
+        while c_cnt <= d {
+            cnt += 1;
+            c_cnt = i * a + 1;
+            i += 1;
+        }
+        sum += cnt;
+    }
+
+    sum += x;
+    println!("{}", sum);
+}
+
+fn abc298_a() {
+    let _l: Vec<usize> = read_line();
+    let l: Vec<String> = read_line();
+
+    let s = l[0].clone();
+
+    let mut flg = false;
+
+    for es in s.chars() {
+        if es == 'o' {
+            flg = true;
+        } else if es == 'x' {
+            flg = false;
+            break;
+        }
+    }
+
+    if flg {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 fn agc027_a() {
