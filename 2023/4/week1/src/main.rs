@@ -14,7 +14,32 @@ where
 }
 
 fn main() {
-    abc092_b();
+    hitachi2020_b();
+}
+
+fn hitachi2020_b() {
+    let l: Vec<usize> = read_line();
+    let m = l[2];
+    let mut vec_a: Vec<usize> = read_line();
+    let mut vec_b: Vec<usize> = read_line();
+
+    let min_a = vec_a.iter().min().unwrap();
+    let min_b = vec_b.iter().min().unwrap();
+
+    let mut ans = min_a + min_b;
+
+    for _ in 1..=m {
+        let vec_m: Vec<usize> = read_line();
+        let x = vec_m[0];
+        let y = vec_m[1];
+        let c = vec_m[2];
+
+        let cmp_ans = vec_a[x-1] + vec_b[y-1] - c;
+        ans = cmp::min(ans, cmp_ans);
+    }
+
+    println!("{}", ans);
+
 }
 
 fn abc092_b() {
