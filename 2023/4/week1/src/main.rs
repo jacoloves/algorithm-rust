@@ -3,6 +3,7 @@ use std::cmp::min;
 use std::fmt::Debug;
 use std::ptr::read;
 use std::str::FromStr;
+use itertools::Itertools;
 
 fn read_line<T: std::str::FromStr>() -> Vec<T>
 where
@@ -14,7 +15,33 @@ where
 }
 
 fn main() {
-    hitachi2020_b();
+    abc150_c();
+}
+
+fn abc150_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let a: Vec<usize> = read_line();
+    let b: Vec<usize> = read_line();
+
+    let p_iter = (1..=n).permutations(n);
+
+    let mut a_order = 0;
+    let mut b_order = 0;
+
+    for (e, i) in p_iter.zip(1..) {
+        if e == a {
+            a_order = i;
+        }
+
+        if e == b {
+            b_order = i;
+        }
+    }
+
+    let ans = (a_order as f32 - b_order as f32).abs();
+
+    println!("{}", ans);
 }
 
 fn hitachi2020_b() {
