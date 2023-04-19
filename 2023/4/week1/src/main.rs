@@ -15,7 +15,26 @@ where
 }
 
 fn main() {
-    abc150_c();
+    abc153_d();
+}
+
+fn f(x: u128) -> u128 {
+    if x == 1 {
+        return 1;
+    }
+
+    let a: u128 = f(x/2);
+
+    a*2+1
+}
+
+fn abc153_d() {
+    let l: Vec<u128> = read_line();
+    let h = l[0];
+
+    let ans = f(h);
+
+    println!("{}", ans);
 }
 
 fn abc150_c() {
