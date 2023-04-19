@@ -15,7 +15,38 @@ where
 }
 
 fn main() {
-    abc153_d();
+    abc158_b();
+}
+
+fn abc158_b() {
+    let l: Vec<u128> = read_line();
+    let n = l[0];
+    let a = l[1];
+    let b = l[2];
+
+    if a == 0 {
+        println!("0");
+    } else {
+        if n - (a+b) == 0 {
+            println!("{}", a);
+        } else {
+            let div_n = n / (a+b);
+            let rem_n = n % (a+b);
+            let mut a_sum = a * div_n;
+
+            if rem_n == 0 {
+                println!("{}", a_sum);
+            } else {
+                if a <= rem_n {
+                    a_sum += a;
+                } else {
+                    a_sum += rem_n;
+                }
+                
+                println!("{}", a_sum);
+            }
+        }
+    }
 }
 
 fn f(x: u128) -> u128 {
