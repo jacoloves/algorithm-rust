@@ -18,7 +18,35 @@ where
 }
 
 fn main() {
-    abc081_b();
+    abc114_b();
+}
+
+fn abc114_b_f(a: char, b: char, c: char) -> f32 {
+    let marge_s = format!("{}{}{}", a, b, c);
+
+    let marge_num: f32 = marge_s.parse().unwrap();
+
+    return (marge_num - 753 as f32).abs();
+}
+
+fn abc114_b() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let n = s.len();
+
+    let mut ans: isize = 100000007;
+    for ((i, j), k) in (0..n - 2).zip(1..n - 1).zip(2..n) {
+        let cmp_num = abc114_b_f(
+            s.chars().nth(i).unwrap(),
+            s.chars().nth(j).unwrap(),
+            s.chars().nth(k).unwrap(),
+        );
+
+        ans = cmp::min(ans, cmp_num as isize);
+    }
+
+    println!("{}", ans);
 }
 
 fn abc081_b() {
