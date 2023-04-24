@@ -21,6 +21,36 @@ fn main() {
     abc114_b();
 }
 
+fn abc108_b() {
+    let l: Vec<isize> = read_line();
+    let x_1 = l[0];
+    let y_1 = l[1];
+    let x_2 = l[2];
+    let y_2 = l[3];
+
+    let mut dx = x_2 - x_1;
+    let mut dy = y_2 - y_1;
+    let mut x = x_2;
+    let mut y = y_2;
+
+    for i in 0..2 {
+        let dx_2 = -dy;
+        let dy_2 = dx;
+        dx = dx_2;
+        dy = dy_2;
+
+        x = x + dx;
+        y = y + dy;
+
+        print!("{} {}", x, y);
+        if i == 0 {
+            print!(" ");
+        } else {
+            println!();
+        }
+    }
+}
+
 fn abc114_b_f(a: char, b: char, c: char) -> f32 {
     let marge_s = format!("{}{}{}", a, b, c);
 
