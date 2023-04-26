@@ -18,7 +18,35 @@ where
 }
 
 fn main() {
-    abc108_b();
+    abc063_b();
+}
+
+fn abc063_b() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let s_copy = s.clone();
+
+    let mut flg = true;
+    for se in s.chars() {
+        let mut cnt = 0;
+        for sce in s_copy.chars() {
+            if se == sce {
+                cnt += 1;
+            }
+        }
+
+        if cnt >= 2 {
+            flg = false;
+            break;
+        }
+    }
+
+    if flg {
+        println!("yes");
+    } else {
+        println!("no");
+    }
 }
 
 fn abc108_b() {
