@@ -18,7 +18,28 @@ where
 }
 
 fn main() {
-    abc063_b();
+    abc052_b();
+}
+
+fn abc052_b() {
+    let _l: Vec<usize> = read_line();
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let mut ans = 0;
+
+    let mut cnt = 0;
+    for c in s.chars() {
+        if c == 'D' {
+            cnt -= 1;
+        } else if c == 'I' {
+            cnt += 1;
+        }
+
+        ans = cmp::max(ans, cnt);
+    }
+
+    println!("{}", ans);
 }
 
 fn abc063_b() {
