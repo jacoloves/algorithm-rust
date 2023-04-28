@@ -18,7 +18,60 @@ where
 }
 
 fn main() {
-    abc052_b();
+    abc087_b();
+}
+
+fn abc087_b() {
+    let l: Vec<usize> = read_line();
+    let a = l[0];
+    let l: Vec<usize> = read_line();
+    let b = l[0];
+    let l: Vec<usize> = read_line();
+    let c = l[0];
+    let l: Vec<usize> = read_line();
+    let x = l[0];
+
+    let mut cnt = 0;
+    for a_i in 0..=a {
+        for b_i in 0..=b {
+            for c_i in 0..=c {
+                if x == 500 * a_i + 100 * b_i + 50 * c_i {
+                    cnt += 1;
+                }
+            }
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+fn abc084_b() {
+    let l: Vec<usize> = read_line();
+    let a = l[0];
+    let b = l[1];
+
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let n = a + b + 1;
+    let mut flg = true;
+    for (c, i) in s.chars().zip(1..=n) {
+        if i == a + 1 {
+            if c != '-' {
+                flg = false;
+                break;
+            }
+        } else if c == '-' {
+            flg = false;
+            break;
+        }
+    }
+
+    if flg {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 fn abc052_b() {
