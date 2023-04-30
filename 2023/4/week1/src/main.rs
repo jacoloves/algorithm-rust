@@ -5,6 +5,7 @@ use itertools::Itertools;
 use std::cmp;
 use std::cmp::min;
 use std::fmt::Debug;
+use std::io::empty;
 use std::ptr::read;
 use std::str::FromStr;
 
@@ -18,7 +19,29 @@ where
 }
 
 fn main() {
-    abc087_b();
+    abc071_b();
+}
+
+fn abc071_b() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+    let mut flg = false;
+
+    for c in alphabet.chars() {
+        let ans_match = s.find(c);
+        if ans_match == None {
+            println!("{}", c);
+            flg = true;
+            break;
+        }
+    }
+
+    if !flg {
+        println!("None");
+    }
 }
 
 fn abc087_b() {
