@@ -19,7 +19,36 @@ where
 }
 
 fn main() {
-    abc071_b();
+    abc127_c();
+}
+
+fn abc127_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let m = l[1];
+
+    let mut l_v: Vec<usize> = vec![];
+    let mut r_v: Vec<usize> = vec![];
+
+    for _ in 0..m {
+        let l: Vec<usize> = read_line();
+        l_v.push(l[0]);
+        r_v.push(l[1]);
+    }
+
+    let mut max_l = 1;
+    let mut min_r = n;
+
+    for i in 0..m {
+        max_l = cmp::max(max_l, l_v[i]);
+        min_r = cmp::min(min_r, r_v[i]);
+    }
+
+    let mut ans = min_r - max_l + 1;
+
+    ans = cmp::max(ans, 0);
+
+    println!("{}", ans);
 }
 
 fn abc071_b() {
