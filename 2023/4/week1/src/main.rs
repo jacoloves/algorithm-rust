@@ -19,7 +19,30 @@ where
 }
 
 fn main() {
-    abc127_c();
+    abc141_c();
+}
+
+fn abc141_c() {
+    let l: Vec<i128> = read_line();
+    let n = l[0];
+    let k = l[1];
+    let q = l[2];
+
+    let mut array_n = vec![0; n as usize];
+
+    for _i in 0..q {
+        let al: Vec<i128> = read_line();
+        let a: usize = al[0] as usize - 1;
+        array_n[a] += 1;
+    }
+
+    for i in 0..n {
+        if k - q + array_n[i as usize] >= 1 {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
+    }
 }
 
 fn abc127_c() {
@@ -27,8 +50,8 @@ fn abc127_c() {
     let n = l[0];
     let m = l[1];
 
-    let mut l_v: Vec<usize> = vec![];
-    let mut r_v: Vec<usize> = vec![];
+    let mut l_v = Vec::new();
+    let mut r_v = Vec::new();
 
     for _ in 0..m {
         let l: Vec<usize> = read_line();
@@ -36,19 +59,19 @@ fn abc127_c() {
         r_v.push(l[1]);
     }
 
-    let mut max_l = 1;
-    let mut min_r = n;
+    let mut max_l = l_v.iter().max().unwrap();
+    let mut min_r = r_v.iter().min().unwrap();
 
-    for i in 0..m {
-        max_l = cmp::max(max_l, l_v[i]);
-        min_r = cmp::min(min_r, r_v[i]);
-    }
+    // for i in 0..m {
+    //     max_l = cmp::max(max_l, l_v[i] - 1);
+    //     min_r = cmp::min(min_r, r_v[i]);
+    // }
 
-    let mut ans = min_r - max_l + 1;
+    // let mut ans = min_r - max_l + 1;
 
-    ans = cmp::max(ans, 0);
+    // ans = cmp::max(ans, 0);
 
-    println!("{}", ans);
+    println!("{}", cmp::max(0, min_r - max_l + 1));
 }
 
 fn abc071_b() {
