@@ -21,7 +21,30 @@ fn read<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc123_b();
+    abc134_c();
+}
+
+#[allow(dead_code)]
+fn abc134_c() {
+    let n: usize = read();
+    let mut v = Vec::new();
+
+    for _ in 0..n {
+        let a: usize = read();
+        v.push(a);
+    }
+
+    let mut cmp_v = v.clone();
+    cmp_v.sort();
+    cmp_v.reverse();
+
+    for i in 0..n {
+        if v[i] == cmp_v[0] {
+            println!("{}", cmp_v[1]);
+        } else {
+            println!("{}", cmp_v[0]);
+        }
+    }
 }
 
 #[allow(dead_code)]
