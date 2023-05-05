@@ -21,7 +21,26 @@ fn read<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc134_c();
+    agc002_a();
+}
+
+#[allow(dead_code)]
+fn agc002_a() {
+    let a: i128 = read();
+    let b: i128 = read();
+
+    if a > 0 && b > 0 {
+        println!("Positive");
+    } else if a <= 0 && b >= 0 {
+        println!("Zero");
+    } else {
+        let j_num = (a - b).abs();
+        if j_num % 2 == 0 {
+            println!("Negative");
+        } else {
+            println!("Positive");
+        }
+    }
 }
 
 #[allow(dead_code)]
