@@ -8,7 +8,7 @@ use std::str::*;
 use std::cmp;
 
 #[allow(dead_code)]
-fn read<T: FromStr>() -> T {
+fn read_line<T: FromStr>() -> T {
     let cin = stdin();
     let cin = cin.lock();
     let s: String = cin
@@ -21,13 +21,40 @@ fn read<T: FromStr>() -> T {
 }
 
 fn main() {
-    agc002_a();
+    abc152_c();
+}
+
+#[allow(dead_code)]
+fn abc152_c() {
+    let n: usize = read_line();
+    let mut p = Vec::new();
+
+    for _ in 0..n {
+        let a: usize = read_line();
+        p.push(a);
+    }
+
+    let mut p_min = p[0];
+    let mut p_max = p[0];
+
+    let mut ans = 1;
+
+    for i in 1..n {
+        if p[i] <= p_max && p[i] <= p_min {
+            ans += 1;
+        }
+
+        p_max = cmp::max(p[i], p_max);
+        p_min = cmp::min(p[i], p_min);
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
 fn agc002_a() {
-    let a: i128 = read();
-    let b: i128 = read();
+    let a: i128 = read_line();
+    let b: i128 = read_line();
 
     if a > 0 && b > 0 {
         println!("Positive");
@@ -45,11 +72,11 @@ fn agc002_a() {
 
 #[allow(dead_code)]
 fn abc134_c() {
-    let n: usize = read();
+    let n: usize = read_line();
     let mut v = Vec::new();
 
     for _ in 0..n {
-        let a: usize = read();
+        let a: usize = read_line();
         v.push(a);
     }
 
@@ -68,11 +95,11 @@ fn abc134_c() {
 
 #[allow(dead_code)]
 fn abc123_b() {
-    let a: isize = read();
-    let b: isize = read();
-    let c: isize = read();
-    let d: isize = read();
-    let e: isize = read();
+    let a: isize = read_line();
+    let b: isize = read_line();
+    let c: isize = read_line();
+    let d: isize = read_line();
+    let e: isize = read_line();
 
     let v_l = [a, b, c, d, e];
 
