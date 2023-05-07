@@ -21,7 +21,36 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc152_c();
+    abc118_b();
+}
+
+#[allow(dead_code)]
+fn abc118_b() {
+    let n: usize = read_line();
+    let m: usize = read_line();
+
+    let mut v: Vec<usize> = Vec::new();
+
+    for _ in 0..m {
+        v.push(0);
+    }
+
+    for _ in 1..=n {
+        let k: usize = read_line();
+        for _ in 1..=k {
+            let a: usize = read_line();
+            v[a - 1] += 1;
+        }
+    }
+
+    let mut ans = 0;
+    for i in 0..m {
+        if v[i] == n {
+            ans += 1;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
