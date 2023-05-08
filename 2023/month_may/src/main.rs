@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::io::*;
 #[allow(unused_imports)]
@@ -21,7 +22,32 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc118_b();
+    abc044_b();
+}
+
+#[allow(dead_code)]
+fn abc044_b() {
+    let w: String = read_line();
+
+    let mut map = HashMap::<char, u32>::new();
+
+    for c in w.chars() {
+        *map.entry(c).or_insert(0) += 1;
+    }
+
+    let mut flg = true;
+    for (_, value) in &map {
+        if value % 2 != 0 {
+            flg = false;
+            break;
+        }
+    }
+
+    if flg {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 #[allow(dead_code)]
