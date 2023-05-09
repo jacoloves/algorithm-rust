@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use std::collections::btree_map::Values;
 use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::io::*;
@@ -22,7 +23,41 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc044_b();
+    abc124_c();
+}
+
+#[allow(dead_code)]
+fn abc124_c() {
+    let s: String = read_line();
+
+    // 0101...
+    let mut cnt1 = 0;
+    for (c, i) in s.chars().zip(0..s.len()) {
+        if i % 2 == 0 {
+            if c != '0' {
+                cnt1 += 1;
+            }
+        } else {
+            if c != '1' {
+                cnt1 += 1;
+            }
+        }
+    }
+    // 1010...
+    let mut cnt2 = 0;
+    for (c, i) in s.chars().zip(0..s.len()) {
+        if i % 2 == 0 {
+            if c != '1' {
+                cnt2 += 1;
+            }
+        } else {
+            if c != '0' {
+                cnt2 += 1;
+            }
+        }
+    }
+
+    println!("{}", cmp::min(cnt1, cnt2));
 }
 
 #[allow(dead_code)]
