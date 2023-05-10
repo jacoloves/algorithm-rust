@@ -23,7 +23,25 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc124_c();
+    abc090_b();
+}
+
+#[allow(dead_code)]
+fn abc090_b() {
+    let a: usize = read_line();
+    let b: usize = read_line();
+
+    let mut ans = 0;
+    for i in a..=b {
+        let stri: String = i.to_string();
+        let reverse: String = stri.chars().rev().collect::<String>();
+
+        if stri == reverse {
+            ans += 1;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
