@@ -1,5 +1,4 @@
 use itertools::Itertools;
-use std::collections::btree_map::Values;
 use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::io::*;
@@ -23,7 +22,31 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc090_b();
+    agc024_a();
+}
+
+#[allow(dead_code)]
+fn agc024_a() {
+    let a: i128 = read_line();
+    let b: i128 = read_line();
+    let _c: i128 = read_line();
+    let k: i128 = read_line();
+
+    const JUDGE_NUM: i128 = 1000000000000000000;
+
+    if k % 2 == 0 {
+        if (a - b).abs() >= JUDGE_NUM {
+            println!("Unfair");
+        } else {
+            println!("{}", a - b);
+        }
+    } else {
+        if (b - a).abs() >= JUDGE_NUM {
+            println!("Unfair");
+        } else {
+            println!("{}", b - a);
+        }
+    }
 }
 
 #[allow(dead_code)]
