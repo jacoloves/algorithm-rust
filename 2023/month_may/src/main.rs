@@ -22,7 +22,26 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    agc024_a();
+    abc079_b();
+}
+
+#[allow(dead_code)]
+fn abc079_b() {
+    let n: usize = read_line();
+
+    //let mut ans: u128 = 0;
+
+    let mut v: Vec<u128> = Vec::new();
+
+    v.push(2);
+    v.push(1);
+
+    for i in 2..=n {
+        let tmp = v[i - 1] + v[i - 2];
+        v.push(tmp);
+    }
+
+    println!("{}", v[v.len() - 1]);
 }
 
 #[allow(dead_code)]
