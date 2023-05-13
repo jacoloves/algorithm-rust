@@ -22,7 +22,33 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc079_b();
+    abc139_c();
+}
+
+#[allow(dead_code)]
+fn abc139_c() {
+    let n: u128 = read_line();
+    let mut h: Vec<u128> = Vec::new();
+
+    for _ in 1..=n {
+        let tmp: u128 = read_line();
+        h.push(tmp);
+    }
+
+    h.reverse();
+
+    let mut ans = 0;
+    let mut val = 0;
+    for i in 1..n {
+        if h[i as usize - 1] <= h[i as usize] {
+            val += 1;
+        } else {
+            val = 0;
+        }
+        ans = cmp::max(ans, val);
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
