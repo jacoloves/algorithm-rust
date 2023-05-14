@@ -22,7 +22,32 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc062_b();
+    abc059_b();
+}
+
+#[allow(dead_code)]
+fn abc059_b() {
+    let a: String = read_line();
+    let b: String = read_line();
+
+    if a.len() > b.len() {
+        println!("GREATER");
+    } else if a.len() < b.len() {
+        println!("LESS");
+    } else {
+        for (a_c, b_c) in a.chars().zip(b.chars()) {
+            let num_a_c = a_c as i32 - 48;
+            let num_b_c = b_c as i32 - 48;
+            if num_a_c > num_b_c {
+                println!("GREATER");
+                return;
+            } else if num_a_c < num_b_c {
+                println!("LESS");
+                return;
+            }
+        }
+        println!("EQUAL");
+    }
 }
 
 #[allow(dead_code)]
