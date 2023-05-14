@@ -22,7 +22,41 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc139_c();
+    abc062_b();
+}
+
+#[allow(dead_code)]
+fn abc062_b() {
+    let h: usize = read_line();
+    let w: usize = read_line();
+
+    let mut a: Vec<String> = Vec::new();
+
+    for _ in 1..=h {
+        let s: String = read_line();
+        a.push(s);
+    }
+
+    let mut ans: Vec<String> = Vec::new();
+
+    let mut tmp_s = "".to_string();
+
+    for _ in 1..=w + 2 {
+        tmp_s.push('#');
+    }
+
+    for i in 0..h + 2 {
+        if i == 0 || i == h + 1 {
+            ans.push(tmp_s.clone());
+        } else {
+            let tmp_s2 = format!("#{}#", a[i - 1]);
+            ans.push(tmp_s2);
+        }
+    }
+
+    for i in 0..ans.len() {
+        println!("{}", ans[i]);
+    }
 }
 
 #[allow(dead_code)]
