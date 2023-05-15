@@ -22,7 +22,30 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc059_b();
+    abc083_b();
+}
+
+#[allow(dead_code)]
+fn abc083_b() {
+    let n: usize = read_line();
+    let a: usize = read_line();
+    let b: usize = read_line();
+
+    let mut ans = 0;
+    for i in 1..=n {
+        let mut tmp_sum = 0;
+        let mut tmp = i;
+        while tmp != 0 {
+            tmp_sum += tmp % 10;
+            tmp /= 10;
+        }
+
+        if tmp_sum >= a && tmp_sum <= b {
+            ans += i;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
