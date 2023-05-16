@@ -22,7 +22,33 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc083_b();
+    abc140_c();
+}
+
+#[allow(dead_code)]
+fn abc140_c() {
+    let n: usize = read_line();
+    let mut b: Vec<usize> = Vec::new();
+
+    for _ in 1..=n - 1 {
+        let a: usize = read_line();
+        b.push(a);
+    }
+
+    let mut ans: Vec<usize> = Vec::new();
+
+    ans.push(b[0]);
+
+    for i in 1..n {
+        ans.push(b[i - 1]);
+        if !(b[i - 1] >= cmp::max(ans[i - 1], ans[i])) {
+            ans[i - 1] = b[i - 1];
+        }
+    }
+
+    let ans_sum: usize = ans.iter().sum();
+
+    println!("{}", ans_sum);
 }
 
 #[allow(dead_code)]
