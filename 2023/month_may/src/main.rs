@@ -22,7 +22,40 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc061_b();
+    abc109_b();
+}
+
+#[allow(dead_code)]
+fn abc109_b() {
+    let n: usize = read_line();
+
+    let mut w: Vec<String> = Vec::new();
+
+    for _ in 1..=n {
+        let w_c: String = read_line();
+        w.push(w_c);
+    }
+
+    for i in 0..n {
+        for j in i + 1..n {
+            if w[i] == w[j] {
+                println!("No");
+                return;
+            }
+        }
+    }
+
+    let mut tmp_w = w[0].clone();
+
+    for i in 1..n {
+        if tmp_w.chars().last().unwrap() != w[i].clone().chars().next().unwrap() {
+            println!("No");
+            return;
+        }
+        tmp_w = w[i].clone();
+    }
+
+    println!("Yes");
 }
 
 #[allow(dead_code)]
