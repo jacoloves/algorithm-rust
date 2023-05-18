@@ -22,7 +22,30 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc109_b();
+    abc109_b_ex();
+}
+
+#[allow(dead_code)]
+fn abc109_b_ex() {
+    let n: usize = read_line();
+
+    let mut w: Vec<String> = Vec::new();
+    for _ in 1..=n {
+        let w_c: String = read_line();
+        w.push(w_c);
+    }
+
+    let mut map_w = HashMap::new();
+    for i in w.iter() {
+        *map_w.entry(i).or_insert(0) += 1;
+    }
+
+    for i in map_w.into_values() {
+        if i >= 2 {
+            println!("No");
+            return;
+        }
+    }
 }
 
 #[allow(dead_code)]
