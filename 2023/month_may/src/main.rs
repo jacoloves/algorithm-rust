@@ -22,7 +22,39 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc109_b_ex();
+    abc133_b();
+}
+
+#[allow(dead_code)]
+fn abc133_b() {
+    let n: usize = read_line();
+    let d: usize = read_line();
+
+    let mut x: Vec<Vec<i32>> = vec![];
+
+    for _ in 1..=n {
+        let mut y = vec![];
+        for _ in 1..=d {
+            let a: i32 = read_line();
+            y.push(a);
+        }
+        x.push(y);
+    }
+
+    let mut ans = 0;
+    for i in 0..n - 1 {
+        for j in i + 1..n {
+            let mut distance = 0;
+            for k in 0..d {
+                distance += (x[i][k] - x[j][k]).pow(2);
+            }
+            let s = (distance as f32).sqrt();
+            if s.fract() == 0.0 {
+                ans += 1;
+            }
+        }
+    }
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
