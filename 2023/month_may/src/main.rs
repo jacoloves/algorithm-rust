@@ -26,8 +26,8 @@ fn main() {
 }
 
 #[allow(dead_code)]
-fn upper_i(i: usize, j: usize, cnt: usize) {
-
+fn upper_i(i: usize, j: usize, cnt: usize, vi: Vec<usize>, vj: Vec<usize>) {
+    
 }
 
 #[allow(dead_code)]
@@ -72,14 +72,8 @@ fn abc302_b() {
             let mut cnt = 0;
             let mut v_i: Vec<usize> = vec![];
             let mut v_j: Vec<usize> = vec![];
-            while cnt == 5 {
-                if s[i].chars().nth(j).unwrap() == 's' {
-                    // upper i-1
-                    if tmp_upper_i - 1 > 0 {
-                        
-                    } 
-                }
-            }
+            
+
         }
     }
 }
