@@ -22,7 +22,78 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc133_b();
+    abc302_b();
+}
+
+#[allow(dead_code)]
+fn upper_i(i: usize, j: usize, cnt: usize) {
+
+}
+
+#[allow(dead_code)]
+fn abc302_b() {
+    let h: usize = read_line();
+    let w: usize = read_line();
+
+    let mut s: Vec<String> = vec![];
+
+    for _ in 1..h {
+        let tmp: String = read_line();
+        s.push(tmp);
+    }
+    
+    for i in 0..h {
+        for j in 0..w {
+            // upper i-1
+            let mut tmp_upper_i = i;
+            // dowmner i+1
+            let mut tmp_downer_i = i;
+            // left j-1
+            let mut tmp_left_j = j;
+            // right j+1
+            let mut tmp_right_j = j;
+
+            // i-1, j-1
+            let mut tmp_left_upper_i = i;
+            let mut tmp_left_upper_j = j;
+
+            // i-1, j+1
+            let mut tmp_right_upper_i = i;
+            let mut tmp_right_upper_j = j;
+
+            // i+1, j+1
+            let mut tmp_right_downer_i = i;
+            let mut tmp_right_downer_j = j;
+
+            // i+1, j-1
+            let mut tmp_left_downer_i = i;
+            let mut tmp_left_downer_j = j;
+
+            let mut cnt = 0;
+            let mut v_i: Vec<usize> = vec![];
+            let mut v_j: Vec<usize> = vec![];
+            while cnt == 5 {
+                if s[i].chars().nth(j).unwrap() == 's' {
+                    // upper i-1
+                    if tmp_upper_i - 1 > 0 {
+                        
+                    } 
+                }
+            }
+        }
+    }
+}
+
+#[allow(dead_code)]
+fn abc302_a() {
+    let a: i128 = read_line();
+    let b: i128 = read_line();
+
+    let mut ans = a / b;
+    if a % b != 0 {
+        ans += 1;
+    }
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
