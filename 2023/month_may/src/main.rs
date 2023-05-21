@@ -8,6 +8,11 @@ use std::str::*;
 #[allow(unused_imports)]
 use std::cmp;
 
+#[allow(unused_imports)]
+use proconio::input;
+#[allow(unused_imports)]
+use proconio::marker::Chars;
+
 #[allow(dead_code)]
 fn read_line<T: FromStr>() -> T {
     let cin = stdin();
@@ -26,54 +31,53 @@ fn main() {
 }
 
 #[allow(dead_code)]
-fn upper_i(i: usize, j: usize, cnt: usize, vi: Vec<usize>, vj: Vec<usize>) {
-    
-}
-
-#[allow(dead_code)]
 fn abc302_b() {
-    let h: usize = read_line();
-    let w: usize = read_line();
-
-    let mut s: Vec<String> = vec![];
-
-    for _ in 1..h {
-        let tmp: String = read_line();
-        s.push(tmp);
+    input! {
+        h: usize,
+        w: usize,
+        s: [Chars; h],
     }
-    
+
+    let directions = [
+        (-1, 0),
+        (-1, 1),
+        (0, 1),
+        (1, 1),
+        (1, 0),
+        (1, -1),
+        (0, -1),
+        (-1, -1),
+    ];
+    let snuke = ['s', 'n', 'u', 'k', 'e'];
     for i in 0..h {
         for j in 0..w {
-            // upper i-1
-            let mut tmp_upper_i = i;
-            // dowmner i+1
-            let mut tmp_downer_i = i;
-            // left j-1
-            let mut tmp_left_j = j;
-            // right j+1
-            let mut tmp_right_j = j;
+            if s[i][j] == snuke[0] {
+                for &(vy, vx) in &directions {
+                    let mut y = i as i64;
+                    let mut x = j as i64;
+                    let mut ans = vec![];
+                    ans.push((y, x));
 
-            // i-1, j-1
-            let mut tmp_left_upper_i = i;
-            let mut tmp_left_upper_j = j;
-
-            // i-1, j+1
-            let mut tmp_right_upper_i = i;
-            let mut tmp_right_upper_j = j;
-
-            // i+1, j+1
-            let mut tmp_right_downer_i = i;
-            let mut tmp_right_downer_j = j;
-
-            // i+1, j-1
-            let mut tmp_left_downer_i = i;
-            let mut tmp_left_downer_j = j;
-
-            let mut cnt = 0;
-            let mut v_i: Vec<usize> = vec![];
-            let mut v_j: Vec<usize> = vec![];
-            
-
+                    for k in 1..snuke.len() {
+                        y = y + vy;
+                        x = x + vx;
+                        if x < 0 || y < 0 || x >= w as i64 || y >= h as i64 {
+                            break;
+                        }
+                        if s[y as usize][x as usize] == snuke[k] {
+                            ans.push((y, x));
+                        } else {
+                            break;
+                        }
+                    }
+                    if ans.len() == snuke.len() {
+                        for &(y, x) in &ans {
+                            println!("{} {}", y + 1, x + 1);
+                        }
+                        return;
+                    }
+                }
+            }
         }
     }
 }
