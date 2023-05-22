@@ -27,7 +27,62 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc302_b();
+    abc158_c();
+}
+
+#[allow(dead_code)]
+fn abc158_c() {
+    input! {
+        a: usize,
+        b: usize,
+    }
+
+    for i in 1..=10001 {
+        let tmp_a = (i as f64 * 0.08) as usize;
+        let tmp_b = (i as f64 * 0.1) as usize;
+        if a == tmp_a && b == tmp_b {
+            println!("{}", i);
+            return;
+        }
+    }
+
+    println!("-1");
+}
+
+#[allow(dead_code)]
+fn abc093_b() {
+    input! {
+        a: usize,
+        b: usize,
+        k: usize,
+    }
+
+    let mut ans = vec![];
+
+    for i in 0..k {
+        let c = a + i;
+
+        if c > b {
+            break;
+        }
+        ans.push(c);
+    }
+
+    for i in 0..k {
+        let d = b - i;
+
+        if d < a {
+            break;
+        }
+        ans.push(d);
+    }
+
+    ans.sort();
+    ans.dedup();
+
+    for e in ans.iter() {
+        println!("{}", e);
+    }
 }
 
 #[allow(dead_code)]
