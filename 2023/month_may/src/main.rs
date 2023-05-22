@@ -27,7 +27,58 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc158_c();
+    abc113_b_ans();
+}
+
+#[allow(dead_code)]
+fn abc113_b_ans() {
+    input! {
+        n: usize,
+        t: f64,
+        a: f64,
+        h: [f64; n],
+    };
+
+    let mut p = 200000.0;
+    let mut r = 0;
+    for i in 0..n {
+        let q = t - h[i] * 0.006;
+        let d = (a - q).abs();
+        if d < p {
+            p = d;
+            r = i;
+        }
+    }
+
+    println!("{}", r + 1);
+}
+
+#[allow(dead_code)]
+fn abc113_b() {
+    input! {
+        n: usize,
+        t: i32,
+        a: i32,
+        h: [i32; n],
+    }
+
+    let mut v = vec![];
+
+    for e in h.iter() {
+        let tmp = t as f32 - *e as f32 * 0.006;
+        v.push(tmp);
+    }
+
+    let mut map = HashMap::new();
+    for (e, i) in v.iter().zip(1..=v.len()) {
+        let cmp_e = (a - *e as i32).abs();
+        map.insert(i, cmp_e);
+    }
+
+    let mut ans_v: Vec<(&usize, &i32)> = map.iter().collect();
+    ans_v.sort_by(|a, b| a.1.cmp(&b.1));
+
+    println!("{}", ans_v[0].0);
 }
 
 #[allow(dead_code)]
