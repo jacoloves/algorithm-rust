@@ -27,7 +27,24 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc104_b();
+    abc050_b();
+}
+
+#[allow(dead_code)]
+fn abc050_b() {
+    input! {
+        n: usize,
+        t: [usize; n],
+        m: usize,
+        p: [[usize; 2]; m],
+    }
+
+    for i in 0..p.len() {
+        let mut tmp_t = t.clone();
+        tmp_t[p[i][0] - 1] = p[i][1];
+        let ans: usize = tmp_t.iter().sum();
+        println!("{}", ans);
+    }
 }
 
 #[allow(dead_code)]
