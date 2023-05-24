@@ -27,7 +27,50 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc113_b_ans();
+    abc104_b();
+}
+
+#[allow(dead_code)]
+fn abc104_b() {
+    input! {
+        s: String,
+    };
+
+    let mut cnt = 0;
+    let mut c_cnt = 0;
+
+    for c in s.chars() {
+        if cnt == 0 && c != 'A' {
+            println!("WA");
+            return;
+        }
+
+        if cnt == 1 && c.is_uppercase() {
+            println!("WA");
+            return;
+        }
+
+        if cnt >= 2 && cnt != s.len() - 1 && c.is_uppercase() && c_cnt == 0 {
+            c_cnt += 1;
+        } else if cnt >= 2 && c_cnt >= 1 && c.is_uppercase() {
+            println!("WA");
+            return;
+        }
+
+        if cnt == s.len() - 1 && c.is_uppercase() {
+            println!("WA");
+            return;
+        }
+
+        cnt += 1;
+    }
+
+    if c_cnt == 0 {
+        println!("WA");
+        return;
+    }
+
+    println!("AC");
 }
 
 #[allow(dead_code)]
