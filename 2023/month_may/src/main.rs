@@ -1,6 +1,5 @@
 use itertools::Itertools;
 use std::collections::HashMap;
-use std::fmt::format;
 #[allow(unused_imports)]
 use std::io::*;
 #[allow(unused_imports)]
@@ -28,7 +27,22 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc103_b();
+    abc049_b();
+}
+
+#[allow(dead_code)]
+fn abc049_b() {
+    input! {
+        h: usize,
+        _w: usize,
+        c: [String;h],
+    }
+
+    for e in c.iter() {
+        for _ in 1..=2 {
+            println!("{}", e);
+        }
+    }
 }
 
 #[allow(dead_code)]
