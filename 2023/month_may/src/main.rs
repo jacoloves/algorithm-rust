@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use std::collections::HashMap;
+use std::fmt::format;
 #[allow(unused_imports)]
 use std::io::*;
 #[allow(unused_imports)]
@@ -27,7 +28,25 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc050_b();
+    abc103_b();
+}
+
+#[allow(dead_code)]
+fn abc103_b() {
+    input! {
+        s: String,
+        t: String,
+    }
+
+    let len: usize = s.len();
+
+    for i in 0..len {
+        if format!("{}{}", &s[len - i..len], &s[0..len - i]) == t {
+            println!("Yes");
+            return;
+        }
+    }
+    println!("No");
 }
 
 #[allow(dead_code)]
