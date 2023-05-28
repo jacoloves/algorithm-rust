@@ -27,7 +27,31 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc049_b();
+    abc148_d();
+}
+
+#[allow(dead_code)]
+fn abc148_d() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    let mut ans = 0;
+    let mut cnt = 1;
+    for e in a.iter() {
+        if *e as isize != cnt {
+            ans += 1;
+        } else {
+            cnt += 1;
+        }
+    }
+
+    if ans == n {
+        println!("-1");
+    } else {
+        println!("{}", ans);
+    }
 }
 
 #[allow(dead_code)]
