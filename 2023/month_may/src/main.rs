@@ -27,7 +27,30 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc148_d();
+    abc058_b();
+}
+
+#[allow(dead_code)]
+fn abc058_b() {
+    input! {
+        o: String,
+        e: String,
+    }
+
+    let mut a: String = "".to_string();
+
+    let diff = o.len() - e.len();
+
+    for (i, j) in o.chars().zip(e.chars()) {
+        a.push(i);
+        a.push(j);
+    }
+
+    if diff == 1 {
+        a.push(o.chars().nth(o.len() - 1).unwrap());
+    }
+
+    println!("{}", a);
 }
 
 #[allow(dead_code)]
