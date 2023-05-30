@@ -27,7 +27,35 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc058_b();
+    abc053_b();
+}
+
+#[allow(dead_code)]
+fn abc053_b() {
+    input! {
+        s: String,
+    }
+
+    let mut flg = false;
+    let mut cnt = 0;
+    let mut ans = -1;
+    for c in s.chars() {
+        if flg {
+            if c == 'Z' {
+                cnt += 1;
+                ans = cmp::max(ans, cnt);
+            } else {
+                cnt += 1
+            }
+        } else {
+            if c == 'A' {
+                flg = true;
+                cnt += 1;
+            }
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
