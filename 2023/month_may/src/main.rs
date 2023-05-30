@@ -27,7 +27,46 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc053_b();
+    agc003_b();
+}
+
+#[allow(dead_code)]
+fn agc003_b() {
+    input! {
+        s: String,
+    }
+
+    let mut v = [false, false, false, false];
+
+    for c in s.chars() {
+        if c == 'E' {
+            v[0] = true;
+        } else if c == 'N' {
+            v[1] = true;
+        } else if c == 'W' {
+            v[2] = true;
+        } else if c == 'S' {
+            v[3] = true;
+        }
+    }
+
+    // N on & S on
+    if v[1] && v[3] {
+        // E on & W on || E off  & W off
+        if (!v[0] && !v[2]) || (v[0] && v[2]) {
+            println!("Yes");
+            return;
+        }
+        // E on & W on
+    } else if v[0] && v[2] {
+        // N on & S on || N off  & S off
+        if (!v[1] && !v[3]) || (v[1] && v[3]) {
+            println!("Yes");
+            return;
+        }
+    }
+
+    println!("No");
 }
 
 #[allow(dead_code)]
