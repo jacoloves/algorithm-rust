@@ -27,7 +27,39 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    agc003_b();
+    abc155_c();
+}
+
+#[allow(dead_code)]
+fn abc155_c() {
+    input! {
+        n: usize,
+        s: [String; n],
+    }
+
+    let mut map = HashMap::new();
+    for c in s.iter() {
+        *map.entry(c).or_insert(0) += 1;
+    }
+
+    let mut v_max: i32 = -1;
+    for (_, v) in map.clone() {
+        v_max = cmp::max(v_max, v)
+    }
+
+    let mut ans: Vec<String> = vec![];
+
+    for (key, value) in map {
+        if value == v_max {
+            ans.push(key.to_string());
+        }
+    }
+
+    ans.sort();
+
+    for ss in ans {
+        println!("{}", ss);
+    }
 }
 
 #[allow(dead_code)]
