@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use std::cmp::Ordering;
 use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::io::*;
@@ -27,7 +28,30 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc155_c();
+    abc128_b();
+}
+
+#[allow(dead_code)]
+fn abc128_b() {
+    input! {
+        n: usize,
+        data: [(String, usize); n],
+    }
+
+    let mut indexed_data: Vec<(usize, String, usize)> = data
+        .into_iter()
+        .enumerate()
+        .map(|(index, (string, number))| (index + 1, string, number))
+        .collect();
+
+    indexed_data.sort_by(|a, b| match a.1.cmp(&b.1) {
+        Ordering::Equal => b.2.cmp(&a.2),
+        ordering => ordering,
+    });
+
+    for (i, _, _) in indexed_data {
+        println!("{}", i);
+    }
 }
 
 #[allow(dead_code)]
