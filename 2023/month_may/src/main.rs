@@ -28,7 +28,36 @@ fn read_line<T: FromStr>() -> T {
 }
 
 fn main() {
-    abc128_b();
+    agc037_b();
+}
+
+#[allow(dead_code)]
+fn agc037_b() {
+    input! {
+        a: Chars,
+    }
+
+    let mut ans = 0;
+
+    let mut i = 0;
+
+    while i < a.len() {
+        ans += 1;
+        if i == a.len() - 1 {
+            break;
+        }
+        if a[i] != a[i + 1] {
+            i += 1;
+        } else {
+            if i == a.len() - 2 {
+                break;
+            }
+            ans += 1;
+            i += 3;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
