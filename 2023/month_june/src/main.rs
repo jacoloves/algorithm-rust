@@ -17,7 +17,26 @@ use proconio::input;
 #[allow(unused_imports)]
 
 fn main() {
-    sumitb2019_c();
+    abc042_b();
+}
+
+#[allow(dead_code)]
+fn abc042_b() {
+    input! {
+        n: usize,
+        _l: usize,
+        mut s: [String; n],
+    }
+
+    s.sort();
+
+    let mut ans: String = "".to_string();
+
+    for e in s.iter() {
+        ans += e;
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
