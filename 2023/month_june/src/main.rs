@@ -17,7 +17,29 @@ use proconio::input;
 #[allow(unused_imports)]
 
 fn main() {
-    abc042_b();
+    abc097_b();
+}
+
+#[allow(dead_code)]
+fn abc097_b() {
+    input! {
+        x: usize,
+    }
+
+    let mut ans = 0;
+
+    for i in 1..=x {
+        for j in 2..=1000 {
+            let t = i.pow(j as u32);
+            if x >= t {
+                ans = cmp::max(ans, t);
+            } else {
+                break;
+            }
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
