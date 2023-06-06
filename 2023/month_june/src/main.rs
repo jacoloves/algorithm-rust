@@ -17,7 +17,45 @@ use proconio::input;
 #[allow(unused_imports)]
 
 fn main() {
-    abc097_b();
+    agc021_a();
+}
+
+#[allow(dead_code)]
+fn agc021_a() {
+    input! {
+        n: i64,
+    }
+
+    if n < 10 {
+        println!("{}", n);
+    } else {
+        let a = n;
+        let mut digits = 0;
+        let mut temp = a;
+        while temp > 0 {
+            digits += 1;
+            temp /= 10;
+        }
+
+        let b = n.to_string();
+        let mut flag = false;
+        for (_, c) in b.chars().enumerate().skip(1) {
+            if c != '9' {
+                flag = true;
+                break;
+            }
+        }
+
+        if !flag && b.chars().next().unwrap() == '9' {
+            println!("{}", digits * 9);
+        } else if !flag && b.chars().next().unwrap() != '9' {
+            let first_digit = b.chars().next().unwrap().to_digit(10).unwrap() as i64;
+            println!("{}", (digits - 1) * 9 + first_digit);
+        } else {
+            let first_digit  = b.chars().next().unwrap().to_digit(10).unwrap() as i64;
+            println!("{}", (digits - 1) * 9 + first_digit - 1);
+        }
+    }
 }
 
 #[allow(dead_code)]
