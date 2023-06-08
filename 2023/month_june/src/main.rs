@@ -17,7 +17,38 @@ use proconio::input;
 #[allow(unused_imports)]
 
 fn main() {
-    agc021_a();
+    abc095_a();
+}
+
+#[allow(dead_code)]
+fn abc095_a() {
+    input! {
+        a: i32,
+        b: i32,
+        c: i32,
+        x: i32,
+        y: i32,
+    }
+
+    let ans: i32;
+
+    if a+b > c*2 {
+        if x > y {
+            let tmp1 = c * (x*2);
+            let dis = x-y;
+            let tmp2 = (c * (y*2)) + (a * dis);
+            ans = cmp::min(tmp1, tmp2);
+        } else {
+            let tmp1 = c * (y*2);
+            let dis = y-x;
+            let tmp2 = (c * (x*2)) + (b * dis);
+            ans = cmp::min(tmp1, tmp2);
+        }
+    } else {
+        ans = a*x + b*y;
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
