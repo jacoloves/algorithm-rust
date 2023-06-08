@@ -17,11 +17,31 @@ use proconio::input;
 #[allow(unused_imports)]
 
 fn main() {
-    abc095_a();
+    abc115_c();
 }
 
 #[allow(dead_code)]
-fn abc095_a() {
+fn abc115_c() {
+    input! {
+        n: usize,
+        k: usize,
+        mut h: [usize; n],
+    }
+
+    h.sort();
+
+    let mut ans: usize = 10000000009;
+
+    for i in 0..=h.len()-k {
+        let tmp = h[i+(k-1)] - h[i];
+        ans = cmp::min(ans, tmp);
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc095_c() {
     input! {
         a: i32,
         b: i32,
