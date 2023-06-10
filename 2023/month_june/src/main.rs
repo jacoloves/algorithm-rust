@@ -16,7 +16,29 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc151_c();
+    agc012_a();
+}
+
+#[allow(dead_code)]
+fn agc012_a() {
+    input! {
+        n: usize,
+        a: [i64; 3*n],
+    }
+
+    let mut a = a;
+    a.sort();
+
+    let mut sum = 0;
+    let mut count = 0;
+    for i in n..3 * n {
+        if count % 2 == 0 {
+            sum += a[i];
+        }
+        count += 1;
+    }
+
+    println!("{}", sum);
 }
 
 #[allow(dead_code)]
