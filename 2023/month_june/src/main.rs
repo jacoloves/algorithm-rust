@@ -14,10 +14,47 @@ use std::cmp;
 
 #[allow(unused_imports)]
 use proconio::input;
-#[allow(unused_imports)]
 
 fn main() {
-    abc115_c();
+    abc151_c();
+}
+
+#[allow(dead_code)]
+fn abc151_c() {
+    input! {
+        n: usize,
+        m: i64,
+        p: [(usize, String); m],
+    }
+
+    let mut correct_arr: Vec<bool> = vec![false; n];
+    let mut pena_arr: Vec<isize> = vec![0; n];
+
+    if m != 0 {
+        for (i, j) in p.iter() {
+            if !correct_arr[i - 1] {
+                if j == "AC" {
+                    correct_arr[i - 1] = true;
+                } else {
+                    pena_arr[i - 1] += 1;
+                }
+            } else {
+                continue;
+            }
+        }
+    }
+
+    let mut pena = 0;
+    for (flg, i) in correct_arr.iter().zip(0..n) {
+        if *flg {
+            pena += pena_arr[i];
+        } else {
+            continue;
+        }
+    }
+
+    let correct_num = correct_arr.iter().filter(|&x| *x).count();
+    println!("{} {}", correct_num, pena);
 }
 
 #[allow(dead_code)]
@@ -32,8 +69,8 @@ fn abc115_c() {
 
     let mut ans: usize = 10000000009;
 
-    for i in 0..=h.len()-k {
-        let tmp = h[i+(k-1)] - h[i];
+    for i in 0..=h.len() - k {
+        let tmp = h[i + (k - 1)] - h[i];
         ans = cmp::min(ans, tmp);
     }
 
@@ -52,20 +89,20 @@ fn abc095_c() {
 
     let ans: i32;
 
-    if a+b > c*2 {
+    if a + b > c * 2 {
         if x > y {
-            let tmp1 = c * (x*2);
-            let dis = x-y;
-            let tmp2 = (c * (y*2)) + (a * dis);
+            let tmp1 = c * (x * 2);
+            let dis = x - y;
+            let tmp2 = (c * (y * 2)) + (a * dis);
             ans = cmp::min(tmp1, tmp2);
         } else {
-            let tmp1 = c * (y*2);
-            let dis = y-x;
-            let tmp2 = (c * (x*2)) + (b * dis);
+            let tmp1 = c * (y * 2);
+            let dis = y - x;
+            let tmp2 = (c * (x * 2)) + (b * dis);
             ans = cmp::min(tmp1, tmp2);
         }
     } else {
-        ans = a*x + b*y;
+        ans = a * x + b * y;
     }
 
     println!("{}", ans);
@@ -103,7 +140,7 @@ fn agc021_a() {
             let first_digit = b.chars().next().unwrap().to_digit(10).unwrap() as i64;
             println!("{}", (digits - 1) * 9 + first_digit);
         } else {
-            let first_digit  = b.chars().next().unwrap().to_digit(10).unwrap() as i64;
+            let first_digit = b.chars().next().unwrap().to_digit(10).unwrap() as i64;
             println!("{}", (digits - 1) * 9 + first_digit - 1);
         }
     }
