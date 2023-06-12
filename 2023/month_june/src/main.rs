@@ -16,7 +16,29 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    agc012_a();
+    abc136_c();
+}
+
+#[allow(dead_code)]
+fn abc136_c() {
+    input! {
+        n: usize,
+        mut h: [i32; n],
+    }
+
+    let mut pre = -999;
+    for i in 0..n {
+        if pre <= h[i] - 1 {
+            pre = h[i] - 1;
+        } else if pre <= h[i] {
+            pre = h[i];
+        } else {
+            println!("No");
+            return;
+        }
+    }
+
+    println!("Yes");
 }
 
 #[allow(dead_code)]
