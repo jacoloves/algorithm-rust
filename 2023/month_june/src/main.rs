@@ -16,7 +16,22 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc136_c();
+    agc041_a();
+}
+
+#[allow(dead_code)]
+fn agc041_a() {
+    input! {
+        n: u128,
+        a: u128,
+        b: u128,
+    }
+
+    if a % 2 == b % 2 {
+        println!("{}", (b - a) / 2);
+    } else {
+        println!("{}", cmp::min(a - 1, n - b) + 1 + (b - a - 1) / 2);
+    }
 }
 
 #[allow(dead_code)]
