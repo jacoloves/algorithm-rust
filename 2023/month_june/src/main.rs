@@ -16,7 +16,29 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    agc041_a();
+    abc144_c();
+}
+
+#[allow(dead_code)]
+fn abc144_c() {
+    input! {
+        n: usize,
+    }
+
+    let mut ans: usize = 1e18 as usize;
+
+    for i in 1..=n {
+        if i * i > n {
+            break;
+        }
+        if n % i != 0 {
+            continue;
+        }
+
+        let j = n / i;
+        ans = cmp::min(ans, i + j - 2);
+    }
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
