@@ -16,7 +16,31 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc144_c();
+    abc100_c();
+}
+
+#[allow(dead_code)]
+fn abc100_c() {
+    input! {
+        n: usize,
+        a: [i32; n],
+    }
+
+    let mut cnt = 0;
+
+    for e in a.iter() {
+        let mut tmp_e = *e;
+        loop {
+            if tmp_e % 2 != 0 {
+                break;
+            }
+
+            tmp_e /= 2;
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
