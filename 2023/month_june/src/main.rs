@@ -16,7 +16,22 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc100_c();
+    agc019_a();
+}
+
+#[allow(dead_code)]
+fn agc019_a() {
+    input! {
+        q: i64,
+        h: i64,
+        s: i64,
+        d: i64,
+        n: i64,
+    }
+
+    let a = cmp::min(q * 4, cmp::min(h * 2, s));
+
+    println!("{}", cmp::min(n * a, (n / 2 * d) + (n % 2 * a)));
 }
 
 #[allow(dead_code)]
