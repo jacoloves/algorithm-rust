@@ -16,7 +16,31 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    agc019_a();
+    abc087_c();
+}
+
+#[allow(dead_code)]
+fn abc087_c() {
+    input! {
+        n: usize,
+        a: [[i32; n]; 2],
+    }
+
+    let mut dp = [[0; 101]; 2];
+    dp[0][0] = a[0][0];
+
+    for y in 0..2 {
+        for x in 0..n {
+            if x > 0 {
+                dp[y][x] = dp[y][x - 1] + a[y][x];
+            }
+            if y > 0 {
+                dp[y][x] = dp[y][x].max(dp[y - 1][x] + a[y][x]);
+            }
+        }
+    }
+
+    println!("{}", dp[1][n - 1]);
 }
 
 #[allow(dead_code)]
