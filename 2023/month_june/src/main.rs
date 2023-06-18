@@ -16,7 +16,89 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc087_c();
+    abc306_d();
+}
+
+#[allow(dead_code)]
+fn abc306_d() {
+    input! {
+        n: usize,
+        xy: [(usize, i64); n],
+    }
+
+    let mut dp:(i64, i64) = (0, 0);
+
+    for (x, y) in xy {
+        if x == 0 {
+            dp.0 = dp.0.max(dp.0.max(dp.1) + y);
+        } else {
+            dp.1 = dp.1.max(dp.0 + y);
+        }
+    }
+
+    println!("{}", dp.0.max(dp.1));
+
+}
+
+#[allow(dead_code)]
+fn abc306_c() {
+    input! {
+        n: usize,
+        a: [i32; 3*n],
+    }
+
+    let mut c: Vec <Vec <i32>> = vec ![vec ![0; 1]; n];
+
+    let mut d: Vec <Vec <i32>> = vec ![vec ![0; 1]; n];
+
+    for (e, i )in a.iter().zip(1..=3*n) {
+        c[(e - 1) as usize][0] += 1;
+        if c[(e - 1) as usize][0] == 2 {
+            d[(e - 1) as usize][0] += i as i32;
+        }
+    }
+
+    let sorted_data: Vec<(usize, &Vec<i32>)> = d
+        .iter()
+        .enumerate()
+        .collect::<Vec<(usize, &Vec<i32>)>>()
+        .into_iter()
+        .sorted_by_key(|&(_, v)| v)
+        .collect();
+
+    for (index, _) in sorted_data {
+        print!("{} ", index + 1);
+    }
+    println!();
+}
+
+#[allow(dead_code)]
+fn abc306_b() {
+    input! {
+        a: [i32; 64],
+    }
+
+    let mut ans: i128 = 0;
+    for (a_e, i) in a.iter().zip(0..64) {
+        if *a_e == 1 {
+            ans += 2_i128.pow(i);
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc306_a() {
+    input! {
+        _n: usize,
+        s: String,
+    }
+
+    for c in s.chars() {
+        print!("{}{}", c, c);
+    }
+    println!();
 }
 
 #[allow(dead_code)]
