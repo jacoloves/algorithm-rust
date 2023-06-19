@@ -16,7 +16,36 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc306_d();
+    abc135_c();
+}
+
+#[allow(dead_code)]
+fn abc135_c() {
+    input! {
+        n: usize,
+        mut a: [usize; n+1],
+        b: [usize; n],
+    }
+
+    let mut ans = 0;
+    for i in 0..n {
+        let mut tmp_b = b[i];
+        if a[i] <= b[i] {
+            ans += a[i];
+            tmp_b -= a[i];
+            if a[i+1] < tmp_b {
+                ans += a[i+1];
+                a[i+1] = 0;
+            } else {
+                ans += tmp_b;
+                a[i+1] -= tmp_b;
+            }
+        } else {
+            ans += b[i];
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
