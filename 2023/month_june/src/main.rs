@@ -16,7 +16,35 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc135_c();
+    abc100_b();
+}
+
+#[allow(dead_code)]
+fn abc100_b() {
+    input! { 
+        d: i32,
+        n: i32,
+    }
+
+    if d == 0 {
+        if n == 100 {
+            println!("101");
+        } else {
+            println!("{}", n);
+        }
+    } else if d == 1 {
+        if n == 100 {
+            println!("10100");
+        } else {
+            println!("{}", n*100);
+        }
+    } else {
+        if n == 100 {
+            println!("1010000");
+        } else {
+            println!("{}", n*100*100);
+        }
+    }
 }
 
 #[allow(dead_code)]
