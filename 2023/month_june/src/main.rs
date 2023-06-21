@@ -16,7 +16,32 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc100_b();
+    abc106_c();
+}
+
+#[allow(dead_code)]
+fn abc106_c() {
+    input! {
+        s: String,
+        mut k: i64,
+    }
+
+    k -= 1;
+    for c in s.chars() {
+        if c == '1' {
+            if k == 0 {
+                println!("1");
+                return;
+            } else {
+                k -= 1;
+            }
+        } else {
+            println!("{}", c);
+            return;
+        }
+    }
+
+    unreachable!();
 }
 
 #[allow(dead_code)]
