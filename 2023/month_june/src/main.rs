@@ -16,7 +16,24 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc106_c();
+    abc103_c();
+}
+
+#[allow(dead_code)]
+fn abc103_c() {
+    input! {
+        n: usize,
+        mut a: [i64; n],
+    }
+
+    for i in &mut a {
+        *i -= 1;
+    }
+
+    let m: i64 = a.iter().sum();
+
+    println!("{}", m);
+
 }
 
 #[allow(dead_code)]
