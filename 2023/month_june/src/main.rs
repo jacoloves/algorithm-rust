@@ -16,7 +16,40 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc103_c();
+    abc091_b();
+}
+
+#[allow(dead_code)]
+fn abc091_b() {
+    input! {
+        n: usize,
+        s: [String; n],
+        m: usize,
+        t: [String; m],
+    }
+
+    let mut s_count_map: HashMap<String, usize> = HashMap::new();
+    let mut t_count_map: HashMap<String, usize> = HashMap::new();
+
+    for e in s {
+        let count = s_count_map.entry(e).or_insert(0);
+        *count += 1;
+    }
+    for e in t {
+        let count = t_count_map.entry(e).or_insert(0);
+        *count += 1;
+    }
+
+    let mut ans: i32 = 0;
+    for (color, cnt) in s_count_map {
+        let mut sum: i32 = 0;
+        sum += cnt as i32;
+        if t_count_map.contains_key(&color) {
+            sum -= t_count_map[&color] as i32
+        }
+        ans = cmp::max(ans, sum);
+    }
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
@@ -33,7 +66,6 @@ fn abc103_c() {
     let m: i64 = a.iter().sum();
 
     println!("{}", m);
-
 }
 
 #[allow(dead_code)]
@@ -63,7 +95,7 @@ fn abc106_c() {
 
 #[allow(dead_code)]
 fn abc100_b() {
-    input! { 
+    input! {
         d: i32,
         n: i32,
     }
@@ -78,13 +110,13 @@ fn abc100_b() {
         if n == 100 {
             println!("10100");
         } else {
-            println!("{}", n*100);
+            println!("{}", n * 100);
         }
     } else {
         if n == 100 {
             println!("1010000");
         } else {
-            println!("{}", n*100*100);
+            println!("{}", n * 100 * 100);
         }
     }
 }
@@ -103,12 +135,12 @@ fn abc135_c() {
         if a[i] <= b[i] {
             ans += a[i];
             tmp_b -= a[i];
-            if a[i+1] < tmp_b {
-                ans += a[i+1];
-                a[i+1] = 0;
+            if a[i + 1] < tmp_b {
+                ans += a[i + 1];
+                a[i + 1] = 0;
             } else {
                 ans += tmp_b;
-                a[i+1] -= tmp_b;
+                a[i + 1] -= tmp_b;
             }
         } else {
             ans += b[i];
@@ -125,7 +157,7 @@ fn abc306_d() {
         xy: [(usize, i64); n],
     }
 
-    let mut dp:(i64, i64) = (0, 0);
+    let mut dp: (i64, i64) = (0, 0);
 
     for (x, y) in xy {
         if x == 0 {
@@ -136,7 +168,6 @@ fn abc306_d() {
     }
 
     println!("{}", dp.0.max(dp.1));
-
 }
 
 #[allow(dead_code)]
@@ -146,11 +177,11 @@ fn abc306_c() {
         a: [i32; 3*n],
     }
 
-    let mut c: Vec <Vec <i32>> = vec ![vec ![0; 1]; n];
+    let mut c: Vec<Vec<i32>> = vec![vec![0; 1]; n];
 
-    let mut d: Vec <Vec <i32>> = vec ![vec ![0; 1]; n];
+    let mut d: Vec<Vec<i32>> = vec![vec![0; 1]; n];
 
-    for (e, i )in a.iter().zip(1..=3*n) {
+    for (e, i) in a.iter().zip(1..=3 * n) {
         c[(e - 1) as usize][0] += 1;
         if c[(e - 1) as usize][0] == 2 {
             d[(e - 1) as usize][0] += i as i32;
