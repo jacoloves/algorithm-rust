@@ -16,7 +16,25 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc091_b();
+    abc083_c();
+}
+
+#[allow(dead_code)]
+fn abc083_c() {
+    input! {
+        x: i64,
+        y: i64,
+    }
+
+    let mut ans = 1;
+    let mut a = x;
+
+    while a * 2 <= y {
+        a *= 2;
+        ans += 1;
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
