@@ -16,7 +16,47 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc083_c();
+    abc145_c();
+}
+
+#[allow(dead_code)]
+fn abc145_c() {
+    input! {
+        n: usize,
+        xy: [(f64, f64); n]
+    }
+
+    let mut count = 0;
+    let mut dist = 0.0;
+
+    for order in (0..n).permutations(n) {
+        count += 1;
+        for i in order.windows(2) {
+            let (x1, y1) = xy[i[0]];
+            let (x2, y2) = xy[i[1]];
+            dist += ((x2 - x1).powi(2) + (y2 - y1).powi(2)).sqrt();
+        }
+    }
+
+    println!("{}", dist / count as f64);
+}
+
+#[allow(dead_code)]
+fn abc055_b() {
+    input! {
+        n: i64,
+    }
+
+    let amod = 1000000007;
+
+    let mut ans = 1;
+
+    for i in 1..=n {
+        ans *= i;
+        ans %= amod;
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
