@@ -16,7 +16,21 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc145_c();
+    abc120_c();
+}
+
+#[allow(dead_code)]
+fn abc120_c() {
+    input! {
+        s: String,
+    }
+
+    let cnt_0 = s.chars().filter(|&c| c == '0').count();
+    let cnt_1 = s.chars().filter(|&c| c == '1').count();
+
+    let ans = cmp::min(cnt_0, cnt_1) * 2;
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
