@@ -16,7 +16,29 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc120_c();
+    ddcc2020_qual_b();
+}
+
+#[allow(dead_code)]
+fn ddcc2020_qual_b() {
+    input! {
+        n: usize,
+        a: [i64; n],
+    }
+
+    let mut s: i64 = 0;
+    for i in 0..n {
+        s += a[i];
+    }
+
+    let mut minx: i64 = s;
+    let mut sum: i64 = 0;
+    for i in 0..n {
+        sum += a[i];
+        minx = minx.min((sum - (s - sum)).abs());
+    }
+
+    println!("{}", minx);
 }
 
 #[allow(dead_code)]
