@@ -16,7 +16,50 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc079_c();
+    abc093_c();
+}
+
+#[warn(dead_code)]
+fn abc093_c() {
+    input! {
+        mut v: [i32; 3],
+    }
+
+    let mut odd = 0;
+    let mut even = 0;
+
+    for i in 0..3 {
+        if v[i] % 2 == 0 {
+            even += 1
+        } else {
+            odd += 1;
+        }
+    }
+
+    let mut ans = 0;
+
+    if odd == 2 {
+        ans += 1;
+        for i in 0..3 {
+            if v[i] % 2 == 1 {
+                v[i] += 1;
+            }
+        }
+    } else if even == 2 {
+        ans += 1;
+        for i in 0..3 {
+            if v[i] % 2 == 0 {
+                v[i] += 1;
+            }
+        }
+    }
+
+    let ma = cmp::max(v[0], cmp::max(v[1], v[2]));
+    for i in 0..3 {
+        ans += (ma - v[i]) / 2;
+    }
+
+    println!("{}", ans);
 }
 
 #[warn(dead_code)]
