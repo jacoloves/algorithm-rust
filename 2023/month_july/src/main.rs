@@ -16,7 +16,28 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc093_c();
+    code_festival_2017_qualc_b();
+}
+
+#[warn(dead_code)]
+fn code_festival_2017_qualc_b() {
+    input! {
+        n: u32,
+        a: [i32; n],
+    }
+
+    let mut all = 1;
+    let mut bad = 1;
+
+    for i in 0..n {
+        all *= 3;
+        if a[i as usize] % 2 == 0 {
+            bad *= 2;
+        }
+    }
+
+    let ans = all - bad;
+    println!("{}", ans);
 }
 
 #[warn(dead_code)]
