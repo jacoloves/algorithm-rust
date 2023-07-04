@@ -16,7 +16,22 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc121_c();
+    agc004_a();
+}
+
+#[allow(dead_code)]
+fn agc004_a() {
+    input! {
+        a: usize,
+        b: usize,
+        c: usize,
+    }
+
+    if a % 2 == 0 || b % 2 == 0 || c % 2 == 0 {
+        println!("0");
+    } else {
+        println!("{}", cmp::min(a * b, cmp::min(a * c, b * c)));
+    }
 }
 
 #[allow(dead_code)]
