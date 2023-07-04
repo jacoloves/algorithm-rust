@@ -16,7 +16,42 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    code_festival_2017_qualc_b();
+    abc121_c();
+}
+
+#[allow(dead_code)]
+fn abc121_c() {
+    input! {
+        n: usize,
+        m: usize,
+        mut ab: [(usize, usize); n],
+    }
+
+    ab.sort_by(|a, b| a.0.partial_cmp(&(b.0)).unwrap());
+
+    let mut ans: usize = 0;
+    let mut cnt: usize = 0;
+
+    for i in 0..n {
+        if m - cnt >= ab[i].1 {
+            ans += ab[i].0 * ab[i].1;
+            cnt += ab[i].1;
+            if cnt == m {
+                println!("{}", ans);
+                return;
+            }
+        } else {
+            while ab[i].1 > 0 {
+                ans += ab[i].0;
+                ab[i].1 -= 1;
+                cnt += 1;
+                if cnt == m {
+                    println!("{}", ans);
+                    return;
+                }
+            }
+        }
+    }
 }
 
 #[warn(dead_code)]
