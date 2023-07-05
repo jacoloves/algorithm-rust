@@ -16,7 +16,27 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    agc004_a();
+    abc046_b();
+}
+
+#[allow(dead_code)]
+fn abc046_b() {
+    input! {
+        n: i32,
+        k: i32,
+    }
+
+    let mut ans: i128 = 0;
+
+    for i in 1..=n {
+        if i == 1 {
+            ans += k as i128;
+        } else {
+            ans *= (k - 1) as i128;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
