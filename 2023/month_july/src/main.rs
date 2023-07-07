@@ -16,7 +16,24 @@ use std::cmp;
 use proconio::input;
 
 fn main() {
-    abc046_b();
+    code_festival_2016_qualc_b();
+}
+
+#[allow(dead_code)]
+fn code_festival_2016_qualc_b() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    let mut cnt = 0;
+    for i in 0..n {
+        if a[a[i] - 1] == i + 1 {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt / 2);
 }
 
 #[allow(dead_code)]
