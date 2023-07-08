@@ -18,7 +18,114 @@ use proconio::input;
 use std::{isize, usize};
 
 fn main() {
-    abc127_c();
+    abc309_c();
+}
+
+#[allow(dead_code)]
+fn abc309_c() {
+    input! {
+        n: usize,
+        k: usize,
+        mut ab: [(usize, usize); n],
+    }
+    ab.sort_by(|a, b| a.0.partial_cmp(&(b.0)).unwrap());
+
+    let mut cnt: usize = 0;
+    loop {
+        let sum = ab.iter().map(|row| row[1]).sum();
+        cnt += ab[0].0;
+
+        if sum <= k {
+            break;
+        } else {
+            if let Some(row) = ab.first_mut() {
+                row.remove(0);
+            }
+        }
+    }
+}
+
+#[allow(dead_code)]
+fn abc309_b() {
+    input! {
+        n: usize,
+        grid: [String; n],
+    }
+
+    let converted_grid: Vec<Vec<u32>> = grid
+        .iter()
+        .map(|row| row.chars().map(|c| c.to_digit(10).unwrap()).collect())
+        .collect();
+
+    let n = converted_grid.len();
+    let m = converted_grid[0].len();
+
+    let mut rotated_grid = vec![vec![0; m]; n];
+
+    for i in 0..n {
+        for j in 0..m {
+            if i == 0 {
+                if j == 0 {
+                    rotated_grid[i][j] = converted_grid[i + 1][j];
+                } else {
+                    rotated_grid[i][j] = converted_grid[i][j - 1];
+                }
+            } else if i == n - 1 {
+                if j == m - 1 {
+                    rotated_grid[i][j] = converted_grid[i - 1][j];
+                } else {
+                    rotated_grid[i][j] = converted_grid[i][j + 1];
+                }
+            } else if j == 0 {
+                rotated_grid[i][j] = converted_grid[i + 1][j];
+            } else if j == m - 1 {
+                rotated_grid[i][j] = converted_grid[i - 1][j];
+            } else {
+                rotated_grid[i][j] = converted_grid[i][j];
+            }
+        }
+    }
+
+    for row in rotated_grid {
+        for cell in row {
+            print!("{}", cell);
+        }
+        println!();
+    }
+}
+
+#[allow(dead_code)]
+fn abc309_a() {
+    input! {
+        a: i32,
+        b: i32,
+    }
+
+    let vec1 = [1, 2, 3];
+    let vec2 = [4, 5, 6];
+    let vec3 = [7, 8, 9];
+
+    if vec1.contains(&a) && vec1.contains(&b) {
+        if a == 2 || b == 2 {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
+    } else if vec2.contains(&a) && vec2.contains(&b) {
+        if a == 5 || b == 5 {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
+    } else if vec3.contains(&a) && vec3.contains(&b) {
+        if a == 8 || b == 8 {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
+    } else {
+        println!("No");
+    }
 }
 
 #[allow(dead_code)]
