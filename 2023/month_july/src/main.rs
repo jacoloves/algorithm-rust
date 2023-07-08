@@ -14,9 +14,31 @@ use std::cmp;
 
 #[allow(unused_imports)]
 use proconio::input;
+#[allow(unused_imports)]
+use std::{isize, usize};
 
 fn main() {
-    code_festival_2016_qualc_b();
+    abc127_c();
+}
+
+#[allow(dead_code)]
+fn abc127_c() {
+    input! {
+        (n,m): (usize, usize),
+        mut nd: [(isize, isize); m],
+    }
+
+    let (mut ll, mut rr) = (isize::MIN, isize::MAX);
+
+    for (l, r) in nd {
+        ll = cmp::max(ll, l);
+        rr = cmp::min(rr, r);
+        if ll > rr {
+            break;
+        }
+    }
+
+    println!("{}", cmp::max(0, rr - ll + 1));
 }
 
 #[allow(dead_code)]
