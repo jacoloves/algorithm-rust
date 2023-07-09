@@ -28,19 +28,24 @@ fn abc309_c() {
         k: usize,
         mut ab: [(usize, usize); n],
     }
-    ab.sort_by(|a, b| a.0.partial_cmp(&(b.0)).unwrap());
 
-    let mut cnt: usize = 0;
-    loop {
-        let sum = ab.iter().map(|row| row[1]).sum();
-        cnt += ab[0].0;
+    let mut tot: usize = 0;
+    for (_, b) in ab.clone() {
+        tot += b;
+    }
 
-        if sum <= k {
-            break;
-        } else {
-            if let Some(row) = ab.first_mut() {
-                row.remove(0);
-            }
+    if tot <= k {
+        println!("1");
+        return;
+    }
+
+    ab.sort_by(|a, b| a.0.cmp(&b.0));
+
+    for (a, b) in ab {
+        tot -= b;
+        if tot <= k {
+            println!("{}", a + 1);
+            return;
         }
     }
 }
