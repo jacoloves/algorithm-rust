@@ -1,14 +1,12 @@
+extern crate proconio;
+extern crate itertools;
+
 #[allow(unused_imports)]
 use itertools::Itertools;
 #[allow(unused_imports)]
 use std::cmp::Ordering;
 #[allow(unused_imports)]
 use std::collections::HashMap;
-#[allow(unused_imports)]
-use std::io::*;
-#[allow(unused_imports)]
-use std::str::*;
-
 #[allow(unused_imports)]
 use std::cmp;
 
@@ -17,8 +15,61 @@ use proconio::input;
 #[allow(unused_imports)]
 use std::{isize, usize};
 
+/* ↓AOJ */
+#[allow(unused_imports)]
+use std::io::*;
+#[allow(unused_imports)]
+use std::str::*;
+
+use std::fmt::Debug;
+use std::str::FromStr;
+
+fn read_line<T: std::str::FromStr>() -> Vec<T>
+where
+    <T as FromStr>::Err: Debug,
+{
+    let mut s = String::new();
+    std::io::stdin().read_line(&mut s).unwrap();
+    s.split_whitespace().map(|c| c.parse().unwrap()).collect()
+}
+/* ↑AOJ */
+
 fn main() {
-    abc309_c();
+    alds1_1_a();
+}
+
+#[allow(dead_code)]
+fn alds1_1_a() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let mut a: Vec<usize> = read_line();
+
+    for (e, i) in a.iter().zip(0..n) {
+        if i == n - 1 {
+            println!("{}", e);
+        } else {
+            print!("{} ", e);
+        }
+    }
+
+    for i in 1..n {
+        let v = a[i];
+        let mut j: i32 = i as i32 - 1;
+        while j >= 0 && a[j as usize] > v {
+            a[j as usize + 1] = a[j as usize];
+            j -= 1;
+        }
+        let k: usize = (j + 1) as usize;
+        a[k] = v;
+        for (e, i) in a.iter().zip(0..n) {
+            if i == n - 1 {
+                println!("{}", e);
+            } else {
+                print!("{} ", e);
+            }
+        }
+    }
 }
 
 #[allow(dead_code)]
