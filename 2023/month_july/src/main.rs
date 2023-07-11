@@ -1,14 +1,13 @@
-extern crate proconio;
 extern crate itertools;
+extern crate proconio;
 
 #[allow(unused_imports)]
 use itertools::Itertools;
+
 #[allow(unused_imports)]
 use std::cmp::Ordering;
 #[allow(unused_imports)]
 use std::collections::HashMap;
-#[allow(unused_imports)]
-use std::cmp;
 
 #[allow(unused_imports)]
 use proconio::input;
@@ -20,6 +19,8 @@ use std::{isize, usize};
 use std::io::*;
 #[allow(unused_imports)]
 use std::str::*;
+#[allow(unused_imports)]
+use std::cmp;
 
 use std::fmt::Debug;
 use std::str::FromStr;
@@ -35,7 +36,33 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_1_a();
+    alds1_1_b();
+}
+
+#[allow(dead_code)]
+fn alds1_1_b() {
+    let l: Vec<usize> = read_line();
+    let mut x = l[0];
+    let mut y = l[1];
+
+    if x >= y {
+        while y > 0 {
+            let r = x % y;
+            x = y;
+            y = r;
+        }
+        println!("{}", x);
+    } else {
+        let tmp = x;
+        x = y;
+        y = tmp;
+        while y > 0 {
+            let r = x % y;
+            x = y;
+            y = r;
+        }
+        println!("{}", x);
+    }
 }
 
 #[allow(dead_code)]
