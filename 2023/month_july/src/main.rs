@@ -36,7 +36,29 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_1_c();
+    alds1_1_d();
+}
+
+#[allow(dead_code)]
+fn alds1_1_d() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let mut r = vec![];
+
+    for _ in 1..=n {
+        let l: Vec<i32> = read_line();
+        r.push(l[0]);
+    }
+
+    let mut minv: i32 = r[0];
+    let mut maxv: i32 = -1000000009;
+    for j in 1..n {
+        maxv = cmp::max(maxv, r[j] - minv);
+        minv = cmp::min(minv, r[j]);
+    }
+
+    println!("{}", maxv);
 }
 
 fn is_prime(x: usize) -> bool {
