@@ -16,11 +16,11 @@ use std::{isize, usize};
 
 /* ↓AOJ */
 #[allow(unused_imports)]
+use std::cmp;
+#[allow(unused_imports)]
 use std::io::*;
 #[allow(unused_imports)]
 use std::str::*;
-#[allow(unused_imports)]
-use std::cmp;
 
 use std::fmt::Debug;
 use std::str::FromStr;
@@ -36,7 +36,58 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_1_b();
+    alds1_1_c();
+}
+
+fn is_prime(x: usize) -> bool {
+    if x == 2 {
+        return true;
+    }
+
+    if x < 2 || x % 2 == 0 {
+        return false;
+    }
+
+    //let mut i: usize = 3;
+    let limit = (x as f64).sqrt() as usize;
+
+    for i in 3..=limit {
+        if x % i == 0 {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+#[allow(dead_code)]
+fn alds1_1_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let mut v = vec![];
+
+    for _ in 1..=n {
+        let l: Vec<usize> = read_line();
+        v.push(l[0]);
+    }
+
+    let mut cnt: usize = 0;
+    for i in 0..n {
+        if is_prime(v[i]) {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+fn gcd(a: usize, b: usize) -> usize {
+    if b == 0 {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
 }
 
 #[allow(dead_code)]
@@ -46,22 +97,9 @@ fn alds1_1_b() {
     let mut y = l[1];
 
     if x >= y {
-        while y > 0 {
-            let r = x % y;
-            x = y;
-            y = r;
-        }
-        println!("{}", x);
+        println!("{}", gcd(x, y));
     } else {
-        let tmp = x;
-        x = y;
-        y = tmp;
-        while y > 0 {
-            let r = x % y;
-            x = y;
-            y = r;
-        }
-        println!("{}", x);
+        println!("{}", gcd(y, x));
     }
 }
 
