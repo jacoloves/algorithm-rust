@@ -36,7 +36,45 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_1_d();
+    alds1_2_a();
+}
+
+#[allow(dead_code)]
+fn alds1_2_a() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let mut r = vec![];
+
+    let l: Vec<i32> = read_line();
+    for i in 0..n {
+        r.push(l[i]);
+    }
+
+    let mut flag = true;
+    let mut cnt = 0;
+    while flag {
+        flag = false;
+        for j in (1..n).rev() {
+            if r[j] < r[j - 1] {
+                let tmp = r[j];
+                r[j] = r[j - 1];
+                r[j - 1] = tmp;
+                flag = true;
+                cnt += 1;
+            }
+        }
+    }
+
+    for i in 0..n {
+        if i == n - 1 {
+            println!("{}", r[i]);
+        } else {
+            print!("{} ", r[i]);
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
