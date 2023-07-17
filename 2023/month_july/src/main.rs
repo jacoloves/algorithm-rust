@@ -36,7 +36,74 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_2_b();
+    alds1_2_c();
+}
+
+#[allow(dead_code)]
+fn alds1_2_c() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+
+    let mut bubble_sort: Vec<(char, i32)> = Vec::new();
+    //    let mut select_sort: Vec<(char, i32)> = Vec::new();
+
+    let l: Vec<String> = read_line();
+    for i in 0..n {
+        let chars: Vec<char> = l[i].chars().collect();
+        let letter = chars[0];
+        let number = chars[1..]
+            .iter()
+            .collect::<String>()
+            .parse::<i32>()
+            .unwrap();
+
+        bubble_sort.push((letter, number));
+    }
+
+    let mut selection_sort = bubble_sort.clone();
+
+    // bubblesort
+    for i in 0..n {
+        for j in (i + 1..n).rev() {
+            if bubble_sort[j].1 < bubble_sort[j - 1].1 {
+                bubble_sort.swap(j, j - 1);
+            }
+        }
+    }
+
+    let bubble_string: Vec<String> = bubble_sort
+        .iter()
+        .map(|a| a.0.to_string() + &a.1.to_string())
+        .collect();
+
+    println!("{}", bubble_string.join(" "));
+    println!("Stable");
+
+    // selectionsort
+    for i in 0..n {
+        let mut minj = i;
+        for j in i..n {
+            if selection_sort[j].1 < selection_sort[minj].1 {
+                minj = j;
+            }
+        }
+        if i != minj {
+            selection_sort.swap(i, minj);
+        }
+    }
+
+    let selection_string: Vec<String> = selection_sort
+        .iter()
+        .map(|a| a.0.to_string() + &a.1.to_string())
+        .collect();
+
+    println!("{}", selection_string.join(" "));
+
+    if bubble_string.join(" ").eq(&selection_string.join(" ")) {
+        println!("Stable");
+    } else {
+        println!("Not stable");
+    }
 }
 
 #[allow(dead_code)]
