@@ -16,6 +16,8 @@ use std::{isize, usize};
 
 /* ↓AOJ */
 #[allow(unused_imports)]
+use std::cell::Cell;
+#[allow(unused_imports)]
 use std::cmp;
 #[allow(unused_imports)]
 use std::io::*;
@@ -36,7 +38,73 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_2_c();
+    alds1_2_d();
+}
+
+fn insertion_sort(v: &mut Vec<i32>, n: usize, g: usize, cnt: &Cell<i32>) {
+    for i in g..n {
+        let ve = v[i];
+        let mut j = (i - g) as i32;
+        while j >= 0 && v[i] > ve {
+            v[j as usize + g] = v[j as usize];
+            j -= g as i32;
+            cnt.set(cnt.get() + 1);
+        }
+        v[j as usize + g] = ve;
+    }
+}
+
+fn shell_sort(v: Vec<i32>, n: usize) {
+    let cnt = Cell::new(0);
+    let mut m = 0;
+    let mut s = 1;
+
+    while n / s > 0 {
+        s *= 2;
+        m += 1;
+    }
+
+    let mut g = vec![];
+
+    let mut t = 1;
+    for _ in 0..m {
+        g.push(n / t);
+        t *= 2;
+    }
+
+    let mut v_c = v;
+
+    for i in 0..m {
+        insertion_sort(&mut v_c, n, g[i], &cnt);
+    }
+
+    println!("{}", m);
+    for i in 0..m {
+        if i != m - 1 {
+            print!("{} ", g[i])
+        } else {
+            println!("{}", g[i]);
+        }
+    }
+
+    println!("{}", cnt.get());
+    for i in 0..n {
+        println!("{}", v_c[i]);
+    }
+}
+
+#[allow(dead_code)]
+fn alds1_2_d() {
+    let l: Vec<usize> = read_line();
+    let n = l[0];
+    let mut a = vec![];
+
+    for i in 0..n {
+        let l: Vec<i32> = read_line();
+        a.push(l[0]);
+    }
+
+    shell_sort(a, n);
 }
 
 #[allow(dead_code)]
