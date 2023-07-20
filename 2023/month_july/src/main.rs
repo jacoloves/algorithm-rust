@@ -16,8 +16,6 @@ use std::{isize, usize};
 
 /* ↓AOJ */
 #[allow(unused_imports)]
-use std::cell::Cell;
-#[allow(unused_imports)]
 use std::cmp;
 #[allow(unused_imports)]
 use std::io::*;
@@ -41,41 +39,37 @@ fn main() {
     alds1_2_d();
 }
 
-fn insertion_sort(v: &mut Vec<i32>, n: usize, g: usize, cnt: &Cell<i32>) {
+fn insertion_sort(v: &mut Vec<i32>, n: usize, g: usize) -> i32 {
+    let mut cnt = 0;
     for i in g..n {
         let ve = v[i];
-        let mut j = (i - g) as i32;
-        while j >= 0 && v[i] > ve {
-            v[j as usize + g] = v[j as usize];
-            j -= g as i32;
-            cnt.set(cnt.get() + 1);
+        let mut j = i;
+        while j >= g && v[j as usize - g] > ve {
+            v[j] = v[j - g];
+            j -= g;
+            cnt += 1;
         }
-        v[j as usize + g] = ve;
+        v[j] = ve;
     }
+    cnt
 }
 
-fn shell_sort(v: Vec<i32>, n: usize) {
-    let cnt = Cell::new(0);
+fn shell_sort(v: &mut Vec<i32>, n: usize) {
+    let mut cnt = 0;
     let mut m = 0;
-    let mut s = 1;
+    let mut g = vec![];
 
-    while n / s > 0 {
-        s *= 2;
+    let mut i = 1;
+    while i <= n {
+        g.push(i);
+        i = i * 3 + 1;
         m += 1;
     }
 
-    let mut g = vec![];
-
-    let mut t = 1;
-    for _ in 0..m {
-        g.push(n / t);
-        t *= 2;
-    }
-
-    let mut v_c = v;
+    g.reverse();
 
     for i in 0..m {
-        insertion_sort(&mut v_c, n, g[i], &cnt);
+        cnt += insertion_sort(v, n, g[i]);
     }
 
     println!("{}", m);
@@ -87,9 +81,13 @@ fn shell_sort(v: Vec<i32>, n: usize) {
         }
     }
 
-    println!("{}", cnt.get());
+    println!("{}", cnt);
     for i in 0..n {
-        println!("{}", v_c[i]);
+        if i != n - 1 {
+            print!("{} ", v[i])
+        } else {
+            println!("{}", v[i]);
+        }
     }
 }
 
@@ -104,7 +102,7 @@ fn alds1_2_d() {
         a.push(l[0]);
     }
 
-    shell_sort(a, n);
+    shell_sort(&mut a, n);
 }
 
 #[allow(dead_code)]
