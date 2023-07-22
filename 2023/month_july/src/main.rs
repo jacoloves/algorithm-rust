@@ -18,6 +18,8 @@ use std::{isize, usize};
 #[allow(unused_imports)]
 use std::cmp;
 #[allow(unused_imports)]
+use std::collections::VecDeque;
+#[allow(unused_imports)]
 use std::io::*;
 #[allow(unused_imports)]
 use std::str::*;
@@ -36,7 +38,81 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_2_d();
+    alds1_3_b();
+}
+
+#[allow(dead_code)]
+fn alds1_3_b() {
+    let l: Vec<i32> = read_line();
+    let n = l[0];
+    let q = l[1];
+
+    let mut que1: VecDeque<(String, i32)> = VecDeque::new();
+    let mut ans: VecDeque<(String, i32)> = VecDeque::new();
+
+    for _ in 0..n {
+        let l: Vec<String> = read_line();
+        let name = l[0].clone();
+        let time = l[1].clone().parse::<i32>().unwrap();
+
+        que1.push_back((name, time));
+    }
+
+    let mut cnt = 0;
+    while ans.len() != n as usize {
+        if que1[0].1 > q {
+            que1[0].1 -= q;
+            cnt += q;
+            // first que change
+            let tmp = que1.pop_front().unwrap();
+            que1.push_back(tmp);
+        } else {
+            cnt += que1[0].1;
+            // ans push_back
+            let mut ans_tmp = que1.pop_front().unwrap();
+            ans_tmp.1 = cnt;
+            ans.push_back(ans_tmp);
+        }
+    }
+
+    for (n, t) in ans.iter() {
+        println!("{} {}", n, t);
+    }
+}
+
+#[allow(dead_code)]
+fn alds1_3_a() {
+    let l: Vec<String> = read_line();
+    let str_pol = l;
+
+    let mut v: Vec<i64> = vec![];
+
+    for elem in str_pol.iter() {
+        if let Ok(num) = elem.parse::<i64>() {
+            v.push(num);
+        } else {
+            if elem == "+" {
+                let pop2 = v.pop().unwrap();
+                let pop1 = v.pop().unwrap();
+                let res = pop1 + pop2;
+                v.push(res);
+            } else if elem == "-" {
+                let pop2 = v.pop().unwrap();
+                let pop1 = v.pop().unwrap();
+                let res = pop1 - pop2;
+                v.push(res);
+            } else {
+                let pop2 = v.pop().unwrap();
+                let pop1 = v.pop().unwrap();
+                let res = pop1 * pop2;
+                v.push(res);
+            }
+        }
+    }
+
+    let ans = v.pop().unwrap();
+
+    println!("{}", ans);
 }
 
 fn insertion_sort(v: &mut Vec<i32>, n: usize, g: usize) -> i32 {
