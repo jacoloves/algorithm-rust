@@ -8,6 +8,8 @@ use itertools::Itertools;
 use std::cmp::Ordering;
 #[allow(unused_imports)]
 use std::collections::HashMap;
+#[allow(unused_imports)]
+use std::collections::HashSet;
 
 #[allow(unused_imports)]
 use proconio::input;
@@ -38,7 +40,100 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_3_b();
+    abc311_b();
+}
+
+#[allow(dead_code)]
+fn abc311_c() {
+    input! {
+        n: i32,
+        a: [i32; n],
+    }
+
+    let mut gra: Vec<Vec<i32>> = Vec::new();
+}
+
+#[allow(dead_code)]
+fn abc311_b() {
+    input! {
+        n: usize,
+        d: usize,
+        s: [String; n],
+    }
+
+    let mut days: Vec<Vec<i32>> = Vec::new();
+
+    for e in s.iter() {
+        let mut arr: Vec<i32> = Vec::new();
+        for (c, i) in e.chars().zip(0..d) {
+            if c == 'o' {
+                arr.push(i as i32 + 1);
+            }
+        }
+        days.push(arr);
+    }
+
+    let mut ele: Option<HashSet<_>> = None;
+
+    for day in days {
+        let set: HashSet<_> = day.into_iter().collect();
+        ele = match ele {
+            Some(com) => Some(com.intersection(&set).cloned().collect()),
+            None => Some(set),
+        };
+    }
+
+    if let Some(com) = ele {
+        let mut com_v: Vec<_> = com.into_iter().collect();
+        com_v.sort();
+        let mut max = 0;
+        let mut tmp = 0;
+        let mut cnt = 0;
+        for e in com_v {
+            if cnt != 0 {
+                if e == tmp + 1 {
+                    cnt += 1;
+                } else {
+                    cnt = 1;
+                }
+            } else {
+                cnt += 1;
+            }
+            max = cmp::max(max, cnt);
+            tmp = e;
+        }
+        println!("{}", max);
+    } else {
+        println!("0");
+    }
+}
+
+#[allow(dead_code)]
+fn abc311_a() {
+    input! {
+        _: usize,
+        s: String,
+    }
+
+    let mut a_cnt = 0;
+    let mut b_cnt = 0;
+    let mut c_cnt = 0;
+
+    for c in s.chars() {
+        if c == 'A' {
+            a_cnt += 1;
+        } else if c == 'B' {
+            b_cnt += 1;
+        } else {
+            c_cnt += 1;
+        }
+
+        if a_cnt >= 1 && b_cnt >= 1 && c_cnt >= 1 {
+            break;
+        }
+    }
+
+    println!("{}", a_cnt + b_cnt + c_cnt);
 }
 
 #[allow(dead_code)]
