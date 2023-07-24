@@ -40,17 +40,38 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc311_b();
+    abc311_c();
 }
 
 #[allow(dead_code)]
 fn abc311_c() {
     input! {
-        n: i32,
+        n: usize,
         a: [i32; n],
     }
 
-    let mut gra: Vec<Vec<i32>> = Vec::new();
+    let mut fl = vec![0; n];
+    let mut s = Vec::new();
+    let mut v: i32 = 1;
+
+    while fl[v as usize - 1] == 0 {
+        fl[v as usize - 1] = 1;
+        s.push(v);
+        v = a[v as usize - 1] as i32;
+    }
+
+    let mut res = Vec::new();
+    for &nx in &s {
+        if nx == v {
+            v = -1;
+        }
+        if v == -1 {
+            res.push(nx);
+        }
+    }
+
+    println!("{}", res.len());
+    println!("{}", res.iter().join(" "));
 }
 
 #[allow(dead_code)]
