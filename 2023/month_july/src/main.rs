@@ -40,7 +40,45 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc311_c();
+    alds1_3_c();
+}
+
+#[allow(dead_code)]
+fn alds1_3_c() {
+    let l: Vec<String> = read_line();
+    let n = l[0].parse::<usize>().unwrap();
+
+    let mut list: VecDeque<i32> = VecDeque::new();
+
+    for _ in 0..n {
+        let l: Vec<String> = read_line();
+        let command = l[0].clone();
+        if command == "insert" {
+            let a = l[1].clone().parse::<i32>().unwrap();
+            list.push_front(a);
+        } else if command == "delete" {
+            let a = l[1].clone().parse::<i32>().unwrap();
+            for (i, e) in list.iter().enumerate() {
+                if *e == a {
+                    let idx = i;
+                    list.remove(idx);
+                    break;
+                }
+            }
+        } else if command == "deleteFirst" {
+            list.pop_front();
+        } else if command == "deleteLast" {
+            list.pop_back();
+        }
+    }
+
+    for (e, i) in list.iter().zip(0..list.len()) {
+        if i != list.len() - 1 {
+            print!("{} ", e);
+        } else {
+            println!("{}", e);
+        }
+    }
 }
 
 #[allow(dead_code)]
