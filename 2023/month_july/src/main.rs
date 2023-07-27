@@ -40,7 +40,61 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_3_c();
+    alds1_3_d();
+}
+
+#[allow(dead_code)]
+fn alds1_3_d() {
+    let l: Vec<String> = read_line();
+    let s = l[0].clone();
+
+    let n = s.len();
+
+    let mut st: VecDeque<(char, i32)> = VecDeque::new();
+    let mut v: Vec<(i32, i32)> = Vec::new();
+
+    for (i, c) in s.chars().enumerate() {
+        if c == '\\' {
+            st.push_back((c, i as i32));
+        } else if c == '/' {
+            if st.len() != 0 && st.back().unwrap().0 == '\\' {
+                let (c, j) = st.pop_back().unwrap();
+                v.push((j, i as i32));
+            } else {
+                st.push_back((c, i as i32));
+            }
+        }
+    }
+
+    v.sort_by(|a, b| a.0.cmp(&b.0));
+
+    let mut a = -1;
+    let mut b = 0;
+    let mut sum = 0;
+    let mut ans: Vec<i32> = Vec::new();
+
+    for e in v.iter() {
+        if e.0 > a {
+            if b > 0 {
+                ans.push(b);
+            }
+            b = 0;
+            a = e.1;
+        }
+        sum += e.1 - e.0;
+        b += e.1 - e.0;
+    }
+
+    if b > 0 {
+        ans.push(b);
+    }
+
+    println!("{}", sum);
+    print!("{}", ans.len());
+    for e in ans.iter() {
+        print!(" {}", e);
+    }
+    println!("");
 }
 
 #[allow(dead_code)]
