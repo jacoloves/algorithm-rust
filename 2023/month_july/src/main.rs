@@ -40,7 +40,79 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_3_d();
+    alds1_4_b();
+}
+
+fn binary_search(a: &Vec<i32>, key: i32) -> bool {
+    let mut left = 0;
+    let mut right = a.len();
+
+    while left < right {
+        let mid = (left + right) / 2;
+        if a[mid] == key {
+            return true;
+        } else if key < a[mid] {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return false;
+}
+
+#[allow(dead_code)]
+fn alds1_4_b() {
+    let l: Vec<String> = read_line();
+    let _ = l[0].parse::<usize>().unwrap();
+
+    let l: Vec<String> = read_line();
+    let s = l.clone();
+
+    let i_s: Vec<i32> = s.iter().map(|e| e.parse::<i32>().unwrap()).collect();
+
+    let l: Vec<String> = read_line();
+    let _ = l[0].parse::<usize>().unwrap();
+
+    let l: Vec<String> = read_line();
+    let t = l.clone();
+
+    let i_t: Vec<i32> = t.iter().map(|e| e.parse::<i32>().unwrap()).collect();
+
+    let mut cnt = 0;
+
+    for e in i_t.iter() {
+        if binary_search(&i_s, *e) {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+#[allow(dead_code)]
+fn alds1_4_a() {
+    let l: Vec<String> = read_line();
+    let _ = l[0].parse::<usize>().unwrap();
+
+    let l: Vec<String> = read_line();
+    let s = l.clone();
+
+    let l: Vec<String> = read_line();
+    let _ = l[0].parse::<usize>().unwrap();
+
+    let mut cnt = 0;
+
+    let l: Vec<String> = read_line();
+    let t = l.clone();
+
+    for e in t.iter() {
+        if s.contains(&e) {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
