@@ -3,7 +3,10 @@ extern crate proconio;
 
 #[allow(unused_imports)]
 use itertools::Itertools;
+#[allow(unused_imports)]
+use proconio::input;
 
+/* ↓AOJ */
 #[allow(unused_imports)]
 use std::cmp::Ordering;
 #[allow(unused_imports)]
@@ -12,11 +15,8 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 
 #[allow(unused_imports)]
-use proconio::input;
-#[allow(unused_imports)]
 use std::{isize, usize};
 
-/* ↓AOJ */
 #[allow(unused_imports)]
 use std::cmp;
 #[allow(unused_imports)]
@@ -40,7 +40,36 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_4_b();
+    alds1_4_c();
+}
+
+#[allow(dead_code)]
+fn alds1_4_c() {
+    let l: Vec<String> = read_line();
+    let n = l[0].parse::<usize>().unwrap();
+
+    let mut map: HashMap<String, bool> = HashMap::new();
+
+    let mut ans: Vec<String> = Vec::new();
+
+    for _ in 0..n {
+        let l: Vec<String> = read_line();
+        let command = l[0].clone();
+        let key = l[1].clone();
+        if command == "insert" {
+            map.insert(key, true);
+        } else if command == "find" {
+            if map.contains_key(&key) {
+                ans.push("yes".to_string());
+            } else {
+                ans.push("no".to_string());
+            }
+        }
+    }
+
+    for e in ans.iter() {
+        println!("{}", e);
+    }
 }
 
 fn binary_search(a: &Vec<i32>, key: i32) -> bool {
