@@ -3,8 +3,6 @@ extern crate proconio;
 
 #[allow(unused_imports)]
 use itertools::Itertools;
-#[allow(unused_imports)]
-use proconio::input;
 
 /* ↓AOJ */
 #[allow(unused_imports)]
@@ -14,6 +12,8 @@ use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::collections::HashSet;
 
+#[allow(unused_imports)]
+use proconio::input;
 #[allow(unused_imports)]
 use std::{isize, usize};
 
