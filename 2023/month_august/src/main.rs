@@ -1,3 +1,6 @@
+#[allow(unused_imports)]
+use proconio::input;
+
 /* ↓AOJ */
 #[allow(unused_imports)]
 use std::cmp::Ordering;
@@ -6,8 +9,6 @@ use std::collections::HashMap;
 #[allow(unused_imports)]
 use std::collections::HashSet;
 
-// #[allow(unused_imports)]
-// use proconio::input;
 #[allow(unused_imports)]
 use std::{isize, usize};
 
@@ -34,9 +35,105 @@ where
 /* ↑AOJ */
 
 fn main() {
-    alds1_5_c();
+    abc315c();
 }
 
+#[allow(dead_code)]
+fn abc315c() {
+    input! {
+        h: usize,
+        w: usize,
+        c: [String; h],
+    }
+
+    let mut c: Vec<Vec<char>> = c
+        .iter()
+        .map(|s| s.chars().collect::<Vec<char>>())
+        .collect::<Vec<Vec<char>>>();
+    for i in 0..h {
+        let mut cnt: usize = 0;
+        let mut ch: char = ' ';
+        for j in 0..w {
+            if c[i][j] != '.' {
+                cnt += 1;
+                ch = c[i][j];
+            }
+        }
+        if cnt >= 2 {
+            for j in 0..w {
+                if c[i][j] == ch {
+                    c[i][j] = '.';
+                }
+            }
+        }
+    }
+
+    for j in 0..w {
+        let mut cnt: usize = 0;
+        let mut ch: char = ' ';
+        for i in 0..h {
+            if c[i][j] != '.' {
+                cnt += 1;
+                ch = c[i][j];
+            }
+        }
+        if cnt >= 2 {
+            for i in 0..h {
+                if c[i][j] == ch {
+                    c[i][j] = '.';
+                }
+            }
+        }
+    }
+
+    println!(
+        "{}",
+        c.iter()
+            .map(|s| s.iter().collect::<String>())
+            .collect::<Vec<String>>()
+            .join("\n")
+    );
+}
+
+#[allow(dead_code)]
+fn abc315b() {
+    input! {
+        n: usize,
+        ss: [usize; n],
+    }
+
+    let ss_sum = ss.iter().sum::<usize>();
+
+    let mut a = (ss_sum + 1) / 2;
+    let mut cnt: usize = 1;
+    for e in ss {
+        if e < a {
+            a -= e;
+            cnt += 1;
+        }
+    }
+
+    println!("{} {}", cnt, a);
+}
+
+#[allow(dead_code)]
+fn abc315a() {
+    input! {
+        s: String,
+    }
+
+    let mut ans: String = String::new();
+
+    for c in s.chars() {
+        if c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u' {
+            ans.push(c);
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
 fn koch(x1: f64, y1: f64, x2: f64, y2: f64, n: usize) {
     if n == 0 {
         println!("{} {}", x1, y1);
@@ -54,6 +151,7 @@ fn koch(x1: f64, y1: f64, x2: f64, y2: f64, n: usize) {
     }
 }
 
+#[allow(dead_code)]
 fn alds1_5_c() {
     let n: usize = read_line()[0];
     let x1: f64 = 0.0;
@@ -64,6 +162,7 @@ fn alds1_5_c() {
     println!("{} {}", x2, y2);
 }
 
+#[allow(dead_code)]
 fn marge(as_: &mut Vec<usize>, left: usize, mid: usize, right: usize) -> usize {
     let mut cnt: usize = 0;
     let n1: usize = mid - left;
@@ -93,6 +192,7 @@ fn marge(as_: &mut Vec<usize>, left: usize, mid: usize, right: usize) -> usize {
     return cnt;
 }
 
+#[allow(dead_code)]
 fn marge_sort(as_: &mut Vec<usize>, left: usize, right: usize) -> usize {
     let mut cnt: usize = 0;
     if left + 1 < right {
@@ -122,6 +222,7 @@ fn alds1_5_b() {
     println!("{}", cnt);
 }
 
+#[allow(dead_code)]
 fn check(k: usize, n: usize, sum: usize, as_: &Vec<usize>) -> bool {
     if sum == 0 {
         return true;
