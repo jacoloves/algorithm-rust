@@ -35,7 +35,66 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc315c();
+    abc315c_ans();
+}
+
+#[allow(dead_code)]
+fn abc315c_ans() {
+    input! {
+        n: usize,
+    }
+
+    let mut a: Vec<Vec<usize>> = vec![Vec::new(); n];
+
+    for _ in 0..n {
+        input! {
+            f: usize,
+            s: usize,
+        }
+        a[f - 1].push(s);
+    }
+
+    let mut ans: usize = 0;
+    for i in 0..n {
+        a[i].sort_by(|a, b| b.cmp(a));
+        if a[i].len() < 2 {
+            continue;
+        }
+        let now: usize = a[i][0] + a[i][1] / 2;
+        ans = cmp::max(ans, now);
+    }
+
+    let mut b: Vec<usize> = Vec::new();
+    for i in 0..n {
+        if a[i].len() == 0 {
+            continue;
+        }
+        b.push(a[i][0]);
+    }
+    b.sort_by(|a, b| b.cmp(a));
+    if b.len() >= 2 {
+        ans = cmp::max(ans, b[0] + b[1]);
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc315b_ans() {
+    input! {
+        n: usize,
+        a: [i32; n],
+    }
+
+    let sum: i32 = a.iter().sum();
+    let mut cnt = (sum + 1) / 2;
+    for (i, &num) in a.iter().enumerate() {
+        if cnt <= num {
+            println!("{} {}", i + 1, cnt);
+            return;
+        }
+        cnt -= num;
+    }
 }
 
 #[allow(dead_code)]
