@@ -35,7 +35,12 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc315c_ans();
+    algo1_1();
+}
+
+#[allow(dead_code)]
+fn algo1_1() {
+    println!("Hello Algo-method!");
 }
 
 #[allow(dead_code)]
