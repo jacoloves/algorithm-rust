@@ -35,7 +35,19 @@ where
 /* ↑AOJ */
 
 fn main() {
-    algo1_1();
+    algo1_3();
+}
+
+#[allow(dead_code)]
+fn algo1_3() {
+    println!("{}", 27182 % 818);
+}
+
+#[allow(dead_code)]
+fn algo1_2() {
+    println!("1");
+    println!("2");
+    println!("3");
 }
 
 #[allow(dead_code)]
