@@ -36,7 +36,38 @@ where
 /* ↑AOJ */
 
 fn main() {
-    algo360();
+    algo361();
+}
+
+#[allow(dead_code)]
+fn algo361() {
+    let line: Vec<i32> = read_line();
+    let n: i32 = line[0];
+    let m: i32 = line[1];
+
+    let mut a: Vec<i32> = read_line();
+    (&mut a).sort();
+    let b: Vec<i32> = read_line();
+
+    let mut cnt = 0;
+    let mut ans = 0;
+    for i in 0..n {
+        for j in cnt..m {
+            if m == j {
+                break;
+            }
+
+            if a[i as usize] <= b[j as usize] {
+                ans += 1;
+                cnt += 1;
+                break;
+            } else {
+                cnt += 1;
+            }
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
