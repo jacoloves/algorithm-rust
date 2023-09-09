@@ -36,7 +36,30 @@ where
 /* ↑AOJ */
 
 fn main() {
-    algo361();
+    algo364();
+}
+
+#[allow(dead_code)]
+fn algo364() {
+    let mut n: usize = read_line()[0];
+
+    let mut cnt: usize = 0;
+
+    loop {
+        if n == 0 {
+            break;
+        }
+
+        cnt += 1;
+
+        if n % 3 == 0 {
+            n /= 3;
+        } else {
+            n -= 1;
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
