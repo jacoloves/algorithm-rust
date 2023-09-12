@@ -36,7 +36,115 @@ where
 /* ↑AOJ */
 
 fn main() {
-    algo364();
+    algo368();
+}
+
+#[allow(dead_code)]
+fn algo368() {
+    let n: f64 = read_line()[0];
+
+    let mut left: f64 = 0.0;
+    let mut right: f64 = 100.0;
+
+    while right - left > 1e-4 {
+        let mid: f64 = (left + right) / 2.0;
+
+        let f: f64 = mid * (mid * (mid + 1.0) + 2.0) + 3.0;
+
+        if f < n {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+
+    let ans: f64 = left;
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn algo363() {
+    let n: usize = read_line()[0];
+
+    let mut sa: Vec<i32> = Vec::new();
+    let mut ta: Vec<i32> = Vec::new();
+
+    for _ in 0..n {
+        let line: Vec<i32> = read_line();
+        sa.push(line[0]);
+        ta.push(line[1]);
+    }
+
+    let mut ids: Vec<usize> = (0..n).collect();
+
+    ids.sort_by(|&i, &j| ta[i].cmp(&ta[j]));
+
+    println!("{:?}", ids);
+    println!("{:?}", ta);
+    println!("{:?}", sa);
+
+    let mut res: usize = 0;
+    let mut lt: i32 = 0;
+    for &i in &ids {
+        if sa[i] < lt {
+            continue;
+        }
+
+        res += 1;
+        lt = ta[i];
+    }
+
+    println!("{}", res);
+}
+
+#[allow(dead_code)]
+fn algo365() {
+    let n: usize = read_line()[0];
+
+    let mut x: Vec<f64> = Vec::new();
+    let mut y: Vec<f64> = Vec::new();
+
+    for _ in 0..n {
+        let line: Vec<f64> = read_line();
+        x.push(line[0]);
+        y.push(line[1]);
+    }
+
+    let mut asn: f64 = 0.0;
+
+    let mut used: Vec<bool> = vec![false; n];
+    used[0] = true;
+
+    let mut prev: usize = 0;
+
+    for _ in 0..n - 1 {
+        let mut nex: i32 = -1;
+        let mut min_dis: f64 = 100000000.0;
+
+        for i in 0..n {
+            if used[i] {
+                continue;
+            }
+
+            let dis: f64 =
+                ((x[i] - x[prev]) * (x[i] - x[prev]) + (y[i] - y[prev]) * (y[i] - y[prev])).sqrt();
+
+            if dis < min_dis {
+                min_dis = dis;
+                nex = i as i32;
+            }
+        }
+
+        used[nex as usize] = true;
+        asn += min_dis;
+
+        prev = nex as usize;
+    }
+
+    asn += ((x[0] - x[prev]) * (x[0] - x[prev]) + (y[0] - y[prev]) * (y[0] - y[prev])).sqrt();
+
+    println!("{}", asn);
 }
 
 #[allow(dead_code)]
