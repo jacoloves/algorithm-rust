@@ -36,7 +36,34 @@ where
 /* ↑AOJ */
 
 fn main() {
-    algo368();
+    arc009();
+}
+
+#[allow(dead_code)]
+fn arc009() {
+    input! {
+        n: usize,
+    }
+
+    let mut a: Vec<usize> = Vec::new();
+    let mut b: Vec<usize> = Vec::new();
+
+    for _ in 0..n {
+        input! {
+            a_i: usize,
+            b_i: usize,
+        }
+
+        a.push(a_i);
+        b.push(b_i);
+    }
+
+    let mut ans: usize = 0;
+    for i in 0..n {
+        ans += a[i] * b[i];
+    }
+
+    println!("{}", (ans as f64 * 1.05) as usize);
 }
 
 #[allow(dead_code)]
@@ -45,7 +72,6 @@ fn algo368() {
 
     let mut left: f64 = 0.0;
     let mut right: f64 = 100.0;
-
     while right - left > 1e-4 {
         let mid: f64 = (left + right) / 2.0;
 
