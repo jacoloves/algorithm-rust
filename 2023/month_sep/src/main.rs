@@ -36,7 +36,41 @@ where
 /* ↑AOJ */
 
 fn main() {
-    arc009();
+    abc099();
+}
+
+#[allow(dead_code)]
+fn abc099() {
+    input! {
+        a: isize,
+        _: isize,
+    }
+
+    let mut cnt: isize = 1;
+
+    for i in 2..999 {
+        cnt += i;
+
+        if cnt - a >= 1 {
+            break;
+        }
+    }
+
+    println!("{}", cnt - a);
+}
+
+#[allow(dead_code)]
+fn abc012() {
+    input! {
+        mut a: usize,
+        mut b: usize,
+    }
+
+    let tmp: usize = a;
+    a = b;
+    b = tmp;
+
+    println!("{} {}", a, b);
 }
 
 #[allow(dead_code)]
