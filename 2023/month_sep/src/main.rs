@@ -36,27 +36,96 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc099();
+    abc281_c();
+}
+
+#[allow(dead_code)]
+fn abc281_c() {
+    input! {
+        n: usize,
+        mut t: isize,
+        mut a: [isize; n],
+    }
+
+    let sum_a: isize = a.iter().sum();
+
+    let mut mus: usize = 1;
+    let mut mus_t: isize = 0;
+
+    if t > sum_a {
+        let div_a: isize = t / sum_a;
+        t -= div_a * sum_a;
+    }
+
+    for i in 0..n {
+        if t > a[i] {
+            t -= a[i];
+            mus += 1;
+        } else if t == a[i] {
+            mus_t = a[i];
+            break;
+        } else {
+            mus_t = t;
+            break;
+        }
+    }
+
+    println!("{} {}", mus, mus_t);
+}
+
+#[allow(dead_code)]
+fn abc186_c() {
+    input! {
+        n: usize,
+    }
+
+    let mut ans: usize = 0;
+
+    for i in 1..=n {
+        let mut flag: bool = true;
+
+        for base in [8, 10] {
+            let mut x = i;
+            while x > 0 {
+                if x % base == 7 {
+                    flag = false;
+                }
+                x /= base;
+            }
+        }
+        if flag {
+            ans += 1;
+        }
+    }
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn arc143() {
+    input! {
+        mut abc: [usize; 3],
+    }
+
+    abc.sort();
+
+    if abc[0] + abc[1] >= abc[2] {
+        println!("{}", abc[2]);
+    } else {
+        println!("-1");
+    }
 }
 
 #[allow(dead_code)]
 fn abc099() {
     input! {
-        a: isize,
-        _: isize,
+        a: usize,
+        b: usize,
     }
 
-    let mut cnt: isize = 1;
+    let d = b - a;
+    let ans = d * (d + 1) / 2 - b;
 
-    for i in 2..999 {
-        cnt += i;
-
-        if cnt - a >= 1 {
-            break;
-        }
-    }
-
-    println!("{}", cnt - a);
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
