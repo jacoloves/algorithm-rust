@@ -36,7 +36,25 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc281_c();
+    abc039_b();
+}
+
+#[allow(dead_code)]
+fn abc039_b() {
+    input! {
+        n: usize,
+    }
+
+    let mut ans: usize = 0;
+
+    for i in 1..=1000 {
+        if i * i * i * i == n {
+            ans = i;
+            break;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
