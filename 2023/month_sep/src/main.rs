@@ -36,7 +36,62 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc039_b();
+    abc321_b();
+}
+
+#[allow(dead_code)]
+fn abc321_b() {
+    input! {
+        n: usize,
+        x: usize,
+        mut a: [usize; n-1],
+    }
+
+    a.sort();
+
+    let mut sum_num: usize = 0;
+
+    if n > 3 {
+        for i in 1..n - 2 {
+            sum_num += a[i];
+        }
+    } else {
+        if x < a[1] {
+            sum_num = a[0];
+        } else {
+            sum_num = a[1];
+        }
+    }
+
+    let ans: usize = x - sum_num;
+
+    if ans > a[n - 2] || ans > 100 {
+        println!("{}", -1);
+    } else {
+        println!("{}", ans);
+    }
+}
+
+#[allow(dead_code)]
+fn abc321_a() {
+    input! {
+        mut n: isize,
+    }
+
+    let mut prev: isize = n % 10;
+    n /= 10;
+
+    while n > 0 {
+        let next: isize = n % 10;
+        n /= 10;
+        if prev >= next {
+            println!("No");
+            return;
+        }
+        prev = next;
+    }
+
+    println!("Yes");
 }
 
 #[allow(dead_code)]
