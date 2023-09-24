@@ -36,7 +36,58 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc321_b();
+    abc321_c_ans();
+}
+
+#[allow(dead_code)]
+fn abc321_c_ans() {
+    input! {
+        k: usize,
+    }
+
+    let mut a: Vec<usize> = Vec::new();
+
+    for s in 0..1 << 10 {
+        let mut x: usize = 0;
+        for i in (0..=9).rev() {
+            if s >> i & 1 != 0 {
+                x = x * 10 + i;
+            }
+        }
+        if x == 0 {
+            continue;
+        }
+        a.push(x);
+    }
+    a.sort();
+    println!("{}", a[k - 1]);
+}
+
+#[allow(dead_code)]
+fn abc321_b_ans() {
+    input! {
+        n: usize,
+        x: usize,
+        mut a: [usize; n-1],
+    }
+
+    let mut ans: isize = -1;
+
+    for i in 0..=100 {
+        let mut ac: Vec<usize> = a.clone();
+        ac.push(i);
+
+        ac.sort();
+
+        let sum_num: usize = ac[1..n - 1].iter().sum();
+
+        if sum_num >= x {
+            ans = i as isize;
+            break;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
