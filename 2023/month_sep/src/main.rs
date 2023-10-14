@@ -36,7 +36,112 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc321_c_ans();
+    abc324_c();
+}
+
+#[allow(dead_code)]
+fn is_string_judge(a: &str, b: &str) -> bool {
+    if a == b {
+        return true;
+    }
+
+    if a.len() == b.len() {
+        let dc = a.chars().zip(b.chars()).filter(|(x, y)| x != y).count();
+        if dc == 1 {
+            return true;
+        }
+    }
+
+    if a.len() + 1 == b.len() {
+        for i in 0..a.len() {
+            if format!("{}{}{}", &a[0..i], &b[i..i + 1], &a[i..]) == b {
+                return true;
+            }
+        }
+    }
+
+    if a.len() == b.len() + 1 {
+        for i in 0..b.len() {
+            if format!("{}{}", &b[0..i], &b[i + 1..]) == a {
+                return true;
+            }
+        }
+    }
+
+    false
+}
+
+#[allow(dead_code)]
+fn abc324_c() {
+    input! {
+        n: usize,
+        t: String,
+        t_array: [String; n],
+    }
+
+    let mut ans: Vec<usize> = Vec::new();
+
+    for i in 0..n {
+        if is_string_judge(&t, &t_array[i]) {
+            ans.push(i + 1);
+        }
+    }
+
+    for i in 0..ans.len() {
+        println!("{}", ans[i]);
+    }
+}
+
+#[allow(dead_code)]
+fn abc324_b() {
+    input! {
+        mut n: usize,
+    }
+
+    while n > 0 {
+        if n % 3 != 0 {
+            break;
+        } else {
+            n /= 3;
+        }
+    }
+
+    while n > 0 {
+        if n % 2 != 0 {
+            break;
+        } else {
+            n /= 2;
+        }
+    }
+
+    if n == 1 {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
+}
+
+#[allow(dead_code)]
+fn abc324_a() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    let mut ans: bool = true;
+
+    for i in 1..n {
+        if a[i - 1] != a[i] {
+            ans = false;
+            break;
+        }
+    }
+
+    if ans {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 #[allow(dead_code)]
