@@ -36,7 +36,33 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc325_b();
+    abc325_b_ans();
+}
+
+#[allow(dead_code)]
+fn abc325_b_ans() {
+    input! {
+        n: usize,
+        w: [(i64, i64); n],
+    }
+
+    let mut res = 0;
+
+    for t in 0..24 {
+        let mut num = 0;
+
+        for i in 0..n {
+            let real_t = (t + w[i].1) % 24;
+
+            if real_t >= 9 && real_t < 18 {
+                num += w[i].0;
+            }
+        }
+
+        res = cmp::max(res, num);
+    }
+
+    println!("{}", res);
 }
 
 #[allow(dead_code)]
@@ -53,7 +79,7 @@ fn abc325_b() {
         let time = v[i].1 + 8;
         let mut tmp_ans: usize = v[i].0;
 
-        for j in i + 1..=n {
+        for j in i + 1..n {
             if v[j].1 <= time {
                 tmp_ans += v[j].0;
             } else {
@@ -64,7 +90,7 @@ fn abc325_b() {
         ans = cmp::max(ans, tmp_ans);
     }
 
-    println!("{:?}", v);
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
