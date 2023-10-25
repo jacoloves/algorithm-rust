@@ -36,9 +36,38 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc325_a();
+    abc325_b();
 }
 
+#[allow(dead_code)]
+fn abc325_b() {
+    input! {
+        n: usize,
+        mut v: [(usize, usize); n],
+    }
+
+    v.sort_by(|a, b| a.1.cmp(&b.1));
+
+    let mut ans: usize = 0;
+    for i in 0..n {
+        let time = v[i].1 + 8;
+        let mut tmp_ans: usize = v[i].0;
+
+        for j in i + 1..=n {
+            if v[j].1 <= time {
+                tmp_ans += v[j].0;
+            } else {
+                break;
+            }
+        }
+
+        ans = cmp::max(ans, tmp_ans);
+    }
+
+    println!("{:?}", v);
+}
+
+#[allow(dead_code)]
 fn abc325_a() {
     input! {
         s: String,
