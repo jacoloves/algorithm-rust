@@ -1,5 +1,7 @@
+use itertools::concat;
 #[allow(unused_imports)]
 use proconio::input;
+use proconio::source::Readable;
 
 /* ↓aoj */
 #[allow(unused_imports)]
@@ -36,7 +38,23 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc325_b_ans();
+    abc323_a();
+}
+
+#[allow(dead_code)]
+fn abc323_a() {
+    input! {
+        s: String,
+    }
+
+    for (i, c) in s.chars().enumerate() {
+        if i % 2 == 1 && c != '0' {
+            println!("No");
+            return;
+        }
+    }
+
+    println!("Yes");
 }
 
 #[allow(dead_code)]
