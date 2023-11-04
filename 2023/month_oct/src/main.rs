@@ -38,7 +38,115 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc323_a();
+    abc327_c();
+}
+
+#[allow(dead_code)]
+fn check_sudoku(a: &Vec<Vec<usize>>) -> bool {
+    for i in 0..9 {
+        let mut row = vec![false; 9];
+        let mut col = vec![false; 9];
+        let mut block = vec![false; 9];
+
+        for j in 0..9 {
+            let row_idx = a[i][j] - 1;
+            if row[row_idx] {
+                return false;
+            }
+            row[row_idx] = true;
+
+            let col_idx = a[j][i] - 1;
+            if col[col_idx] {
+                return false;
+            }
+            col[col_idx] = true;
+
+            let block_row_idx = (i / 3) * 3 + j / 3;
+            let block_col_idx = (i % 3) * 3 + j % 3;
+            let block_idx = a[block_row_idx][block_col_idx] - 1;
+            if block[block_idx] {
+                return false;
+            }
+            block[block_idx] = true;
+        }
+    }
+    true
+}
+
+#[allow(dead_code)]
+fn abc327_c() {
+    input! {
+        a: [[usize; 9]; 9],
+    }
+
+    let ans = check_sudoku(&a);
+
+    println!("{}", if ans { "Yes" } else { "No" });
+}
+
+#[allow(dead_code)]
+fn abc327_b() {
+    input! {
+        n: usize,
+    }
+
+    let mut ans: isize = -1;
+
+    for i in 1..=n {
+        let tmp: usize = i.pow(i as u32);
+        if n == tmp {
+            ans = i as isize;
+            break;
+        }
+
+        if tmp > n {
+            break;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc327_a() {
+    input! {
+        n: usize,
+        s: String,
+    }
+
+    let s: Vec<char> = s.chars().collect();
+
+    let mut ans: String = "No".to_string();
+
+    for i in 0..n - 1 {
+        if (s[i] == 'a' && s[i + 1] == 'b') || (s[i] == 'b' && s[i + 1] == 'a') {
+            ans = "Yes".to_string();
+            break;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc322_a() {
+    input! {
+        n: usize,
+        s: String,
+    }
+
+    let s: Vec<char> = s.chars().collect();
+
+    let mut ans: i32 = -1;
+
+    for i in 0..n - 2 {
+        if s[i] == 'A' && s[i + 1] == 'B' && s[i + 2] == 'C' {
+            ans = i as i32 + 1;
+            break;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
