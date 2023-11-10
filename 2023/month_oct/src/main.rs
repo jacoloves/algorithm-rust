@@ -38,7 +38,56 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc327_c();
+    abc322_b();
+}
+
+#[allow(dead_code)]
+fn abc322_b() {
+    input! {
+        n: usize,
+        m: usize,
+        s: String,
+        t: String,
+    }
+
+    let sc: Vec<char> = s.chars().collect();
+    let tc: Vec<char> = t.chars().collect();
+
+    let reverse_sc: Vec<char> = sc.iter().rev().map(|c| *c).collect();
+    let reverse_tc: Vec<char> = tc.iter().rev().map(|c| *c).collect();
+
+    if s == t {
+        println!("0");
+        return;
+    }
+
+    for i in 0..=m - n {
+        let mut tmp_a = 0;
+        let mut tmp_b = 0;
+        for j in 0..n {
+            if sc[j] == tc[i + j] {
+                tmp_a += 1;
+            }
+        }
+
+        if tmp_a == n {
+            println!("1");
+            return;
+        }
+
+        for j in 0..n {
+            if reverse_sc[j] == reverse_tc[i + j] {
+                tmp_b += 1;
+            }
+        }
+
+        if tmp_b == n {
+            println!("2");
+            return;
+        }
+    }
+
+    println!("3");
 }
 
 #[allow(dead_code)]
