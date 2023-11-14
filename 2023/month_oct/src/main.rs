@@ -38,7 +38,36 @@ where
 /* ↑aoj */
 
 fn main() {
-    abc322_b();
+    abc322_b_ans();
+}
+
+#[allow(dead_code)]
+fn abc322_b_ans() {
+    input! {
+        n: usize,
+        m: usize,
+        s: String,
+        t: String,
+    }
+
+    let mut is_prefix = true;
+    for i in 0..n {
+        if s.chars().nth(i) != t.chars().nth(i) {
+            is_prefix = false;
+        }
+    }
+    let mut is_suffix = true;
+    for i in 0..n {
+        if s.chars().nth(i) != t.chars().nth(m - n + i) {
+            is_suffix = false;
+        }
+    }
+
+    if is_prefix {
+        println!("{}", if is_suffix { 0 } else { 1 });
+    } else {
+        println!("{}", if is_suffix { 2 } else { 3 });
+    }
 }
 
 #[allow(dead_code)]
