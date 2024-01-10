@@ -36,7 +36,24 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc335_a();
+    abc335_b();
+}
+
+#[allow(dead_code)]
+fn abc335_b() {
+    input! {
+        n: usize,
+    }
+
+    for x in 0..=n {
+        for y in 0..=n {
+            for z in 0..=n {
+                if x + y + z <= n {
+                    println!("{} {} {}", x, y, z);
+                }
+            }
+        }
+    }
 }
 
 #[allow(dead_code)]
