@@ -36,7 +36,21 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc335_b();
+    abc334_a();
+}
+
+#[allow(dead_code)]
+fn abc334_a() {
+    input! {
+        b: usize,
+        g: usize,
+    }
+
+    if b > g {
+        println!("Bat");
+    } else {
+        println!("Glove");
+    }
 }
 
 #[allow(dead_code)]
