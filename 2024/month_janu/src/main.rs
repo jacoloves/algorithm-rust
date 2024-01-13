@@ -36,7 +36,28 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc334_a();
+    abc334_b();
+}
+
+#[allow(dead_code)]
+fn abc334_floor(a: isize, b: isize) -> isize {
+    let c = (a % b + b) % b;
+    (a - c) / b
+}
+
+#[allow(dead_code)]
+fn abc334_b() {
+    input! {
+        a: isize,
+        m: isize,
+        mut l: isize,
+        mut r: isize,
+    }
+
+    l -= a;
+    r -= a;
+
+    println!("{}", abc334_floor(r, m) - abc334_floor(l - 1, m));
 }
 
 #[allow(dead_code)]
