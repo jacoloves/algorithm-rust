@@ -36,7 +36,24 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc334_b();
+    abc336_a();
+}
+
+#[allow(dead_code)]
+fn abc336_a() {
+    input! {
+        n: usize
+    }
+
+    let mut s = String::from("L");
+
+    for _ in 1..=n {
+        s += "o";
+    }
+
+    s += "ng";
+
+    println!("{}", s);
 }
 
 #[allow(dead_code)]
