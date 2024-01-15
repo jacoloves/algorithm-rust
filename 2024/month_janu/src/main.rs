@@ -36,7 +36,19 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc336_a();
+    abc336_b();
+}
+
+#[allow(dead_code)]
+fn abc336_b() {
+    input! {
+        n: usize
+    }
+
+    let binary = format!("{:b}", n);
+    let cnt = binary.chars().rev().take_while(|&c| c == '0').count();
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
