@@ -39,7 +39,20 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc364_b();
+    abc365_a();
+}
+
+#[allow(dead_code)]
+fn abc365_a() {
+    input! {
+        y: usize,
+    }
+
+    if y % 4 == 0 && y % 100 != 0 || y % 400 == 0 {
+        println!("366");
+    } else {
+        println!("365");
+    }
 }
 
 #[allow(dead_code)]
