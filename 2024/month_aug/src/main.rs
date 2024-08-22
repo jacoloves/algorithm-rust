@@ -39,7 +39,29 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc365_a();
+    abc365_b();
+}
+
+#[allow(dead_code)]
+fn abc365_b() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    let mut copy_a = a.clone();
+
+    copy_a.sort();
+
+    let mut second_max = 0;
+    for i in 0..n {
+        if a[i] == copy_a[n - 2] {
+            second_max = i;
+            break;
+        }
+    }
+
+    println!("{}", second_max + 1);
 }
 
 #[allow(dead_code)]
