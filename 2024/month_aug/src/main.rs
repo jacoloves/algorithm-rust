@@ -39,7 +39,36 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc365_b();
+    abc366_a();
+}
+
+#[allow(dead_code)]
+fn abc366_a() {
+    input! {
+        n: usize,
+        t: usize,
+        a: usize
+    }
+
+    if t == a {
+        println!("No");
+        return;
+    }
+
+    let sum_cnt = t + a;
+    let rest = n - sum_cnt;
+
+    if t < a {
+      if a - t <= rest {
+        println!("No");
+      } else {
+        println!("Yes");
+      }  
+    } else if t - a <= rest {
+        println!("No");
+    } else {
+        println!("Yes");
+    }
 }
 
 #[allow(dead_code)]
