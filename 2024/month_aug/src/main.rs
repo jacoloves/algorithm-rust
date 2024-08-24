@@ -39,7 +39,32 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc366_a();
+    abc366_b();
+}
+
+#[allow(dead_code)]
+fn abc366_b() {
+    input! {
+        n: usize,
+        s: [String; n],
+    }
+
+    let m = s.iter().map(|e| e.len()).max().unwrap();
+    let mut t = vec![vec!['*'; n]; m];
+
+    for i in 0..n {
+        let chars: Vec<char> = s[i].chars().collect();
+        for j in 0..chars.len() {
+            t[j][n - i - 1] = chars[j];
+        }
+    }
+
+    for i in 0..m {
+        while t[i].last() == Some(&'*') {
+            t[i].pop();
+        }
+        println!("{}", t[i].iter().collect::<String>());
+    }
 }
 
 #[allow(dead_code)]
@@ -59,11 +84,11 @@ fn abc366_a() {
     let rest = n - sum_cnt;
 
     if t < a {
-      if a - t <= rest {
-        println!("No");
-      } else {
-        println!("Yes");
-      }  
+        if a - t <= rest {
+            println!("No");
+        } else {
+            println!("Yes");
+        }
     } else if t - a <= rest {
         println!("No");
     } else {
