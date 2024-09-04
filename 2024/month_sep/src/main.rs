@@ -39,7 +39,30 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc367_a();
+    abc367_b();
+}
+
+#[allow(dead_code)]
+fn abc367_b() {
+    input! {
+        x: f32,
+    }
+
+    let mut multi_x = x * 1000.0;
+
+    let mut divid_num = 1000.0;
+    for _ in 1..=3 {
+        if multi_x % 10.0 == 0.0 {
+           divid_num /= 10.0; 
+        } else {
+            break;
+        }
+        multi_x /= 10.0;
+    } 
+
+    let ans = multi_x / divid_num;
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
