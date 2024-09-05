@@ -39,7 +39,35 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc367_b();
+    abc368_a();
+}
+
+#[allow(dead_code)]
+fn abc368_a() {
+    input! {
+        k: usize,
+        n: usize,
+        mut a: [usize; k],
+    }
+
+    let mut back_a: Vec<usize> = vec![];
+
+    for _ in 1..=n {
+        let tmp_n = a.pop().unwrap();
+        back_a.push(tmp_n);
+    }
+
+    back_a.reverse();
+
+    for e in back_a {
+        print!("{} ", e);
+    }
+
+    for e in a {
+        print!("{} ", e);
+    }
+
+    println!();
 }
 
 #[allow(dead_code)]
