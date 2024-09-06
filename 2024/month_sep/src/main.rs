@@ -39,7 +39,36 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc368_a();
+    abc368_b();
+}
+
+#[allow(dead_code)]
+fn abc368_b() {
+    input! {
+        n: usize,
+        mut a: [usize; n],
+    }
+
+    let mut cnt = 0;
+    loop {
+        cnt += 1;
+        a.sort_by(|a, b| b.partial_cmp(a).unwrap());
+        a[0] -= 1;
+        a[1] -= 1;
+
+        let mut zero_cnt = 0;
+        for e in &a {
+            if *e == 0 {
+                zero_cnt += 1;
+            }
+        }
+
+        if zero_cnt >= n - 1 {
+            break;
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
@@ -81,12 +110,12 @@ fn abc367_b() {
     let mut divid_num = 1000.0;
     for _ in 1..=3 {
         if multi_x % 10.0 == 0.0 {
-           divid_num /= 10.0; 
+            divid_num /= 10.0;
         } else {
             break;
         }
         multi_x /= 10.0;
-    } 
+    }
 
     let ans = multi_x / divid_num;
 
