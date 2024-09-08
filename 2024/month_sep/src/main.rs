@@ -2,6 +2,7 @@
 use itertools::min;
 #[allow(unused_imports)]
 use proconio::input;
+use proconio::marker::Usize1;
 /* ↓aoj */
 #[allow(unused_imports)]
 use std::cmp::Ordering;
@@ -39,7 +40,51 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc368_b();
+    abc370_b();
+}
+
+#[allow(dead_code)]
+fn abc370_b() {
+    input! {
+        n: usize,
+    }
+
+    let mut a = vec![];
+
+    for i in 0..n {
+        input! {
+            r: [usize; i + 1]
+        }
+        a.push(r);
+    }
+
+    let mut b: usize = 0;
+    for c in 0..n {
+        b = if b >= c { a[b][c] - 1 } else { a[c][b] - 1 };
+    }
+
+    let ans = b + 1;
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc370_a() {
+    input! {
+        l: usize,
+        r: usize,
+    }
+
+    if l == 1 && r == 0 {
+        println!("Yes");
+        return;
+    }
+
+    if l == 0 && r == 1 {
+        println!("No");
+        return;
+    }
+
+    println!("Invalid");
 }
 
 #[allow(dead_code)]
