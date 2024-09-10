@@ -40,7 +40,25 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc370_b();
+    abc369_a();
+}
+
+#[allow(dead_code)]
+fn abc369_a() {
+    input! {
+        a: usize,
+        b: usize,
+    }
+    if a == b {
+        println!("1");
+        return;
+    }
+
+    if ((a + b) % 2) == 0 {
+        println!("3");
+    } else {
+        println!("2");
+    }
 }
 
 #[allow(dead_code)]
