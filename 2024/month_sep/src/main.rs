@@ -2,7 +2,6 @@
 use itertools::min;
 #[allow(unused_imports)]
 use proconio::input;
-use proconio::marker::Usize1;
 /* ↓aoj */
 #[allow(unused_imports)]
 use std::cmp::Ordering;
@@ -40,7 +39,64 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc369_a();
+    abc373_c();
+}
+
+#[allow(dead_code)]
+fn abc373_c() {
+    input! {
+        n: usize,
+        mut a: [isize; n],
+        mut b: [isize; n],
+    }
+
+    let a_max = *a.iter().max().unwrap();
+    let b_max = *b.iter().max().unwrap();
+
+    println!("{}", a_max + b_max);
+}
+
+#[allow(dead_code)]
+fn abc373_b() {
+    input! {
+        s: String,
+    }
+
+    let sc: Vec<char> = s.chars().collect();
+    let mut cp = HashMap::new();
+
+    for (i, &c) in sc.iter().enumerate() {
+        cp.insert(c, i as i32 + 1);
+    }
+
+    let mut td = 0;
+    let mut prevpos = *cp.get(&'A').unwrap();
+
+    for c in 'B'..='Z' {
+        let curret_p = *cp.get(&c).unwrap();
+        td += (curret_p - prevpos).abs();
+        prevpos = curret_p;
+    }
+
+    println!("{}", td);
+}
+
+#[allow(dead_code)]
+fn abc373_a() {
+    input! {
+        s: [String; 12],
+    }
+
+    let mut ans = 0;
+    for i in 1..=12 {
+        let s = s[i - 1].to_string().len();
+
+        if i == s {
+            ans += 1;
+        }
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
