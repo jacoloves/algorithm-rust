@@ -40,7 +40,40 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc314a();
+    abc311a();
+}
+
+#[allow(dead_code)]
+fn abc311a() {
+    input! {
+        _: usize,
+        s: String
+    }
+
+    let mut a_cnt = 0;
+    let mut b_cnt = 0;
+    let mut c_cnt = 0;
+
+    let mut idx = 0;
+
+    for c in s.chars() {
+        idx += 1;
+        if c == 'A' && a_cnt == 0 {
+            a_cnt = 1;
+        }
+        if c == 'B' && b_cnt == 0 {
+            b_cnt = 1;
+        }
+        if c == 'C' && c_cnt == 0 {
+            c_cnt = 1;
+        }
+
+        if a_cnt == 1 && b_cnt == 1 && c_cnt == 1 {
+            break;
+        }
+    }
+
+    println!("{}", idx);
 }
 
 #[allow(dead_code)]
@@ -50,7 +83,7 @@ fn abc314a() {
     }
 
     let pi100: &str = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
-    
+
     let s1 = &pi100[0..n + 2];
 
     println!("{}", s1);
@@ -65,14 +98,14 @@ fn abc317a() {
         mut p: [usize; n]
     }
 
-    let sub_a = x - h; 
+    let sub_a = x - h;
     let mut ans: usize = 0;
 
     for (pa, num) in zip(p.iter_mut(), 1..) {
-       if *pa >= sub_a {
+        if *pa >= sub_a {
             ans = num;
             break;
-       }
+        }
     }
 
     println!("{}", ans);
