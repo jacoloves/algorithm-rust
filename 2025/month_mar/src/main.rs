@@ -40,7 +40,29 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc311a();
+    abc310a();
+}
+
+#[allow(dead_code)]
+fn abc310a() {
+    input! {
+        n: usize,
+        p: usize,
+        q: usize,
+        mut d: [usize; n]
+    }
+
+    for elem in d.iter_mut() {
+        *elem += q;
+    }
+
+    let min_d = d.iter().min().unwrap();
+
+    if p >= *min_d {
+        println!("{}", *min_d);
+    } else {
+        println!("{}", p);
+    }
 }
 
 #[allow(dead_code)]
