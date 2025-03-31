@@ -40,7 +40,27 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc310a();
+    abc309a();
+}
+
+#[allow(dead_code)]
+fn abc309a() {
+    input! {
+        a: usize,
+        b: usize,
+    }
+
+    let pair = (a, b);
+
+    match pair {
+        (1, 2) => println!("Yes"),
+        (2, 3) => println!("Yes"),
+        (4, 5) => println!("Yes"),
+        (5, 6) => println!("Yes"),
+        (7, 8) => println!("Yes"),
+        (8, 9) => println!("Yes"),
+        _ => println!("No"),
+    }
 }
 
 #[allow(dead_code)]
@@ -96,6 +116,30 @@ fn abc311a() {
     }
 
     println!("{}", idx);
+}
+
+#[allow(dead_code)]
+fn abc312a() {
+    input! {
+        s: String
+    }
+
+    let comp = ["ACE","BDF","CEG","DFA","EGB","FAC","GBD"];
+
+    let mut flag = false;
+
+    for i in 0..comp.len() {
+        if s == comp[i] {
+            flag = true;
+            break;
+        }
+    }
+
+    if flag {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 #[allow(dead_code)]
