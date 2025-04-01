@@ -40,7 +40,41 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc309a();
+    abc308a();
+}
+
+fn is_25_multiple_between_100_and_675(n: usize) -> bool {
+    if n < 100 && n > 675 {
+        return false;
+    }
+
+    if n % 25 == 0 {
+        return true;
+    }
+
+    false
+}
+
+#[allow(dead_code)]
+fn abc308a() {
+    input! {
+       s: [usize; 8],
+    }
+
+    let mut prev = &s[0];
+    for current in &s[1..] {
+        if !(is_25_multiple_between_100_and_675(*prev)) || !(is_25_multiple_between_100_and_675(*current)) {
+            println!("No");
+            return;
+        }
+        if current < prev {
+            println!("No");
+            return;
+        }
+        prev = current;
+    }
+
+    println!("Yes");
 }
 
 #[allow(dead_code)]
