@@ -40,7 +40,35 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc308a();
+    abc307a();
+}
+
+#[allow(dead_code)]
+fn abc307a() {
+    input! {
+        n: usize,
+        a: [usize; n*7]
+    }
+
+    let mut sum_vec: Vec<usize>  = Vec::new();
+
+    let mut sum = 0;
+    for (i, elem) in a.iter().enumerate() {
+        sum += elem;
+        if (i + 1) % 7 == 0 {
+            sum_vec.push(sum);
+            sum = 0;
+        }
+    }
+
+    let mut ans_str = String::new();
+
+    for elem in sum_vec.iter() {
+        ans_str.push_str(&elem.to_string());
+        ans_str.push(' ');
+    }
+
+    println!("{}", ans_str.trim_end());
 }
 
 #[allow(dead_code)]
