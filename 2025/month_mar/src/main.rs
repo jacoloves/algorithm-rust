@@ -40,7 +40,24 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc307a();
+    abc306a();
+}
+
+#[allow(dead_code)]
+fn abc306a() {
+    input! {
+        _: usize,
+        s: String
+    }
+
+    let mut ans_str = String::new();
+
+    for c in s.chars() {
+        ans_str.push(c);
+        ans_str.push(c);
+    }
+
+    println!("{}", ans_str);
 }
 
 #[allow(dead_code)]
