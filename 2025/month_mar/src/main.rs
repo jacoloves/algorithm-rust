@@ -40,7 +40,48 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc306a();
+    abc305a();
+}
+
+#[allow(dead_code)]
+fn abc305a() {
+    input! {
+        n: usize,
+    }
+
+    if n == 100 {
+        println!("100");
+        return;
+    }
+
+    if n >= 10 {
+        let n_10 = n / 10;
+        let n_1 = n % 10;
+
+        if n_1 == 0 || n_1 == 1 || n_1 == 2 {
+            let ans = n_10 * 10;
+            println!("{}", ans);
+        } else if n_1 == 3 || n_1 == 4 || n_1 == 5 {
+            let ans = n_10 * 10 + 5;
+            println!("{}", ans);
+        } else if n_1 == 6 || n_1 == 7 {
+            let ans = n_10 * 10 + 5;
+            println!("{}", ans);
+        } else if n_1 == 8 || n_1 == 9 {
+            let ans = n_10 * 10 + 10;
+            println!("{}", ans);
+        } 
+    } else {
+        if n == 0 || n == 1 || n == 2 {
+            println!("0");
+        } else if n == 3 || n == 4 || n == 5 {
+            println!("5");
+        } else if n == 6 || n == 7 {
+            println!("5");
+        } else if n == 8 || n == 9 {
+            println!("10");
+        }
+    }
 }
 
 fn isqrt(n: usize) -> usize {
