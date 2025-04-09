@@ -43,6 +43,93 @@ fn main() {
     abc306a();
 }
 
+fn isqrt(n: usize) -> usize {
+    let mut low = 0;
+    let mut high = n;
+    while low <= high {
+        let mid = (low + high) / 2;
+
+        if mid == 0 {
+            low = 1;
+            continue;
+        }
+
+        if mid <= n / mid {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    high
+}
+
+#[allow(dead_code)]
+fn abc400c() {
+    input! {
+        n: usize
+    }
+
+    let mut gn = HashSet::new();
+
+    let mut pow2 = 1;
+    while pow2 <= n {
+        let max_b = (n / pow2) as f64;
+        let b_limit = max_b.sqrt() as usize;
+
+        for b in 1..=b_limit {
+            let x = pow2 * b * b;
+            if x <= n {
+                gn.insert(x);
+            }
+        }
+
+        match pow2.checked_mul(2) {
+            Some(p) => pow2 = p,
+            None => break,
+        }
+    }
+
+    println!("{}", gn.len());
+}
+
+#[allow(dead_code)]
+fn abc400b() {
+    input! {
+        n: usize,
+        m: usize,
+    }
+
+    let inf_judge = 10usize.pow(9);
+
+    let mut sum = 0;
+
+    for i in 0..=m {
+        sum += n.pow(i as u32);
+        if sum > inf_judge {
+            println!("inf");
+            return;
+        }
+    }
+
+    println!("{}", sum);
+}
+
+#[allow(dead_code)]
+fn abc400a() {
+    input! {
+        a: usize,
+    }
+
+    if 400 % a != 0 {
+        println!("-1");
+        return;
+    }
+
+    let ans = 400 / a;
+
+    println!("{}", ans);
+}
+
 #[allow(dead_code)]
 fn abc306a() {
     input! {
@@ -67,7 +154,7 @@ fn abc307a() {
         a: [usize; n*7]
     }
 
-    let mut sum_vec: Vec<usize>  = Vec::new();
+    let mut sum_vec: Vec<usize> = Vec::new();
 
     let mut sum = 0;
     for (i, elem) in a.iter().enumerate() {
@@ -187,30 +274,6 @@ fn abc311a() {
     }
 
     println!("{}", idx);
-}
-
-#[allow(dead_code)]
-fn abc312a() {
-    input! {
-        s: String
-    }
-
-    let comp = ["ACE","BDF","CEG","DFA","EGB","FAC","GBD"];
-
-    let mut flag = false;
-
-    for i in 0..comp.len() {
-        if s == comp[i] {
-            flag = true;
-            break;
-        }
-    }
-
-    if flag {
-        println!("Yes");
-    } else {
-        println!("No");
-    }
 }
 
 #[allow(dead_code)]
