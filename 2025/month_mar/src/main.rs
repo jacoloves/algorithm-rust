@@ -40,7 +40,36 @@ where
 /* ↑AOJ */
 
 fn main() {
-    abc305a();
+    abc304a();
+}
+
+#[allow(dead_code)]
+fn abc304a() {
+    input! {
+        n: usize,
+        pairs: [(String, usize); n]
+    }
+
+    let min_age_index = pairs
+        .iter()
+        .enumerate()
+        .min_by_key(|&(_, (_, age))| age)
+        .map(|(index, _)| index)
+        .unwrap();
+
+    let mut people: Vec<String> = Vec::new();
+
+    for i in min_age_index..n {
+        people.push(pairs[i].0.clone());
+    }
+
+    for i in 0..min_age_index{
+        people.push(pairs[i].0.clone());
+    }
+
+    for elem in people.iter() {
+        println!("{}", elem);
+    }
 }
 
 #[allow(dead_code)]
@@ -84,6 +113,7 @@ fn abc305a() {
     }
 }
 
+#[allow(dead_code)]
 fn isqrt(n: usize) -> usize {
     let mut low = 0;
     let mut high = n;
