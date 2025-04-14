@@ -43,8 +43,30 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc401c();
+    abc153a();
 }
+
+#[allow(dead_code)]
+fn abc153a() {
+    input! {
+        h: usize,
+        a: usize,
+    }
+
+    if h < a {
+        println!("1");
+        return;
+    }
+
+    let mut ans = h / a;
+
+    if h % a != 0 {
+        ans += 1;
+    }
+
+    println!("{}", ans);
+}
+
 
 #[allow(dead_code)]
 fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut Vec<Vec<usize>>) {
@@ -71,60 +93,60 @@ fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut
 }
 
 #[allow(dead_code)]
-fn abc401d() {
-    const DOT: u8 = b'.';
-    const O: u8 = b'o';
-    const Q: u8 = b'?';
+// fn abc401d() {
+//     const DOT: u8 = b'.';
+//     const O: u8 = b'o';
+//     const Q: u8 = b'?';
 
-    input! {
-        n: usize,
-        k: usize,
-        s: [u8; n],
-    }
+//     input! {
+//         n: usize,
+//         k: usize,
+//         s: [u8; n],
+//     }
 
-    let mut count_o = vec![0; n];
-    let mut count_dot = vec![0; n];
-    let mut total = 0;
+//     let mut count_o = vec![0; n];
+//     let mut count_dot = vec![0; n];
+//     let mut total = 0;
 
-    let mut positions = vec![];
+//     let mut positions = vec![];
 
-    let mut all_valid_o_positions = vec![];
-    dfs(0, k, n, s, &mut positions, &mut all_valid_o_positions);
+//     let mut all_valid_o_positions = vec![];
+//     dfs(0, k, n, s, &mut positions, &mut all_valid_o_positions);
 
-    'outer: for o_pos in all_valid_o_positions {
-        for (i, &c) in s.iter().enumerate() {
-            if c == O && !o_pos.contains(&i) {
-                continue 'outer;
-            }
-            if c == DOT && o_pos.contains(&i) {
-                continue 'outer;
-            }
-        }
-        total += 1;
-        let mut temp = vec![DOT; n];
-        for &i in &o_pos {
-            temp[i] = O;
-        }
-        for i in 0..n {
-            match temp[i] {
-                O => count_o[i] += 1,
-                DOT => count_dot[i] += 1,
-                _ => {}
-            }
-        }
-    }
+//     'outer: for o_pos in all_valid_o_positions {
+//         for (i, &c) in s.iter().enumerate() {
+//             if c == O && !o_pos.contains(&i) {
+//                 continue 'outer;
+//             }
+//             if c == DOT && o_pos.contains(&i) {
+//                 continue 'outer;
+//             }
+//         }
+//         total += 1;
+//         let mut temp = vec![DOT; n];
+//         for &i in &o_pos {
+//             temp[i] = O;
+//         }
+//         for i in 0..n {
+//             match temp[i] {
+//                 O => count_o[i] += 1,
+//                 DOT => count_dot[i] += 1,
+//                 _ => {}
+//             }
+//         }
+//     }
 
-    let mut res = vec![b'?'; n];
-    for i in 0..n {
-        if count_o[i] = total {
-            res[i] = b'o';
-        } else if count_dot[i] = total {
-            res[i] = b'.';
-        }
-    }
+//     let mut res = vec![b'?'; n];
+//     for i in 0..n {
+//         if count_o[i] = total {
+//             res[i] = b'o';
+//         } else if count_dot[i] = total {
+//             res[i] = b'.';
+//         }
+//     }
 
-    println!("{}", String::from_utf8(res).unwrap());
-}
+//     println!("{}", String::from_utf8(res).unwrap());
+// }
 
 #[allow(dead_code)]
 fn abc401c() {
