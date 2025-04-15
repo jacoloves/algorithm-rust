@@ -43,7 +43,25 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc153a();
+    abc162b();
+}
+
+#[allow(dead_code)]
+fn abc162b() {
+    input! {
+        n: usize,
+    }
+
+    let mut sum = 0;
+
+    for i in 1..=n {
+        if i % 3 == 0 || i % 5 == 0 {
+            continue;
+        }
+        sum += i;
+    }
+
+    println!("{}", sum);
 }
 
 #[allow(dead_code)]
@@ -66,7 +84,6 @@ fn abc153a() {
 
     println!("{}", ans);
 }
-
 
 #[allow(dead_code)]
 fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut Vec<Vec<usize>>) {
@@ -147,7 +164,6 @@ fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut
 
 //     println!("{}", String::from_utf8(res).unwrap());
 // }
-
 #[allow(dead_code)]
 fn abc401c() {
     input! {
