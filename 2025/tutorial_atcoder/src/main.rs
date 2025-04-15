@@ -43,7 +43,59 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc162b();
+    abc200b();
+}
+
+#[allow(dead_code)]
+fn abc200b() {
+    input! {
+        mut n: usize,
+        k: usize
+    }
+
+    for _ in 0..k {
+        if n % 200 == 0 {
+            n /= 200;
+        } else {
+            n = n * 1000 + 200;
+        }
+    }
+
+    println!("{}", n);
+}
+
+#[allow(dead_code)]
+fn abc165b() {
+    input! {
+        x: usize,
+    }
+
+    let mut ans = 100;
+    let mut i = 1;
+
+    while ans < x {
+        ans += ans / 100;
+        i += 1;
+    }
+
+    println!("{}", i - 1);
+}
+
+#[allow(dead_code)]
+fn abc206b() {
+    input! {
+        n: usize
+    }
+
+    let mut sum = 1;
+
+    let mut i = 1;
+    while n >= sum {
+        sum += i;
+        i += 1;
+    }
+
+    println!("{}", i - 1);
 }
 
 #[allow(dead_code)]
