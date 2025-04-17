@@ -43,8 +43,112 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc200b();
+    abc093b();
 }
+
+#[allow(dead_code)]
+fn abc093b() {
+    input! {
+        a: usize,
+        b: usize,
+        k: usize
+    }
+
+    let mut sub_vec = vec![];
+    for i in a..=b {
+        sub_vec.push(i);
+    }
+
+    let mut sort_vec = sub_vec.clone();
+
+
+
+    println!("{:?}", sort_vec);
+}
+
+#[allow(dead_code)]
+fn abc208b() {
+    input! {
+        mut p: usize
+    }
+
+    let factorial_10 = (1..=10).fold(1, |acc, x| acc * x);
+    let factorial_9 = (1..=9).fold(1, |acc, x| acc * x);
+    let factorial_8 = (1..=8).fold(1, |acc, x| acc * x);
+    let factorial_7 = (1..=7).fold(1, |acc, x| acc * x);
+    let factorial_6 = (1..=6).fold(1, |acc, x| acc * x);
+    let factorial_5 = (1..=5).fold(1, |acc, x| acc * x);
+    let factorial_4 = (1..=4).fold(1, |acc, x| acc * x);
+    let factorial_3 = (1..=3).fold(1, |acc, x| acc * x);
+    let factorial_2 = (1..=2).fold(1, |acc, x| acc * x);
+    let factorial_1 = (1..=1).fold(1, |acc, x| acc * x);
+
+    let mut cnt = 0;
+
+    loop {
+        if p >= factorial_10 {
+            p -= factorial_10;
+            cnt += 1;
+        } else if p >= factorial_9 {
+            p -= factorial_9;
+            cnt += 1;
+        } else if p >= factorial_8 {
+            p -= factorial_8;
+            cnt += 1;
+        } else if p >= factorial_7 {
+            p -= factorial_7;
+            cnt += 1;
+        } else if p >= factorial_6 {
+            p -= factorial_6;
+            cnt += 1;
+        } else if p >= factorial_5 {
+            p -= factorial_5;
+            cnt += 1;
+        } else if p >= factorial_4 {
+            p -= factorial_4;
+            cnt += 1;
+        } else if p >= factorial_3 {
+            p -= factorial_3;
+            cnt += 1;
+        } else if p >= factorial_2 {
+            p -= factorial_2;
+            cnt += 1;
+        } else if p >= factorial_1 {
+            p -= factorial_1;
+            cnt += 1;
+        } else {
+            break;
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+#[allow(dead_code)]
+fn abc164b() {
+    input! {
+        mut a: usize,
+        b: usize,
+        mut c: usize,
+        d: usize
+    }
+
+    loop {
+        // hero turn
+        c = c.saturating_sub(b);
+        if c == 0 {
+            println!("Yes");
+            return;
+        }
+        // monstaer turn
+        a = a.saturating_sub(d);
+        if a == 0 {
+            println!("No");
+            return;
+        }
+    }
+}
+
 
 #[allow(dead_code)]
 fn abc200b() {
