@@ -54,16 +54,40 @@ fn abc093b() {
         k: usize
     }
 
-    let mut sub_vec = vec![];
-    for i in a..=b {
-        sub_vec.push(i);
+    if (b-a+1) <= k {
+        for i in a..=b {
+            println!("{}", i);
+        } 
+        return;
     }
 
-    let mut sort_vec = sub_vec.clone();
+    let mut sub_vec = vec![];
+    let mut cnt = 0;
+    for i in a..=b {
+        if cnt < k {
+            sub_vec.push(i);
+            cnt += 1;
+        } else {
+            break;
+        }
+    }
 
+    cnt = 0;
+    for i in (a..=b).rev() {
+        if cnt < k {
+            sub_vec.push(i);
+            cnt += 1;
+        } else {
+            break;
+        }
+    }
 
+    sub_vec.sort();
+    sub_vec.dedup();
 
-    println!("{:?}", sort_vec);
+    for i in sub_vec {
+        println!("{}", i);
+    }
 }
 
 #[allow(dead_code)]
