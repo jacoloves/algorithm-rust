@@ -43,7 +43,36 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc093b();
+    abc158c();
+}
+
+#[allow(dead_code)]
+fn abc158c() {
+    input! {
+        a: usize,
+        b: usize
+    }
+
+    let mut money: f64 = 1_f64;
+    loop {
+       let a_tax = money * 0.08;
+       let b_tax = money * 0.1;
+
+       let a_tax = a_tax.floor() as usize;
+       let b_tax = b_tax.floor() as usize;
+
+        if a_tax == a && b_tax == b {
+             println!("{}", money);
+             return;
+        }
+
+        if a_tax > a || b_tax > b {
+            println!("-1");
+            return;
+        }
+
+        money += 1_f64;
+    }
 }
 
 #[allow(dead_code)]
