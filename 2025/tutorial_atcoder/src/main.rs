@@ -43,7 +43,54 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc158c();
+    abc090b();
+}
+
+#[allow(dead_code)]
+fn abc090b() {
+    input! {
+        a: usize,
+        b: usize
+    }
+
+    let mut palindrome_number = 0;
+
+    for i in a..=b {
+        let s = i.to_string();
+        let s_rev = s.chars().rev().collect::<String>();
+        if s == s_rev {
+            palindrome_number += 1;
+        }
+    }
+
+    println!("{}", palindrome_number);
+
+}
+
+#[allow(dead_code)]
+fn abc068b() {
+    input! {
+        n: usize
+    }
+
+    let mut div_max_cnt = 0;
+    let mut div_max = 1;
+
+    for i in 1..=n {
+        let mut div_i = i;
+        let mut div_cnt = 0;
+        while div_i / 2 != 0 {
+            div_i /= 2;
+            div_cnt += 1;
+        } 
+
+        if div_cnt > div_max_cnt {
+            div_max_cnt = div_cnt;
+            div_max = i;
+        }
+    }
+
+    println!("{}", div_max);
 }
 
 #[allow(dead_code)]
