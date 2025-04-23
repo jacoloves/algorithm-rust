@@ -43,7 +43,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc090b();
+    abc220b();
+}
+
+#[allow(dead_code)]
+fn abc220b() {
+    input! {
+        k: usize,
+        mut a: usize,
+        mut b: usize
+    }
+
+    let mut i = 0;
+    let mut a_decimal = 0;
+    let mut b_decimal = 0;
+    while a > 0 {
+        let a_tmp = a % 10;
+        a_decimal += a_tmp * k.pow(i as u32);
+        a /= 10;
+        i += 1;
+    }
+
+    i = 0;
+    while b > 0 {
+        let b_tmp = b % 10;
+        b_decimal += b_tmp * k.pow(i as u32);
+        b /= 10;
+        i += 1;
+    }
+
+    let ans = a_decimal * b_decimal;
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
