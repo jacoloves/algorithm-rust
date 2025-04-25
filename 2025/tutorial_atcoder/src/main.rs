@@ -43,7 +43,45 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc220b();
+    tenkei067();
+}
+
+
+#[allow(dead_code)]
+fn operate(n: u64) -> u64 {
+    let mut x =n;
+    let mut digits = Vec::new();
+    if x == 0 {
+        digits.push('0');
+    }
+
+    while x > 0 {
+        let d = (x % 9) as u32;
+        digits.push(std::char::from_digit(d, 10).unwrap());
+        x /= 9;
+    }
+    digits.reverse();
+    let base9 = digits.into_iter().collect::<String>();
+
+    let replaced = base9.chars().map(|c| if c == '8' { '5' } else { c }).collect::<String>();
+
+    u64::from_str_radix(&replaced, 8).unwrap()
+}
+
+#[allow(dead_code)]
+fn tenkei067() {
+    input! {
+        n_str: String,
+        k: usize
+    }
+
+    let mut n = u64::from_str_radix(&n_str, 8).unwrap();
+
+    for _ in 0..k {
+        n = operate(n);
+    }
+
+    println!("{:o}", n);
 }
 
 #[allow(dead_code)]
