@@ -43,7 +43,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc220b();
+    abc081b();
+}
+
+#[allow(dead_code)]
+fn abc081b() {
+    input! {
+        n: usize,
+        mut a: [usize; n]
+    }
+
+    let mut dev_cnt = 0;
+
+    loop {
+        let mut flg = true;
+        for i in 0..n {
+            if a[i] % 2 != 0 {
+                flg = false;
+                break;
+            }
+        }
+        if flg {
+            for i in 0..n {
+                a[i] /= 2;
+            }
+            dev_cnt += 1;
+        } else {
+            break;
+        }
+    }
+
+    println!("{}", dev_cnt);
 }
 
 #[allow(dead_code)]
@@ -94,7 +124,6 @@ fn abc090b() {
     }
 
     println!("{}", palindrome_number);
-
 }
 
 #[allow(dead_code)]
@@ -112,7 +141,7 @@ fn abc068b() {
         while div_i / 2 != 0 {
             div_i /= 2;
             div_cnt += 1;
-        } 
+        }
 
         if div_cnt > div_max_cnt {
             div_max_cnt = div_cnt;
@@ -132,15 +161,15 @@ fn abc158c() {
 
     let mut money: f64 = 1_f64;
     loop {
-       let a_tax = money * 0.08;
-       let b_tax = money * 0.1;
+        let a_tax = money * 0.08;
+        let b_tax = money * 0.1;
 
-       let a_tax = a_tax.floor() as usize;
-       let b_tax = b_tax.floor() as usize;
+        let a_tax = a_tax.floor() as usize;
+        let b_tax = b_tax.floor() as usize;
 
         if a_tax == a && b_tax == b {
-             println!("{}", money);
-             return;
+            println!("{}", money);
+            return;
         }
 
         if a_tax > a || b_tax > b {
@@ -160,10 +189,10 @@ fn abc093b() {
         k: usize
     }
 
-    if (b-a+1) <= k {
+    if (b - a + 1) <= k {
         for i in a..=b {
             println!("{}", i);
-        } 
+        }
         return;
     }
 
@@ -278,7 +307,6 @@ fn abc164b() {
         }
     }
 }
-
 
 #[allow(dead_code)]
 fn abc200b() {
