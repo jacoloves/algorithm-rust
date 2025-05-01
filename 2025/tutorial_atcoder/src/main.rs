@@ -43,7 +43,76 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc081b();
+    abc130b();
+}
+
+#[allow(dead_code)]
+fn abc095b() {}
+
+#[allow(dead_code)]
+fn abc130b() {
+    input! {
+        n: usize,
+        x: usize,
+        mut a: [usize; n]
+    }
+
+    let mut d = 0;
+    let mut ans = 0;
+
+    for i in 0..n {
+        if d <= x {
+            ans += 1;
+        }
+
+        d += a[i];
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc174b() {
+    input! {
+        n: usize,
+        d: usize,
+        xy: [(isize, isize); n]
+    }
+
+    let mut ans = 0;
+
+    for i in 0..n {
+        let sq = (xy[i].0 * xy[i].0 + xy[i].1 * xy[i].1) as f64;
+        let sq_root = sq.sqrt();
+        if sq_root <= d as f64 {
+            ans += 1;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc088b() {
+    input! {
+        n: usize,
+        mut a: [usize; n]
+    }
+
+    let mut alice = 0;
+    let mut bob = 0;
+
+    a.sort_by(|a, b| b.cmp(a));
+
+    for i in 0..n {
+        if i % 2 == 0 {
+            alice += a[i];
+        } else {
+            bob += a[i];
+        }
+    }
+
+    println!("{}", alice - bob);
 }
 
 #[allow(dead_code)]
