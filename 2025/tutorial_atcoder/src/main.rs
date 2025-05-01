@@ -43,11 +43,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc130b();
+    abc095b();
 }
 
 #[allow(dead_code)]
-fn abc095b() {}
+fn abc095b() {
+    input! {
+        n: usize,
+        mut x: usize,
+        mut a: [usize; n]
+    }
+
+    a.sort();
+    let a_min = a[0];
+
+    let mut cnt = n;
+
+    for elem in a {
+        x -= elem;
+    }
+
+    loop {
+        if x < a_min {
+            break;
+        }
+
+        x -= a_min;
+        cnt += 1;
+    }
+
+    println!("{}", cnt);
+}
 
 #[allow(dead_code)]
 fn abc130b() {
