@@ -43,7 +43,28 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    tenkei067();
+    abc124b();
+}
+
+#[allow(dead_code)]
+fn abc124b() {
+    input! {
+        n: usize,
+        a: [usize; n]
+    }
+
+    let mut cnt = 1;
+    let first_a = a[0];
+    let mut max_a = a[0];
+
+    for i in 1..n {
+        if first_a <= a[i] && a[i-1] <= a[i] && max_a <= a[i] {
+            max_a = a[i];
+            cnt += 1;
+        } 
+    }
+
+    println!("{}", cnt);
 }
 
 
