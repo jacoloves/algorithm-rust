@@ -82,6 +82,132 @@ fn tenkei067() {
     }
 
     println!("{:o}", n);
+    abc095b();
+}
+
+#[allow(dead_code)]
+fn abc095b() {
+    input! {
+        n: usize,
+        mut x: usize,
+        mut a: [usize; n]
+    }
+
+    a.sort();
+    let a_min = a[0];
+
+    let mut cnt = n;
+
+    for elem in a {
+        x -= elem;
+    }
+
+    loop {
+        if x < a_min {
+            break;
+        }
+
+        x -= a_min;
+        cnt += 1;
+    }
+
+    println!("{}", cnt);
+}
+
+#[allow(dead_code)]
+fn abc130b() {
+    input! {
+        n: usize,
+        x: usize,
+        mut a: [usize; n]
+    }
+
+    let mut d = 0;
+    let mut ans = 0;
+
+    for i in 0..n {
+        if d <= x {
+            ans += 1;
+        }
+
+        d += a[i];
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc174b() {
+    input! {
+        n: usize,
+        d: usize,
+        xy: [(isize, isize); n]
+    }
+
+    let mut ans = 0;
+
+    for i in 0..n {
+        let sq = (xy[i].0 * xy[i].0 + xy[i].1 * xy[i].1) as f64;
+        let sq_root = sq.sqrt();
+        if sq_root <= d as f64 {
+            ans += 1;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc088b() {
+    input! {
+        n: usize,
+        mut a: [usize; n]
+    }
+
+    let mut alice = 0;
+    let mut bob = 0;
+
+    a.sort_by(|a, b| b.cmp(a));
+
+    for i in 0..n {
+        if i % 2 == 0 {
+            alice += a[i];
+        } else {
+            bob += a[i];
+        }
+    }
+
+    println!("{}", alice - bob);
+}
+
+#[allow(dead_code)]
+fn abc081b() {
+    input! {
+        n: usize,
+        mut a: [usize; n]
+    }
+
+    let mut dev_cnt = 0;
+
+    loop {
+        let mut flg = true;
+        for i in 0..n {
+            if a[i] % 2 != 0 {
+                flg = false;
+                break;
+            }
+        }
+        if flg {
+            for i in 0..n {
+                a[i] /= 2;
+            }
+            dev_cnt += 1;
+        } else {
+            break;
+        }
+    }
+
+    println!("{}", dev_cnt);
 }
 
 #[allow(dead_code)]
@@ -132,7 +258,6 @@ fn abc090b() {
     }
 
     println!("{}", palindrome_number);
-
 }
 
 #[allow(dead_code)]
@@ -150,7 +275,7 @@ fn abc068b() {
         while div_i / 2 != 0 {
             div_i /= 2;
             div_cnt += 1;
-        } 
+        }
 
         if div_cnt > div_max_cnt {
             div_max_cnt = div_cnt;
@@ -170,15 +295,15 @@ fn abc158c() {
 
     let mut money: f64 = 1_f64;
     loop {
-       let a_tax = money * 0.08;
-       let b_tax = money * 0.1;
+        let a_tax = money * 0.08;
+        let b_tax = money * 0.1;
 
-       let a_tax = a_tax.floor() as usize;
-       let b_tax = b_tax.floor() as usize;
+        let a_tax = a_tax.floor() as usize;
+        let b_tax = b_tax.floor() as usize;
 
         if a_tax == a && b_tax == b {
-             println!("{}", money);
-             return;
+            println!("{}", money);
+            return;
         }
 
         if a_tax > a || b_tax > b {
@@ -198,10 +323,10 @@ fn abc093b() {
         k: usize
     }
 
-    if (b-a+1) <= k {
+    if (b - a + 1) <= k {
         for i in a..=b {
             println!("{}", i);
-        } 
+        }
         return;
     }
 
@@ -316,7 +441,6 @@ fn abc164b() {
         }
     }
 }
-
 
 #[allow(dead_code)]
 fn abc200b() {
