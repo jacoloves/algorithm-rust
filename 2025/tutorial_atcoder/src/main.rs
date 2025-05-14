@@ -43,7 +43,32 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc404d();
+    abc113b();
+}
+
+#[allow(dead_code)]
+fn abc113b() {
+    input! {
+        n: usize,
+        t: f64,
+        a: f64,
+        h: [f64; n]
+    }
+
+    let mut closest_index = 0;
+    let mut min_diff = f64::MAX;
+
+    for i in 0..n {
+        let temp = t - h[i] * 0.006;
+        let diff = (temp - a).abs();
+
+        if diff < min_diff {
+            min_diff = diff;
+            closest_index = i;
+        }
+    }
+
+    println!("{}", closest_index + 1);
 }
 
 #[allow(dead_code)]
