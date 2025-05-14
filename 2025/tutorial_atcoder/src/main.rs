@@ -218,6 +218,20 @@ fn abc404a() {
             return;
         }
     }
+    abc201b();
+}
+
+#[allow(dead_code)]
+fn abc201b() {
+    input! {
+        n: usize,
+        mut pair: [(String, usize); n],
+    }
+
+    // sort by second element descending order
+    pair.sort_by(|a, b| b.1.cmp(&a.1));
+
+    println!("{}", pair[1].0);
 }
 
 #[allow(dead_code)]
