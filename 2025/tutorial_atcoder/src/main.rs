@@ -43,7 +43,181 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc124b();
+    abc404d();
+}
+
+#[allow(dead_code)]
+fn abc404d() {
+    input! {
+        n: usize,
+        m: usize,
+        c: [i64; n],
+    }
+
+    let mut animals_in_zoo: Vec<Vec<usize>> = vec![Vec::new(); n];
+
+    for animal in 0..m {
+        input! {
+            k: usize,
+            a: [usize; k]
+        }
+        for &z in &a {
+            animals_in_zoo[z - 1].push(animal);
+        }
+    }
+
+    let states = 3usize.pow(n as u32);
+    let mut best: Option<i64> = None;
+
+    for mut st in 0..states {
+        let mut cost: i64 = 0;
+        let mut cnt = vec![0u8; m];
+
+        for zoo in 0..n {
+            let visits = st % 3;
+            st /= 3;
+
+            if visits == 0 {
+                continue;
+            }
+
+            cost += (visits as i64) * c[zoo];
+
+            for &animal in &animals_in_zoo[zoo] {
+                cnt[animal] += visits as u8;
+            }
+        }
+
+        if cnt.iter().all(|&x| x >= 2) {
+            best = Some(best.map_or(cost, |cur| cur.min(cost)));
+        }
+    }
+
+    println!("{}", best.unwrap_or(-1));
+}
+
+#[allow(dead_code)]
+fn abc404c() {
+    input! {
+        n: usize,
+        m: usize,
+    }
+
+    let mut g: Vec<Vec<usize>> = vec![Vec::new(); n];
+
+    for _ in 0..m {
+        input! {
+            a: usize,
+            b: usize
+        }
+        let (a, b) = (a - 1, b - 1);
+        g[a].push(b);
+        g[b].push(a);
+    }
+
+    if m != n {
+        println!("No");
+        return;
+    }
+
+    if g.iter().any(|v| v.len() != 2) {
+        println!("No");
+        return;
+    }
+
+    let mut visited = vec![false; n];
+    let mut que = VecDeque::new();
+    visited[0] = true;
+    que.push_back(0);
+
+    while let Some(v) = que.pop_front() {
+        for &u in &g[v] {
+            if !visited[u] {
+                visited[u] = true;
+                que.push_back(u);
+            }
+        }
+    }
+
+    if visited.iter().all(|&x| x) {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
+}
+
+#[allow(dead_code)]
+fn rotate90(src: &[Vec<char>]) -> Vec<Vec<char>> {
+    let n = src.len();
+    let mut dst = vec![vec!['.'; n]; n];
+    for i in 0..n {
+        for j in 0..n {
+            dst[j][n - 1 - i] = src[i][j];
+        }
+    }
+    dst
+}
+
+#[allow(dead_code)]
+fn diff(a: &[Vec<char>], b: &[Vec<char>]) -> usize {
+    let n = a.len();
+    let mut cnt = 0;
+    for i in 0..n {
+        for j in 0..n {
+            if a[i][j] != b[i][j] {
+                cnt += 1;
+            }
+        }
+    }
+    cnt
+}
+
+#[allow(dead_code)]
+fn abc404b() {
+    input! {
+        n: usize,
+    }
+
+    let mut s: Vec<Vec<char>> = (0..n)
+        .map(|_| {
+            input! { row: String }
+            row.chars().collect()
+        })
+        .collect();
+
+    let t: Vec<Vec<char>> = (0..n)
+        .map(|_| {
+            input! { row: String }
+            row.chars().collect()
+        })
+        .collect();
+
+    let mut best = usize::MAX;
+    for rot in 0..4 {
+        best = best.min(diff(&s, &t) + rot);
+        s = rotate90(&s);
+    }
+
+    println!("{}", best);
+}
+
+#[allow(dead_code)]
+fn abc404a() {
+    input! {
+        s: String
+    }
+
+    let mut seen = [false; 26];
+    for c in s.chars() {
+        seen[(c as u8 - b'a') as usize] = true;
+    }
+
+    for i in 0..26 {
+        if !seen[i] {
+            println!("{}", (b'a' + i as u8) as char);
+            return;
+        }
+    }
 }
 
 #[allow(dead_code)]
@@ -58,19 +232,18 @@ fn abc124b() {
     let mut max_a = a[0];
 
     for i in 1..n {
-        if first_a <= a[i] && a[i-1] <= a[i] && max_a <= a[i] {
+        if first_a <= a[i] && a[i - 1] <= a[i] && max_a <= a[i] {
             max_a = a[i];
             cnt += 1;
-        } 
+        }
     }
 
     println!("{}", cnt);
 }
 
-
 #[allow(dead_code)]
 fn operate(n: u64) -> u64 {
-    let mut x =n;
+    let mut x = n;
     let mut digits = Vec::new();
     if x == 0 {
         digits.push('0');
@@ -84,7 +257,10 @@ fn operate(n: u64) -> u64 {
     digits.reverse();
     let base9 = digits.into_iter().collect::<String>();
 
-    let replaced = base9.chars().map(|c| if c == '8' { '5' } else { c }).collect::<String>();
+    let replaced = base9
+        .chars()
+        .map(|c| if c == '8' { '5' } else { c })
+        .collect::<String>();
 
     u64::from_str_radix(&replaced, 8).unwrap()
 }
