@@ -43,8 +43,33 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc113b();
+    abc205b();
 }
+
+#[allow(dead_code)]
+fn abc205b() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+
+    // elemnt count
+    let mut cnt = vec![0; n];
+
+    for i in 0..n {
+        cnt[a[i] - 1] += 1;
+    }
+
+    for i in 0..n {
+        if cnt[i] > 1 {
+            println!("No");
+            return;
+        }
+    }
+
+    println!("Yes");
+}
+
 
 #[allow(dead_code)]
 fn abc113b() {
