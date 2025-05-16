@@ -43,8 +43,28 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc205b();
+    abc067b();
 }
+
+#[allow(dead_code)]
+fn abc067b() {
+    input! {
+        n: usize,
+        k: usize,
+        mut l: [usize; n],
+    }
+
+    // sort l in descending order
+    l.sort_by(|a, b| b.cmp(a));
+
+    let mut sum = 0;
+    for i in 0..k {
+        sum += l[i];
+    }
+
+    println!("{}", sum);
+}
+
 
 #[allow(dead_code)]
 fn abc205b() {
