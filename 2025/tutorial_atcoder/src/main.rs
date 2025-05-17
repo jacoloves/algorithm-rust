@@ -43,7 +43,24 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc067b();
+    abc132c();
+}
+
+#[allow(dead_code)]
+fn abc132c() {
+    input! {
+        n: usize,
+        mut d: [usize; n],
+    }
+
+    d.sort();
+
+    let mid = n / 2;
+    if d[mid] > d[mid - 1] {
+        println!("{}", d[mid] - d[mid - 1]);
+    } else {
+        println!("0");
+    }
 }
 
 #[allow(dead_code)]
@@ -64,7 +81,6 @@ fn abc067b() {
 
     println!("{}", sum);
 }
-
 
 #[allow(dead_code)]
 fn abc205b() {
@@ -89,7 +105,6 @@ fn abc205b() {
 
     println!("Yes");
 }
-
 
 #[allow(dead_code)]
 fn abc113b() {
