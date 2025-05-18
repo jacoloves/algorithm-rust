@@ -11,9 +11,10 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 
 #[allow(unused_imports)]
-use std::iter::zip;
+use std::isize;
 #[allow(unused_imports)]
-use std::{isize, usize};
+use std::iter::zip;
+use std::usize;
 
 #[allow(unused_imports)]
 use std::cmp;
@@ -43,7 +44,59 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc132c();
+    abc121c();
+}
+
+#[allow(dead_code)]
+fn abc121c() {
+    input! {
+        n: usize,
+        m: usize,
+        mut pairs: [(usize, usize); n],
+    }
+
+    pairs.sort_by(|a, b| a.0.cmp(&b.0));
+
+    let mut sum_a = 0;
+    let mut remain_m = m;
+
+    for i in 0..n {
+        if remain_m == 0 {
+            break;
+        }
+
+        if remain_m > pairs[i].1 {
+            sum_a += pairs[i].0 * pairs[i].1;
+            remain_m -= pairs[i].1;
+        } else {
+            sum_a += pairs[i].0 * remain_m;
+            remain_m = 0;
+        }
+    }
+
+    println!("{}", sum_a);
+}
+
+#[allow(dead_code)]
+fn abc115c() {
+    input! {
+        n: usize,
+        k: usize,
+        mut h: [usize; n],
+    }
+
+    h.sort();
+
+    let mut min_diff = usize::MAX;
+
+    for i in 0..=n - k {
+        let diff = h[i + k - 1] - h[i];
+        if diff < min_diff {
+            min_diff = diff;
+        }
+    }
+
+    println!("{}", min_diff);
 }
 
 #[allow(dead_code)]
