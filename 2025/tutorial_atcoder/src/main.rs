@@ -44,7 +44,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc113c();
+    tenkei076();
+}
+
+#[allow(dead_code)]
+fn tenkei076() {
+    input! {
+        n: usize,
+        a: [usize; n],
+    }
+    let total: usize = a.iter().sum();
+    if total % 10 != 0 {
+        println!("No");
+        return;
+    }
+    let target = total / 10;
+    let mut sum = 0;
+    let mut r = 0;
+
+    // l: left pointer
+    for l in 0..n {
+        while r < l + n && sum < target {
+            sum += a[r % n];
+            r += 1;
+        }
+        if sum == target {
+            println!("Yes");
+            return;
+        }
+        sum -= a[l];
+    }
+    println!("No");
 }
 
 #[allow(dead_code)]
