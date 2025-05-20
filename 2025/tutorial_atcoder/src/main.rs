@@ -44,7 +44,36 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc121c();
+    abc113c();
+}
+
+#[allow(dead_code)]
+fn abc113c() {
+    input! {
+        n: usize,
+        m: usize,
+        pairs: [(usize, usize); m],
+    }
+
+    let mut city_info = Vec::with_capacity(m);
+    for (i, &(p, y)) in pairs.iter().enumerate() {
+        city_info.push((p, y, i));
+    }
+
+    city_info.sort_by_key(|&(_p, y, _i)| y);
+
+    let mut cnt = vec![0; n + 1];
+    let mut ans = vec![String::new(); m];
+
+    for &(p, _y, orig_idx) in city_info.iter() {
+        cnt[p] += 1;
+        ans[orig_idx] = format!("{:06}{:06}", p, cnt[p]);
+    }
+
+    for code in ans {
+        println!("{}", code);
+    }
+
 }
 
 #[allow(dead_code)]
