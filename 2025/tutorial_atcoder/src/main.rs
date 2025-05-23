@@ -44,7 +44,50 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    tenkei076();
+    abc104b();
+}
+
+#[allow(dead_code)]
+fn abc104b() {
+    input! {
+        s: String,
+    }
+
+    let mut c_cnt = 0;
+    let mut len_cnt = 0;
+    let mut upper_cnt = 0;
+
+    for c in s.chars() {
+        len_cnt += 1;
+        if c != 'A' && len_cnt == 1 {
+            println!("WA");
+            return;
+        }
+        if c == 'C' && len_cnt >= 3 {
+            c_cnt += 1;
+        }
+        if c_cnt > 1 {
+            println!("WA");
+            return;
+        }
+
+        if c == 'C' && len_cnt == s.len() {
+            println!("WA");
+            return;
+        }
+
+        if c.is_uppercase() {
+            upper_cnt += 1;
+        }
+        
+    }
+
+    if c_cnt == 1 && upper_cnt == 2 {
+        println!("AC");
+    } else {
+        println!("WA");
+    }
+
 }
 
 #[allow(dead_code)]
