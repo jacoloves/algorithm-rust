@@ -44,7 +44,130 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc104b();
+    abc407d();
+}
+
+#[allow(dead_code)]
+fn abc407d() {
+    input! {
+        h: usize,
+        w: usize,
+    }
+
+    let n = h * w;
+    let mut a = Vec::with_capacity(n);
+    for _ in 0..h {
+        input! {
+            row: [u64; w]
+        }
+        a.extend_from_slice(&row);
+    }
+
+    let mut adj: Vec<Vec<usize>> = vec![Vec::new(); n];
+    for i in 0..h {
+        for j in 0..w {
+            let v = i * w + j;
+            if j + 1 < w {
+                let r = v + 1;
+                adj[v].push(r);
+                adj[r].push(v);
+            }
+            if i + 1 < h {
+                let d = v + w;
+                adj[v].push(d);
+                adj[d].push(v);
+            }
+        }
+    }
+
+    let full: u32 = (1u32 << n) - 1;
+    let size = 1usize << n;
+
+    let mut dp = vec![false; size];
+    dp[0] = true;
+    for mask in 1u32..=full {
+        let i = mask.trailing_zeros() as usize;
+        let mut ok = false;
+        for &j in &adj[i] {
+            if mask & (1u32 << j) != 0 {
+                let next = mask ^ (1u32 << i) ^ (1u32 << j);
+                if dp[next as usize] {
+                    ok = true;
+                    break;
+                }
+            }
+        }
+        dp[mask as usize] = ok;
+    }
+
+    let mut xor = vec![0u64; size];
+    for mask in 1u32..=full {
+        let b = mask.trailing_zeros() as usize;
+        xor[mask as usize] = xor[(mask ^ (1u32 << b)) as usize] ^ a[b];
+    }
+
+    let mut ans = 0u64;
+    for mask in 0u32..=full {
+        if dp[(full ^ mask) as usize] {
+            ans = ans.max(xor[mask as usize]);
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc407c() {
+    input! {
+        s: String
+    }
+
+    let digits: Vec<i64> = s.bytes().map(|b| (b - b'0') as i64).collect();
+    let n = digits.len() as i64;
+
+    let mut last = *digits.last().unwrap();
+    for &d in digits[..digits.len() - 1].iter().rev() {
+        let diff = (d - (last % 10) + 10) % 10;
+        last += diff;
+    }
+
+    let answer = n + last;
+    println!("{}", answer);
+}
+
+#[allow(dead_code)]
+fn abc407b() {
+    input! {
+        x: usize,
+        y: usize,
+    }
+
+    let mut codition_cnt = 0;
+    // i + j >= x
+    // (i - j).abs() >= y
+    for i in 1..=6 {
+        for j in 1..=6 {
+            if i + j >= x || (i as isize - j as isize).abs() >= y as isize {
+                codition_cnt += 1;
+            }
+        }
+    }
+
+    let probability = codition_cnt as f64 / 36.0;
+
+    println!("{}", probability);
+}
+
+#[allow(dead_code)]
+fn abc407a() {
+    input! {
+        a: usize,
+        b: usize
+    }
+
+    let ans = (a + b / 2) / b;
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
@@ -79,7 +202,6 @@ fn abc104b() {
         if c.is_uppercase() {
             upper_cnt += 1;
         }
-        
     }
 
     if c_cnt == 1 && upper_cnt == 2 {
@@ -87,7 +209,6 @@ fn abc104b() {
     } else {
         println!("WA");
     }
-
 }
 
 #[allow(dead_code)]
@@ -146,7 +267,6 @@ fn abc113c() {
     for code in ans {
         println!("{}", code);
     }
-
 }
 
 #[allow(dead_code)]
