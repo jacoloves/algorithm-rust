@@ -44,7 +44,20 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc407d();
+    abc215a();
+}
+
+#[allow(dead_code)]
+fn abc215a() {
+    input! {
+        s: String,
+    }
+
+    if s == "Hello,World!" {
+        println!("AC");
+    } else {
+        println!("WA");
+    }
 }
 
 #[allow(dead_code)]
