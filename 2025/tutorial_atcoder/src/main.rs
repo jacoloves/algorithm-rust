@@ -44,8 +44,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc215a();
+    abc084b();
 }
+
+#[allow(dead_code)]
+fn abc084b() {
+    input! {
+        a: usize,
+        b: usize,
+        s: String
+    }
+
+    if !s.contains('-') {
+        println!("No");
+        return;
+    }
+
+    let mut parts = s.split('-');
+    let first_part = parts.next().unwrap();
+    let second_part = parts.next().unwrap();
+
+    if first_part.len() == a && second_part.len() == b {
+        if first_part.chars().all(|c| c.is_digit(10)) && second_part.chars().all(|c| c.is_digit(10)) {
+            println!("Yes");
+        } else {
+            println!("No");
+        }
+    } else {
+        println!("No");
+    }
+}
+
 
 #[allow(dead_code)]
 fn abc215a() {
