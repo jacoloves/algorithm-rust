@@ -44,7 +44,26 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc084b();
+    abc146b();
+}
+
+#[allow(dead_code)]
+fn abc146b() {
+    input! {
+        n: usize,
+        s: String,
+    }
+
+    let mut ans_str = String::new();
+    let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    for c in s.chars() {
+        let mut idx = abc.find(c).unwrap();
+        idx = (idx + n) % 26; 
+        ans_str.push(abc.chars().nth(idx).unwrap());
+    }
+
+    println!("{}", ans_str);
 }
 
 #[allow(dead_code)]
