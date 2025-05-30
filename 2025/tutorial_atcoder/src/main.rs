@@ -1,34 +1,21 @@
+// Standard library imports
+#[allow(unused_imports)]
+use std::{
+    cmp::{self, Ordering},
+    collections::{HashMap, HashSet, VecDeque},
+    fmt::Debug,
+    io::*,
+    isize,
+    iter::zip,
+    str::{self, FromStr},
+    usize,
+};
+
+// External crate imports
 #[allow(unused_imports)]
 use itertools::min;
 #[allow(unused_imports)]
 use proconio::input;
-/* ↓aoj */
-#[allow(unused_imports)]
-use std::cmp::Ordering;
-#[allow(unused_imports)]
-use std::collections::HashMap;
-#[allow(unused_imports)]
-use std::collections::HashSet;
-
-#[allow(unused_imports)]
-use std::isize;
-#[allow(unused_imports)]
-use std::iter::zip;
-use std::usize;
-
-#[allow(unused_imports)]
-use std::cmp;
-#[allow(unused_imports)]
-use std::collections::VecDeque;
-#[allow(unused_imports)]
-use std::io::*;
-#[allow(unused_imports)]
-use std::str::*;
-
-#[allow(unused_imports)]
-use std::fmt::Debug;
-#[allow(unused_imports)]
-use std::str::FromStr;
 
 #[allow(dead_code)]
 fn read_line<T: std::str::FromStr>() -> Vec<T>
@@ -46,6 +33,10 @@ const MOD: usize = 1_000_000_000;
 fn main() {
     abc147b();
 }
+
+// =============================================================================
+// ABC 147 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc147b() {
@@ -65,6 +56,10 @@ fn abc147b() {
     println!("{}", cnt / 2);
 }
 
+// =============================================================================
+// ABC 146 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc146b() {
     input! {
@@ -83,6 +78,27 @@ fn abc146b() {
 
     println!("{}", ans_str);
 }
+
+// =============================================================================
+// ABC 215 Problems
+// =============================================================================
+
+#[allow(dead_code)]
+fn abc215a() {
+    input! {
+        s: String,
+    }
+
+    if s == "Hello,World!" {
+        println!("AC");
+    } else {
+        println!("WA");
+    }
+}
+
+// =============================================================================
+// ABC 084 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc084b() {
@@ -112,19 +128,9 @@ fn abc084b() {
     }
 }
 
-
-#[allow(dead_code)]
-fn abc215a() {
-    input! {
-        s: String,
-    }
-
-    if s == "Hello,World!" {
-        println!("AC");
-    } else {
-        println!("WA");
-    }
-}
+// =============================================================================
+// ABC 407 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 // https://atcoder.jp/contests/abc407/tasks/abc407_d
@@ -194,27 +200,19 @@ fn abc407d_sai() {
     }
 
     println!("{}", ans);
-
 }
 
 #[allow(dead_code)]
-// https://atcoder.jp/contests/abc407/tasks/abc407_c
-fn abc407c_sai() {
+// https://atcoder.jp/contests/abc407/tasks/abc407_a
+fn abc407a_sai() {
     input! {
-        s: String
+        a: usize,
+        b: usize
     }
 
-    let digits: Vec<i64> = s.bytes().map(|b| (b - b'0') as i64).collect();
-    let n = digits.len() as i64;
+    let ans = (a + b / 2) / b;
 
-    let mut last = *digits.last().unwrap();
-    for &d in digits[..digits.len() - 1].iter().rev() {
-        let diff = (d - (last % 10) + 10) % 10;
-        last += diff;
-    }
-
-    let answer = n + last;
-    println!("{}", answer);
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
@@ -241,89 +239,8 @@ fn abc407b_sai() {
 }
 
 #[allow(dead_code)]
-// https://atcoder.jp/contests/abc407/tasks/abc407_a
-fn abc407a_sai() {
-    input! {
-        a: usize,
-        b: usize
-    }
-
-    let ans = (a + b / 2) / b;
-
-    println!("{}", ans);
-}
-
-#[allow(dead_code)]
-fn abc407d() {
-    input! {
-        h: usize,
-        w: usize,
-    }
-
-    let n = h * w;
-    let mut a = Vec::with_capacity(n);
-    for _ in 0..h {
-        input! {
-            row: [u64; w]
-        }
-        a.extend_from_slice(&row);
-    }
-
-    let mut adj: Vec<Vec<usize>> = vec![Vec::new(); n];
-    for i in 0..h {
-        for j in 0..w {
-            let v = i * w + j;
-            if j + 1 < w {
-                let r = v + 1;
-                adj[v].push(r);
-                adj[r].push(v);
-            }
-            if i + 1 < h {
-                let d = v + w;
-                adj[v].push(d);
-                adj[d].push(v);
-            }
-        }
-    }
-
-    let full: u32 = (1u32 << n) - 1;
-    let size = 1usize << n;
-
-    let mut dp = vec![false; size];
-    dp[0] = true;
-    for mask in 1u32..=full {
-        let i = mask.trailing_zeros() as usize;
-        let mut ok = false;
-        for &j in &adj[i] {
-            if mask & (1u32 << j) != 0 {
-                let next = mask ^ (1u32 << i) ^ (1u32 << j);
-                if dp[next as usize] {
-                    ok = true;
-                    break;
-                }
-            }
-        }
-        dp[mask as usize] = ok;
-    }
-
-    let mut xor = vec![0u64; size];
-    for mask in 1u32..=full {
-        let b = mask.trailing_zeros() as usize;
-        xor[mask as usize] = xor[(mask ^ (1u32 << b)) as usize] ^ a[b];
-    }
-
-    let mut ans = 0u64;
-    for mask in 0u32..=full {
-        if dp[(full ^ mask) as usize] {
-            ans = ans.max(xor[mask as usize]);
-        }
-    }
-
-    println!("{}", ans);
-}
-
-#[allow(dead_code)]
-fn abc407c() {
+// https://atcoder.jp/contests/abc407/tasks/abc407_c
+fn abc407c_sai() {
     input! {
         s: String
     }
@@ -341,40 +258,11 @@ fn abc407c() {
     println!("{}", answer);
 }
 
-#[allow(dead_code)]
-fn abc407b() {
-    input! {
-        x: usize,
-        y: usize,
-    }
 
-    let mut codition_cnt = 0;
-    // i + j >= x
-    // (i - j).abs() >= y
-    for i in 1..=6 {
-        for j in 1..=6 {
-            if i + j >= x || (i as isize - j as isize).abs() >= y as isize {
-                codition_cnt += 1;
-            }
-        }
-    }
 
-    let probability = codition_cnt as f64 / 36.0;
-
-    println!("{}", probability);
-}
-
-#[allow(dead_code)]
-fn abc407a() {
-    input! {
-        a: usize,
-        b: usize
-    }
-
-    let ans = (a + b / 2) / b;
-
-    println!("{}", ans);
-}
+// =============================================================================
+// ABC 104 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc104b() {
@@ -417,6 +305,10 @@ fn abc104b() {
     }
 }
 
+// =============================================================================
+// Special Problems (Tenkei)
+// =============================================================================
+
 #[allow(dead_code)]
 fn tenkei076() {
     input! {
@@ -432,7 +324,7 @@ fn tenkei076() {
     let mut sum = 0;
     let mut r = 0;
 
-    // l: left pointer
+    // Sliding window approach
     for l in 0..n {
         while r < l + n && sum < target {
             sum += a[r % n];
@@ -446,6 +338,80 @@ fn tenkei076() {
     }
     println!("No");
 }
+
+#[allow(dead_code)]
+fn tenkei067() {
+    input! {
+        n_str: String,
+        k: usize
+    }
+
+    let mut n = u64::from_str_radix(&n_str, 8).unwrap();
+
+    for _ in 0..k {
+        n = operate(n);
+    }
+
+    println!("{:o}", n);
+}
+
+// =============================================================================
+// Utility Functions
+// =============================================================================
+
+#[allow(dead_code)]
+fn operate(n: u64) -> u64 {
+    let mut x = n;
+    let mut digits = Vec::new();
+    if x == 0 {
+        digits.push('0');
+    }
+
+    while x > 0 {
+        let d = (x % 9) as u32;
+        digits.push(std::char::from_digit(d, 10).unwrap());
+        x /= 9;
+    }
+    digits.reverse();
+    let base9 = digits.into_iter().collect::<String>();
+
+    let replaced = base9
+        .chars()
+        .map(|c| if c == '8' { '5' } else { c })
+        .collect::<String>();
+
+    u64::from_str_radix(&replaced, 8).unwrap()
+}
+
+#[allow(dead_code)]
+fn rotate90(src: &[Vec<char>]) -> Vec<Vec<char>> {
+    let n = src.len();
+    let mut dst = vec![vec!['.'; n]; n];
+    for i in 0..n {
+        for j in 0..n {
+            dst[j][n - 1 - i] = src[i][j];
+        }
+    }
+    dst
+}
+
+#[allow(dead_code)]
+fn diff(a: &[Vec<char>], b: &[Vec<char>]) -> usize {
+    let n = a.len();
+    let mut cnt = 0;
+    for i in 0..n {
+        for j in 0..n {
+            if a[i][j] != b[i][j] {
+                cnt += 1;
+            }
+        }
+    }
+    cnt
+}
+
+// =============================================================================
+// ABC 113 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc113c() {
@@ -474,6 +440,39 @@ fn abc113c() {
         println!("{}", code);
     }
 }
+
+// =============================================================================
+// ABC 113 Problems (continued)
+// =============================================================================
+
+#[allow(dead_code)]
+fn abc113b() {
+    input! {
+        n: usize,
+        t: f64,
+        a: f64,
+        h: [f64; n]
+    }
+
+    let mut closest_index = 0;
+    let mut min_diff = f64::MAX;
+
+    for i in 0..n {
+        let temp = t - h[i] * 0.006;
+        let diff = (temp - a).abs();
+
+        if diff < min_diff {
+            min_diff = diff;
+            closest_index = i;
+        }
+    }
+
+    println!("{}", closest_index + 1);
+}
+
+// =============================================================================
+// ABC 121 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc121c() {
@@ -505,6 +504,10 @@ fn abc121c() {
     println!("{}", sum_a);
 }
 
+// =============================================================================
+// ABC 115 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc115c() {
     input! {
@@ -527,6 +530,10 @@ fn abc115c() {
     println!("{}", min_diff);
 }
 
+// =============================================================================
+// ABC 132 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc132c() {
     input! {
@@ -543,6 +550,10 @@ fn abc132c() {
         println!("0");
     }
 }
+
+// =============================================================================
+// ABC 067 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc067b() {
@@ -562,6 +573,10 @@ fn abc067b() {
 
     println!("{}", sum);
 }
+
+// =============================================================================
+// ABC 205 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc205b() {
@@ -587,30 +602,9 @@ fn abc205b() {
     println!("Yes");
 }
 
-#[allow(dead_code)]
-fn abc113b() {
-    input! {
-        n: usize,
-        t: f64,
-        a: f64,
-        h: [f64; n]
-    }
-
-    let mut closest_index = 0;
-    let mut min_diff = f64::MAX;
-
-    for i in 0..n {
-        let temp = t - h[i] * 0.006;
-        let diff = (temp - a).abs();
-
-        if diff < min_diff {
-            min_diff = diff;
-            closest_index = i;
-        }
-    }
-
-    println!("{}", closest_index + 1);
-}
+// =============================================================================
+// ABC 404 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc404d() {
@@ -713,32 +707,6 @@ fn abc404c() {
 }
 
 #[allow(dead_code)]
-fn rotate90(src: &[Vec<char>]) -> Vec<Vec<char>> {
-    let n = src.len();
-    let mut dst = vec![vec!['.'; n]; n];
-    for i in 0..n {
-        for j in 0..n {
-            dst[j][n - 1 - i] = src[i][j];
-        }
-    }
-    dst
-}
-
-#[allow(dead_code)]
-fn diff(a: &[Vec<char>], b: &[Vec<char>]) -> usize {
-    let n = a.len();
-    let mut cnt = 0;
-    for i in 0..n {
-        for j in 0..n {
-            if a[i][j] != b[i][j] {
-                cnt += 1;
-            }
-        }
-    }
-    cnt
-}
-
-#[allow(dead_code)]
 fn abc404b() {
     input! {
         n: usize,
@@ -784,8 +752,11 @@ fn abc404a() {
             return;
         }
     }
-    abc201b();
 }
+
+// =============================================================================
+// ABC 201 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc201b() {
@@ -799,6 +770,10 @@ fn abc201b() {
 
     println!("{}", pair[1].0);
 }
+
+// =============================================================================
+// ABC 124 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc124b() {
@@ -821,46 +796,9 @@ fn abc124b() {
     println!("{}", cnt);
 }
 
-#[allow(dead_code)]
-fn operate(n: u64) -> u64 {
-    let mut x = n;
-    let mut digits = Vec::new();
-    if x == 0 {
-        digits.push('0');
-    }
-
-    while x > 0 {
-        let d = (x % 9) as u32;
-        digits.push(std::char::from_digit(d, 10).unwrap());
-        x /= 9;
-    }
-    digits.reverse();
-    let base9 = digits.into_iter().collect::<String>();
-
-    let replaced = base9
-        .chars()
-        .map(|c| if c == '8' { '5' } else { c })
-        .collect::<String>();
-
-    u64::from_str_radix(&replaced, 8).unwrap()
-}
-
-#[allow(dead_code)]
-fn tenkei067() {
-    input! {
-        n_str: String,
-        k: usize
-    }
-
-    let mut n = u64::from_str_radix(&n_str, 8).unwrap();
-
-    for _ in 0..k {
-        n = operate(n);
-    }
-
-    println!("{:o}", n);
-    abc095b();
-}
+// =============================================================================
+// ABC 095 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc095b() {
@@ -891,6 +829,10 @@ fn abc095b() {
     println!("{}", cnt);
 }
 
+// =============================================================================
+// ABC 130 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc130b() {
     input! {
@@ -913,6 +855,10 @@ fn abc130b() {
     println!("{}", ans);
 }
 
+// =============================================================================
+// ABC 174 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc174b() {
     input! {
@@ -933,6 +879,10 @@ fn abc174b() {
 
     println!("{}", ans);
 }
+
+// =============================================================================
+// ABC 088 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc088b() {
@@ -956,6 +906,10 @@ fn abc088b() {
 
     println!("{}", alice - bob);
 }
+
+// =============================================================================
+// ABC 081 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc081b() {
@@ -987,6 +941,10 @@ fn abc081b() {
     println!("{}", dev_cnt);
 }
 
+// =============================================================================
+// ABC 220 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc220b() {
     input! {
@@ -1017,6 +975,10 @@ fn abc220b() {
     println!("{}", ans);
 }
 
+// =============================================================================
+// ABC 090 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc090b() {
     input! {
@@ -1036,6 +998,10 @@ fn abc090b() {
 
     println!("{}", palindrome_number);
 }
+
+// =============================================================================
+// ABC 068 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc068b() {
@@ -1062,6 +1028,10 @@ fn abc068b() {
 
     println!("{}", div_max);
 }
+
+// =============================================================================
+// ABC 158 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc158c() {
@@ -1091,6 +1061,10 @@ fn abc158c() {
         money += 1_f64;
     }
 }
+
+// =============================================================================
+// ABC 093 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc093b() {
@@ -1135,6 +1109,10 @@ fn abc093b() {
         println!("{}", i);
     }
 }
+
+// =============================================================================
+// ABC 208 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc208b() {
@@ -1194,6 +1172,10 @@ fn abc208b() {
     println!("{}", cnt);
 }
 
+// =============================================================================
+// ABC 164 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc164b() {
     input! {
@@ -1219,6 +1201,10 @@ fn abc164b() {
     }
 }
 
+// =============================================================================
+// ABC 200 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc200b() {
     input! {
@@ -1237,6 +1223,10 @@ fn abc200b() {
     println!("{}", n);
 }
 
+// =============================================================================
+// ABC 165 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc165b() {
     input! {
@@ -1253,6 +1243,10 @@ fn abc165b() {
 
     println!("{}", i - 1);
 }
+
+// =============================================================================
+// ABC 206 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc206b() {
@@ -1271,6 +1265,10 @@ fn abc206b() {
     println!("{}", i - 1);
 }
 
+// =============================================================================
+// ABC 162 Problems
+// =============================================================================
+
 #[allow(dead_code)]
 fn abc162b() {
     input! {
@@ -1288,6 +1286,10 @@ fn abc162b() {
 
     println!("{}", sum);
 }
+
+// =============================================================================
+// ABC 153 Problems
+// =============================================================================
 
 #[allow(dead_code)]
 fn abc153a() {
@@ -1309,6 +1311,10 @@ fn abc153a() {
 
     println!("{}", ans);
 }
+
+// =============================================================================
+// Helper/Utility Functions
+// =============================================================================
 
 #[allow(dead_code)]
 fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut Vec<Vec<usize>>) {
@@ -1334,61 +1340,11 @@ fn dfs(idx: usize, k: usize, n: usize, s: &[u8], pos: &mut Vec<usize>, all: &mut
     pos.pop();
 }
 
-#[allow(dead_code)]
-// fn abc401d() {
-//     const DOT: u8 = b'.';
-//     const O: u8 = b'o';
-//     const Q: u8 = b'?';
 
-//     input! {
-//         n: usize,
-//         k: usize,
-//         s: [u8; n],
-//     }
+// =============================================================================
+// ABC 401 Problems
+// =============================================================================
 
-//     let mut count_o = vec![0; n];
-//     let mut count_dot = vec![0; n];
-//     let mut total = 0;
-
-//     let mut positions = vec![];
-
-//     let mut all_valid_o_positions = vec![];
-//     dfs(0, k, n, s, &mut positions, &mut all_valid_o_positions);
-
-//     'outer: for o_pos in all_valid_o_positions {
-//         for (i, &c) in s.iter().enumerate() {
-//             if c == O && !o_pos.contains(&i) {
-//                 continue 'outer;
-//             }
-//             if c == DOT && o_pos.contains(&i) {
-//                 continue 'outer;
-//             }
-//         }
-//         total += 1;
-//         let mut temp = vec![DOT; n];
-//         for &i in &o_pos {
-//             temp[i] = O;
-//         }
-//         for i in 0..n {
-//             match temp[i] {
-//                 O => count_o[i] += 1,
-//                 DOT => count_dot[i] += 1,
-//                 _ => {}
-//             }
-//         }
-//     }
-
-//     let mut res = vec![b'?'; n];
-//     for i in 0..n {
-//         if count_o[i] = total {
-//             res[i] = b'o';
-//         } else if count_dot[i] = total {
-//             res[i] = b'.';
-//         }
-//     }
-
-//     println!("{}", String::from_utf8(res).unwrap());
-// }
 #[allow(dead_code)]
 fn abc401c() {
     input! {
