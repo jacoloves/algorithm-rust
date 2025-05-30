@@ -44,7 +44,25 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc146b();
+    abc147b();
+}
+
+#[allow(dead_code)]
+fn abc147b() {
+    input! {
+        s: String
+    }
+
+    let palindrome = s.chars().rev().collect::<String>();
+    let mut cnt = 0;
+
+    for (c1, c2) in s.chars().zip(palindrome.chars()) {
+        if c1 != c2 {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt / 2);
 }
 
 #[allow(dead_code)]
