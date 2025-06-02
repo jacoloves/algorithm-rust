@@ -47,6 +47,122 @@ fn abc408d() {
     for _ in 0..t {
         input! {
             n: usize,
+            s: String
+        }
+
+        let bytes = s.as_bytes();
+        debug_assert_eq!(n, bytes.len());
+
+        let mut ones_pref: i32 = 0;
+        let mut max_g: i32 = 0;
+        let mut min_f: i32 = i32::MAX;
+        let mut tot: i32 = 0;
+
+        for (idx, &ch) in bytes.iter().enumerate() {
+            if ch == b'1' {
+                ones_pref += 1;
+                tot += 1;
+            }
+            let r = (idx as i32) + 1;
+            let g_r = r - 2 * ones_pref;
+
+            min_f = min_f.min(g_r - max_g);
+            max_g = max_g.max(g_r);
+        }
+
+        let ans = tot + min_f.min(0);
+        res.push(ans);;
+    }
+
+    for ans in res {
+        println!("{}", ans);
+    }
+}
+
+#[allow(dead_code)]
+fn abc408c_kai() {
+    input! {
+        n: usize,
+        m: usize,
+    }
+
+    let mut diff: Vec<i32> = vec![0; n + 2];
+
+    for _ in 0..m {
+        input! {
+            l: usize,
+            r: usize
+        }
+        diff[l] += 1;
+        diff[r + 1] -= 1;
+    }
+
+    let mut cur = 0i32;
+    let mut ans = i32::MAX;
+    for x in 1..=n {
+        cur += diff[x];
+        if cur < ans {
+            ans = cur;
+        }
+    }
+
+    println!("{}", ans);
+}
+
+#[allow(dead_code)]
+fn abc408b_kai() {
+    input! {
+        n: usize,
+        mut a: [usize; n],
+    }
+
+    a.sort();
+    a.dedup();
+
+    print("{} ", a.len());
+    for (i, val) in a.iter().enumerate() {
+        if i + 1 == a.len() {
+            println!("{}", val);
+        } else {
+            print!("{} ", val);
+        }
+    }
+}
+
+
+#[allow(dead_code)]
+fn abc408a_kai() {
+    input! {
+        n: usize,
+        m: f64,
+        mut a: [f64; n]
+    }
+
+    let sleep_time = m + 0.5;
+    let mut prev_e = 0.0;
+    for e in a.iter_mut() {
+        if (*e - prev_e).abs() >= sleep_time {
+            println!("No");
+            return;
+        }
+        prev_e = *e;
+    }
+
+    println!("Yes");
+}
+
+
+#[allow(dead_code)]
+fn abc408d() {
+    input! {
+        t: usize,
+    }
+
+    let mut res: Vec<i32> = Vec::with_capacity(t);
+
+    for _ in 0..t {
+        input! {
+            n: usize,
             s: String,
         }
 
