@@ -33,7 +33,24 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc408b();
+    abc218b();
+}
+
+#[allow(dead_code)]
+fn abc218b() {
+    input! {
+        p: [usize; 26],
+    }
+
+    let abc = "abcdefghijklmnopqrstuvwxyz";
+
+    let mut ans = String::new();
+
+    for e in p.iter() {
+        ans.push(abc.chars().nth(e - 1).unwrap());
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
@@ -71,7 +88,7 @@ fn abc408d() {
         }
 
         let ans = tot + min_f.min(0);
-        res.push(ans);;
+        res.push(ans);
     }
 
     for ans in res {
@@ -119,7 +136,7 @@ fn abc408b_kai() {
     a.sort();
     a.dedup();
 
-    print("{} ", a.len());
+    print!("{} ", a.len());
     for (i, val) in a.iter().enumerate() {
         if i + 1 == a.len() {
             println!("{}", val);
@@ -153,47 +170,47 @@ fn abc408a_kai() {
 
 
 #[allow(dead_code)]
-fn abc408d() {
-    input! {
-        t: usize,
-    }
+// fn abc408d() {
+//     input! {
+//         t: usize,
+//     }
 
-    let mut res: Vec<i32> = Vec::with_capacity(t);
+//     let mut res: Vec<i32> = Vec::with_capacity(t);
 
-    for _ in 0..t {
-        input! {
-            n: usize,
-            s: String,
-        }
+//     for _ in 0..t {
+//         input! {
+//             n: usize,
+//             s: String,
+//         }
 
-        let bytes = s.as_bytes();
-        debug_assert_eq!(n, bytes.len());
+//         let bytes = s.as_bytes();
+//         debug_assert_eq!(n, bytes.len());
 
-        let mut ones_pref: i32 = 0;
-        let mut max_g: i32 = 0;
-        let mut min_f: i32 = i32::MAX;
-        let mut tot: i32 = 0;
+//         let mut ones_pref: i32 = 0;
+//         let mut max_g: i32 = 0;
+//         let mut min_f: i32 = i32::MAX;
+//         let mut tot: i32 = 0;
 
-        for (idx, &ch) in bytes.iter().enumerate() {
-            if ch == b'1' {
-                ones_pref += 1;
-                tot += 1;
-            }
-            let r = (idx as i32) + 1;
-            let g_r = r - 2 * ones_pref;
+//         for (idx, &ch) in bytes.iter().enumerate() {
+//             if ch == b'1' {
+//                 ones_pref += 1;
+//                 tot += 1;
+//             }
+//             let r = (idx as i32) + 1;
+//             let g_r = r - 2 * ones_pref;
 
-            min_f = min_f.min(g_r - max_g);
-            max_g = max_g.max(g_r);
-        }
+//             min_f = min_f.min(g_r - max_g);
+//             max_g = max_g.max(g_r);
+//         }
 
-        let ans = tot + min_f.min(0);
-        res.push(ans);
-    }
+//         let ans = tot + min_f.min(0);
+//         res.push(ans);
+//     }
 
-    for ans in res {
-        println!("{}", ans);
-    }
-}
+//     for ans in res {
+//         println!("{}", ans);
+//     }
+// }
 
 #[allow(dead_code)]
 fn abc408c() {
