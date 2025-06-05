@@ -33,7 +33,28 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc218b();
+    abc058b();
+}
+
+#[allow(dead_code)]
+fn abc058b() {
+    input! {
+        o: String,
+        e: String,
+    }
+
+    let mut ans = String::new();
+
+    for i in 0..e.len() {
+        ans.push(o.chars().nth(i).unwrap());
+        ans.push(e.chars().nth(i).unwrap());
+    }
+
+    if o.len() > e.len() {
+        ans.push(o.chars().last().unwrap());
+    }
+
+    println!("{}", ans);
 }
 
 #[allow(dead_code)]
