@@ -33,7 +33,34 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc058b();
+    abc066b();
+}
+
+#[allow(dead_code)]
+fn abc066b() {
+    input! {
+        s: String
+    }
+
+    let n = s.len();
+    
+    for remove_count in 1..n {
+        let remaining_len = n - remove_count;
+
+        if remaining_len % 2 != 0 {
+            continue;
+        }
+
+        let half = remaining_len / 2;
+        let first_half = &s[0..half];
+        let second_half = &s[half..remaining_len];
+
+        if first_half == second_half {
+            println!("{}", remaining_len);
+            return;
+        }
+    }
+
 }
 
 #[allow(dead_code)]
