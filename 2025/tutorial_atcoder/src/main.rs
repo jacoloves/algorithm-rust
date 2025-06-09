@@ -33,7 +33,29 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc066b();
+    abc103b();
+}
+
+
+#[allow(dead_code)]
+fn abc103b() {
+    input! {
+        s: String,
+        t: String,
+    }
+
+    if s.len() != t.len() {
+        println!("No");
+        return;
+    }
+
+    let doubled_t = format!("{}{}", t, t);
+
+    if doubled_t.contains(&s) {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
 
 #[allow(dead_code)]
