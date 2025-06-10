@@ -33,9 +33,37 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc103b();
+    abc221b();
 }
 
+#[allow(dead_code)]
+fn abc221b() {
+    input! {
+        s: String,
+        t: String,
+    }
+
+    if s == t {
+        println!("Yes");
+        return;
+    }
+
+    let s_chars: Vec<char> = s.chars().collect();
+    let t_chars: Vec<char> = t.chars().collect();
+    let n = s_chars.len();
+
+    for i in 0..n - 1 {
+        let mut temp = s_chars.clone();
+        temp.swap(i, i + 1);;
+
+        if temp == t_chars {
+            println!("Yes");
+            return;
+        }
+    }
+
+    println!("No");
+}
 
 #[allow(dead_code)]
 fn abc103b() {
