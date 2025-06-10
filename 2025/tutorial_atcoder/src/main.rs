@@ -33,7 +33,36 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc221b();
+    abc152b();
+}
+
+#[allow(dead_code)]
+fn abc152b() {
+    input! {
+        a: usize,
+        b: usize,
+    }
+
+    let mut a_vec = Vec::new();
+    let mut b_vec = Vec::new();
+
+    for _ in 0..b {
+        a_vec.push(a.to_string());
+    }
+
+    for _ in 0..a {
+        b_vec.push(b.to_string());
+    }
+
+    let a_string = a_vec.join("");
+    let b_string = b_vec.join("");
+
+    // dict comparison
+    match a_string.cmp(&b_string) {
+        Ordering::Less => println!("{}", a_string),
+        Ordering::Greater => println!("{}", b_string),
+        Ordering::Equal => println!("{}", a_string),
+    }
 }
 
 #[allow(dead_code)]
@@ -54,7 +83,7 @@ fn abc221b() {
 
     for i in 0..n - 1 {
         let mut temp = s_chars.clone();
-        temp.swap(i, i + 1);;
+        temp.swap(i, i + 1);
 
         if temp == t_chars {
             println!("Yes");
@@ -93,7 +122,7 @@ fn abc066b() {
     }
 
     let n = s.len();
-    
+
     for remove_count in 1..n {
         let remaining_len = n - remove_count;
 
@@ -110,7 +139,6 @@ fn abc066b() {
             return;
         }
     }
-
 }
 
 #[allow(dead_code)]
@@ -244,7 +272,6 @@ fn abc408b_kai() {
     }
 }
 
-
 #[allow(dead_code)]
 fn abc408a_kai() {
     input! {
@@ -265,7 +292,6 @@ fn abc408a_kai() {
 
     println!("Yes");
 }
-
 
 #[allow(dead_code)]
 // fn abc408d() {
@@ -309,7 +335,6 @@ fn abc408a_kai() {
 //         println!("{}", ans);
 //     }
 // }
-
 #[allow(dead_code)]
 fn abc408c() {
     input! {
