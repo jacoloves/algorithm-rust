@@ -33,7 +33,31 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc152b();
+    abc082b();
+}
+
+#[allow(dead_code)]
+fn abc082b() {
+    input! {
+        s: String,
+        t: String,
+    }
+
+    let mut s_dict_ascending: Vec<char> = s.chars().collect();
+    let mut t_dict_descending: Vec<char> = t.chars().collect();
+
+    s_dict_ascending.sort();
+    t_dict_descending.sort_by(|a, b| b.cmp(a));
+
+    let s_string: String = s_dict_ascending.iter().collect();
+    let t_string: String = t_dict_descending.iter().collect();
+
+    // dict comparison
+    match s_string.cmp(&t_string) {
+        Ordering::Less => println!("Yes"),
+        Ordering::Greater => println!("No"),
+        Ordering::Equal => println!("No"),
+    }
 }
 
 #[allow(dead_code)]
