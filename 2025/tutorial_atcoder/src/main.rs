@@ -37,6 +37,91 @@ fn main() {
 }
 
 #[allow(dead_code)]
+fn abc410c_alt() {
+    input! {
+        n: usize,
+        q: usize,
+    }
+
+    let mut a: Vec<usize> = (1..=n).collect();
+
+    let mut shift: usize = 0;
+    let mut outs: Vec<usize> = Vec::new();
+
+    for _ in 0..q {
+        input! {
+            typ: u8
+        }
+
+        match typ {
+            1 => {
+                input! {
+                    p: usize,
+                    x: usize
+                }
+                let idx = (p - 1 + shift) % n;
+                a[idx]
+            }
+        }
+    }
+}
+
+#[allow(dead_code)]
+fn abc410b_alt() {
+    input! {
+        n: usize,
+        q: usize,
+        xs: [usize; q]
+    }
+
+    let mut cnt = vec![0usize; n];
+    let mut ans = Vec::with_capacity(q);
+
+    for x in xs {
+        let idx = if x >= 1 {
+            x - 1
+        } else {
+            let mut best = 0;
+            for i in 1..n {
+                if cnt[i] < cnt[best] {
+                    best = i;
+                }
+            }
+            best
+        };
+
+        cnt[idx] += 1;
+        ans.push(idx + 1);
+    }
+
+    for (i, v) in ans.iter().enumerate() {
+        if i + 1 == ans.len() {
+            println!("{}", v);
+        } else {
+            print!("{} ", v);
+        }
+    }
+}
+
+#[allow(dead_code)]
+fn abc410a_alt() {
+    input! {
+        n: usize,
+        a: [usize; n],
+        k: usize,
+    }
+
+    let mut cnt = 0;
+    for e in a {
+        if k <= e {
+            cnt += 1;
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+#[allow(dead_code)]
 fn abc410d() {
     input! {
         n: usize,
