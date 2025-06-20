@@ -37,6 +37,47 @@ fn main() {
 }
 
 #[allow(dead_code)]
+fn abc410d_alt() {
+    input! {
+        n: usize,
+        m: usize,
+    }
+
+    let mut adj: Vec<Vec<(usize, u16)>> = vec![Vec::new(); n + 1];
+    for _ in 0..m {
+        input! {
+            a: usize,
+            b: usize,
+            w: u16
+        }
+        adj[a].push((b, w));
+    }
+
+    const MAX_X: usize = 1 << 10;
+    let mut seen = vec![vec![false; MAX_X]; n + 1];
+    let mut que = VecDeque::new();
+
+    seen[1][0] = true;
+    que.push_back((1usize, 0usize));
+
+    while let Some((u, x)) = que.pop_front() {
+        for &(v, w) in &adj[u] {
+            let nx = x ^ w as usize;
+            if !seen[v][nx] {
+                seen[v][nx] = true;
+                que.push_back((v, nx));
+            }
+        }
+    }
+
+    if let Some(ans) = (0..MAX_X).find(|&x| seen[n][x]) {
+        println!("{}", ans);
+    } else {
+        println!("-1");
+    }
+}
+
+#[allow(dead_code)]
 fn abc410c_alt() {
     input! {
         n: usize,
@@ -60,8 +101,28 @@ fn abc410c_alt() {
                     x: usize
                 }
                 let idx = (p - 1 + shift) % n;
-                a[idx]
+                a[idx] = x;
             }
+            2 => {
+                input! {
+                    p: usize
+                }
+                let idx = (p - 1 + shift) % n;
+                outs.push(a[idx]);
+            }
+            3 => {
+                input! {
+                    k: usize
+                }
+                shift = (shift + k % n) % n;
+            }
+            _ => unreachable!(),
+        }
+    }
+
+    if !outs.is_empty() {
+        for e in outs {
+            println!("{}", e);
         }
     }
 }
