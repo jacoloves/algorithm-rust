@@ -33,8 +33,79 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc410d();
+    abc075b();
 }
+
+#[allow(dead_code)]
+fn abc075b() {
+    input! {
+        h: usize,
+        w: usize,
+        grid: [String; h]
+    }
+
+    let mut board: Vec<Vec<char>> = grid.iter().map(|row| row.chars().collect()).collect();
+
+    let directions = [
+        (-1, -1), (-1, 0), (-1, 1),
+        (0, -1), (0, 1),
+        (1, -1), (1, 0), (1, 1)
+    ];
+
+    for i in 0..h {
+        for j in 0..w {
+            if board[i][j] == '.' {
+                let mut bomb_count = 0;
+
+                for &(di, dj) in &directions {
+                    let ni = i as i32 + di;
+                    let nj = j as i32 + dj;
+
+                    if ni >= 0 && ni < h as i32 && nj >= 0 && nj < w as i32 {
+                        let ui = ni as usize;
+                        let uj = nj as usize;
+                        if board[ui][uj] == '#' {
+                            bomb_count += 1;
+                        }
+                    }
+                }
+
+                board[i][j] = char::from_digit(bomb_count, 10).unwrap();
+            }
+        }
+    }
+
+    for row in board {
+        let row_string: String = row.iter().collect();
+        println!("{}", row_string);
+    }
+}
+
+
+#[allow(dead_code)]
+fn abc087b() {
+    input! {
+        a: usize,
+        b: usize,
+        c: usize,
+        x: usize,
+    }
+
+    let mut cnt = 0;
+
+    for i in 0..=a {
+        for j in 0..=b {
+            for k in 0..=c {
+                if i * 500 + j * 100 + k * 50 == x {
+                    cnt += 1;
+                }
+            }
+        }
+    }
+
+    println!("{}", cnt);
+}
+
 
 #[allow(dead_code)]
 fn abc410d_alt() {
