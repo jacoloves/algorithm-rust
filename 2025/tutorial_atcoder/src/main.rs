@@ -33,7 +33,47 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc075b();
+    abc105b();
+}
+
+#[allow(dead_code)]
+fn abc133b() {
+}
+
+#[allow(dead_code)]
+fn abc105b() {
+    input! {
+        n: usize,
+    }
+
+    for i in 0..=100 {
+        for j in 0..=100 {
+            if (i * 4) + (j * 7) == n {
+                println!("Yes");
+                return;
+            }
+        }
+    }
+
+    println!("No");
+}
+
+#[allow(dead_code)]
+fn abc144b() {
+    input! {
+        n: usize,
+    }
+
+    for i in 1..=9 {
+        for j in 1..=9 {
+            if i * j == n {
+                println!("Yes");
+                return;
+            }
+        }
+    }
+
+    println!("No");
 }
 
 #[allow(dead_code)]
