@@ -33,11 +33,83 @@ where
 const MOD: usize = 1_000_000_000;
 
 fn main() {
-    abc105b();
+    abc175b();
+}
+
+#[allow(dead_code)]
+fn abc214b() {
+    input! {
+
+    }
+}
+
+#[allow(dead_code)]
+fn abc175b() {
+    input! {
+        n: usize,
+        l: [usize; n],
+    }
+
+    if n < 3 {
+        println!("0");
+        return;
+    }
+
+    let mut cnt = 0;
+
+    for i in 0..n {
+        for j in (i + 1)..n {
+            for k in (j + 1)..n {
+                if l[i] != l[j] && l[j] != l[k] && l[k] != l[i] {
+                    let mut sides = vec![l[i], l[j], l[k]];
+                    sides.sort();
+                    if sides[0] + sides[1] > sides[2] {
+                        cnt += 1;
+                    }
+                }
+            }
+        }
+    }
+
+    println!("{}", cnt);
+}
+
+#[allow(dead_code)]
+fn is_perfect_square(n: isize) -> bool {
+    if n < 0 {
+        return false;
+    }
+
+    let sqrt_n = (n as f64).sqrt() as isize;
+
+    sqrt_n * sqrt_n == n || (sqrt_n + 1) * (sqrt_n + 1) == n
 }
 
 #[allow(dead_code)]
 fn abc133b() {
+    input! {
+        n: usize,
+        d: usize,
+        points: [[isize; d]; n]
+    }
+
+    let mut cnt = 0;
+    for i in 0..n {
+        for j in (i + 1)..n {
+            let mut distance_squared = 0isize;
+
+            for k in 0..d {
+                let diff = points[i][k] - points[j][k];
+                distance_squared += diff * diff;
+            }
+
+            if is_perfect_square(distance_squared) {
+                cnt += 1;
+            }
+        }
+    }
+
+    println!("{}", cnt);
 }
 
 #[allow(dead_code)]
